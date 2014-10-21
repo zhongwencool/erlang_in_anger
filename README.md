@@ -74,57 +74,64 @@ What is not necessarily assumed is that the reader knows how to debug Erlang sof
 dive into an existing code base, diagnose issues, or has an idea of the best practices about deploying Erlang in a production environment 5.
 <p></p>
 <font color="green">
-阅读此书需要读者精通(proficient)基本的Erlang和OTP框架，我只会在认为OTP很棘手的时候解释下。希望感到困惑的读者能仔细阅读Erlang/OTP相关的资料（注4：非常推荐你先看看Learn You Some Erlang 或 Erlang的官方文档）。
-但这并不需要读者会调试 Erlang 软件，深入现有的代码库，诊断问题，或掌握在生产环境中部署Erlang的最佳实践（注5：在屏幕或tmux session运行Erlang并不是一个部署策略）。</font>
+阅读此书需要读者精通(proficient)基本的Erlang和OTP框架，我只会在认为OTP很棘手的时候解释下。希望感到困惑的读者能仔细阅读Erlang/OTP相关的资料。
+但这并不需要读者会调试 Erlang 软件，深入现有的代码库，诊断问题，或掌握在生产环境中部署Erlang的最佳实践。</font>
 ## How To Read This Book
 ## 如何去读这本书？
 <p></p>
 This book is divided in two parts.
 Part I focuses on how to write applications. It includes how to dive into a code base
 (Chapter 1), general tips on writing open source Erlang software (Chapter 2), and how to
-plan for overload in your system design (Chapter 3).
+plan for overload in your system design (Chapter 3).<br>
 Part II focuses on being an Erlang medic and concerns existing, living systems. It
 contains instructions on how to connect to a running node (Chapter 4), and the basic
 runtime metrics available (Chapter 5). It also explains how to perform a system autopsy
 using a crash dump (Chapter 6), how to identify and fix memory leaks (Chapter 7), and
 how to find runaway CPU usage (Chapter 8). The final chapter contains instructions on
-how to trace Erlang function calls in production using recon 6 to understand issues before they bring the system down (Chapter 9).  
+how to trace Erlang function calls in production using recon <sup>6</sup> to understand issues before they bring the system down (Chapter 9).<br>
 Each chapter is followed up by a few optional exercises in the form of questions or
 hands-on things to try if you feel like making sure you understood everything, or if you
 want to push things further.
 <p></p>
 <font color="green">
-此书分两部分：
+此书分两部分：<br>
 
-Part I 集中讲怎么去写一个应用(applications).
+Part I 集中讲怎么去写一个应用(applications).<br>
 
-包括:
-* 章节1：怎样了解现有的代码库;
-* 章节2：常用写开源Erlang软件的注意项;
-* 章节3：如何在为系统过载做计划设计.
+包括:<br>
+章节1：怎样了解现有的代码库;<br>
+章节2：常用写开源Erlang软件的注意项;<br>
+章节3：如何在为系统过载做计划设计.<br>
 
- Part II 集中于做为一个Erlang医生怎么去关注现有的生命系统.
+ Part II 集中于做为一个Erlang医生怎么去关注现有的生命系统.<br><br>
 
-包括:
-* 章节4：如何连接一个运行时的节点;
-* 章节5：基本的运行时状态指标信息;
-* 章节6：如何通过crash dump文件来解剖系统;
-* 章节7：如何识别和修复内存泄露;
-* 章节8：如何找到CPU失控的原因;
-* 章节9：怎样去在生产环境中使用recon来追踪(trace)Erlang函数，从而在问题把系统搞挂之前就找到问题(章节9)。
+包括:<br>
+章节4：如何连接一个运行时的节点;<br>
+章节5：基本的运行时状态指标信息;<br>
+章节6：如何通过crash dump文件来解剖系统;<br>
+章节7：如何识别和修复内存泄露;<br>
+章节8：如何找到CPU失控的原因;<br>
+章节9：怎样去在生产环境中使用recon<sup>6</sup>来追踪(trace)Erlang函数，从而在问题把系统搞挂之前就找到问题。<br>
 
 每个章节都有一些练习，可用于动手尝试确保你明白了一切，这会让你理解更深刻。
 <font>
 
 <p></p>
-1. life-critical systems are usually excluded from this category
-2. Erlang people now seem to favour "let it fail", given it makes people far less nervous.
-3. 131 out of 132 bugs are transient bugs (they’re non-deterministic and go away when you look at them,
-and trying again may solve the problem entirely), according to Jim Gray in Why Do Computers Stop and
-What Can Be Done About It?
-
- + 注1:生死攸关的系统不在这个讨论范畴。
- + 注2:更确切地说是"let it fail"，但这会让人更加紧张。
- + 注3:131/132的bugs都是短暂的bugs，他们出现得不确定，当你去找他们时，他们又消失了，再次尝试或许可以解决这个问题，根据Jim Gray的 Why Do Computers Stop and What Can Be Done About It?
-
+[1]. life-critical systems are usually excluded from this category<br>
+[2]. Erlang people now seem to favour "let it fail", given it makes people far less nervous.<br>
+[3]. 131 out of 132 bugs are transient bugs (they’re non-deterministic and go away when you look at them,
+and trying again may solve the problem entirely), according to Jim Gray in Why Do Computers Stop and What Can Be Done About It?<br>
+[4]. I do r ecommend visiting Learn You Some Erlang or the regular Erlang Documentation if a free resource
+is required<br>
+[5]. Running Erlang in a screen or tmux session is not a deployment strategy.<br>
+[6]. [http://ferd.github.io/recon/](http://ferd.github.io/recon/) — a library used to make the text lighter, and with generally productionsafe functions.
+<p><p>
+<font color="green">
+[注1]:生死攸关的系统不在这个讨论范畴。<br>
+[注2]:更确切地说是"let it fail"，但这会让人更加紧张。<br>
+[注3]:131/132的bugs都是短暂的bugs，他们出现得不确定，当你去找他们时，他们又消失了，再次尝试或许可以解决这个问题，根据Jim Gray的 Why Do Computers Stop and What Can Be Done About It?<br>
+[注4]:非常推荐你先看看Learn You Some Erlang 或 Erlang的官方文档。<br>
+[注5]:在屏幕或tmux session运行Erlang并不是一个部署策略。<br>
+[注6]:[http://ferd.github.io/recon/](http://ferd.github.io/recon/) 一个轻量级的用于tracer 代码库。
+</font>
 
