@@ -1,8 +1,8 @@
 
 
 
-<< Stuff Goes Bad: Erlang in Anger >> 由 Fred Hébert(写Learn Your Some Erlang的帅小伙) 和 Heroku 联合推出，遵循 <font color="blue"> Creative
-Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</font>
+<< Stuff Goes Bad: Erlang in Anger >> 由 Fred Hébert(写Learn Your Some Erlang的帅小伙) 和 Heroku 联合推出，遵循 <font color="blue"> [Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License.](http://creativecommons.org/licenses/by-nc-sa/4.0/)</font>
 
 # Introduction
 
