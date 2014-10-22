@@ -17,7 +17,7 @@ The program is written once, and after that, it’s off to production, whatever 
 there. If there are errors, new versions will need to be shipped.
 
 <font color="green">
-相对于大多数其它编程语言，Erlang处理失败(failure)方法非常独特的。 常见处理错误的思维模式就是用尽一切方法来防止错误的发生，不允许在运行时出错，如果不能杜绝错误，系统就会超出设计者原本的设想（变得不可控）。
+相对于大多数其它编程语言，Erlang处理失败(failure)方法非常独特的。 常见处理错误的思维模式就是用尽一切方法来防止错误的发生，不允许在运行时出错，如果不能杜绝错误，系统就会超出设计者原本的设想（变得不可控）。<br>
 
 一旦程序写完，并发布成产品出去，在什么都可能发生的生产环境下，如果出错了，那么必须要重新发布一个新版本修复这个问题。  </font>
 <p></p>
@@ -25,21 +25,21 @@ Erlang, on the other hand, takes the approach that failures will happen no matte
 whether they’re developer-, operator-, or hardware-related. It is rarely practical or even possible to get rid of all errors in a program or a system. <sup>1</sup> If you can deal with some errors rather than preventing them at all cost, then most undefined behaviours of a program can go in that "deal with it" approach.
 <p></p>
 <font color="green">
-但Erlang能够处理错误，这些错误可以是运行时来自开发者设计本身的，操作符引起的或与硬件相关的任何失败，甚至可以处理来自于程序或系统的所有错误<sup>1</sup>。如果你用处理错误的方式来取代千方百计地阻止错误发生，那么所有的程序的不确定行为都会跑到这个错误处理的方法里
+但Erlang能够处理错误，这些错误可以是运行时来自开发者设计本身的，操作符引起的或与硬件相关的任何失败，甚至可以处理来自于程序或系统的所有错误<sup>1</sup>。如果你用处理错误的方式来取代千方百计地阻止错误发生，那么所有的程序的不确定行为都会跑到这个错误处理的方法里。
 </font>
 <p></p>
-This is where the "Let it Crash" <sup>2</sup> idea comes from: Because you can now deal with failure, and because the cost of weeding out all of the complex bugs from a system before it hits production is often prohibitive, programmers should only deal with the errors they know how to handle, and leave the rest for another process (a supervisor) or the virtual machine to deal with.
+This is where the "Let it Crash" <sup>2</sup> idea comes from: Because you can now deal with failure, and because the cost of weeding out all of the complex bugs from a system before it hits production is often prohibitive, programmers should only deal with the errors they know how to handle, and leave the rest for another process (a supervisor) or the virtual machine to deal with.<br>
 Given that most bugs are transient <sup>3</sup>, simply restarting processes back to a state known to be stable when encountering an error can be a surprisingly good strategy.
 <p></p>
 <font color="green">
-这就是"Let it Crash"<sup>2</sup> 的Erlang理念.这个idea来处自于：在上生产环境前，如果想把所有复杂的bugs都发现并除掉几乎是不可能的，设计者可以只先处理他们知道原因的错误，让其它的都交给监控进程或另一个虚拟机(virtual machine)来处理。
+这就是"Let it Crash"<sup>2</sup> 的Erlang理念.这个idea来处自于：在系统运行至生产环境前，如果想把所有复杂的bugs都发现并除掉几乎是不可能，设计者可以只先处理他们知道原因的错误，让其它的都交给监控进程或另一个虚拟机(virtual machine)来处理。<br>
 鉴于大多数bugs是短暂的<sup>3</sup>，简单的重启发生错误的进程让其重新工作到正常状态无疑是一个非常好的策略。
 </font>
 <p></p>
 Erlang is a programming environment where the approach taken is equivalent to the human body’s immune system, where as most other languages only care about hygiene to make sure no germ enters the body. Both forms appear extremely important to me. Almost every environment offers varying degrees of hygiene. Nearly no other environment offers the immune system where errors at run time can be dealt with and seen as survivable.
 <p></p>
 <font color="green">
-Erlang 这种处理方式非常像人类身体的免疫系统，其它语言只是关注卫生是否足够可以防止病菌进入身体。这两者的区别对我来说非常重要，因为几乎所有的环境都只提供不同程度的卫生，但却其它的系统都不能提供类似于免疫系统一样，可以在成长时容许病毒进入，并把病毒隔离或消灭掉。</font>
+Erlang 这种处理方式非常像人类身体的免疫系统，其它语言只是关注环境中否足够干净得可以防止病菌进入身体。这两者的区别对我来说非常重要，因为几乎所有的环境都只提供不同程度的卫生，但是其它的系统都不能提供类似于免疫系统一样，可以在成长时容许病毒进入，并把病毒隔离或消灭掉。</font>
 <p></p>
 Because the system doesn’t collapse the first time something bad touches it, Erlang/OTP
 also allows you to be a doctor. You can go in the system, pry it open right there in production, carefully observe everything inside as it runs, and even try to fix it interactively.
@@ -56,13 +56,17 @@ war. It is first and foremost a collection of tips and tricks to help understand
 debug pro duction systems that were built in Erlang.
 <p></p>
 <font color="green">
-这本书意在：怎样在这个战争的时代作一位Erlang好医生。 首先你要学会收集的提示和技巧来了解失败是从哪里来的， 这是一本帮助开发人员调试建于Erlang的生产系统代码词典。</font>
+这本书意在：怎样在这个战争的时代作一位Erlang好医生。 首先你要学会收集的提示和技巧来了解失败是从哪里来的， 这是一本帮助开发人员调试建于Erlang的生产系统代码词典。
+</font>
+<p></p>
 
-## Who is this for?
-
-## 这本书适合什么人？
+ **Who is this for?**
+<p></p>
+**这本书适合什么人？**
+<p></p>
 
 This book is not for beginners. There is a gap left between most tutorials, books, training sessions, and actually being able to operate, diagnose, and debug running systems once they’ve made it to production. There’s a fumbling phase implicit to a programmer’s learning of a new language and environment where they just have to figure how to get out of the guidelines and step into the real world, with the community that go es with it.
+<p></p>
 <font color="green">
 这本书不适合于初学者。
 大多数的书都没有讲如何在生产环境中操作，诊断，和调试运行时系统，但这个摸索阶段却隐含着一个程序员学习新的语言和环境时，如何起出指南和进入现实世界，与社区共同成长的过程。</font>
@@ -76,8 +80,10 @@ dive into an existing code base, diagnose issues, or has an idea of the best pra
 <font color="green">
 阅读此书需要读者精通(proficient)基本的Erlang和OTP框架，我只会在认为OTP很棘手的时候解释下。希望感到困惑的读者能仔细阅读Erlang/OTP相关的资料。
 但这并不需要读者会调试 Erlang 软件，深入现有的代码库，诊断问题，或掌握在生产环境中部署Erlang的最佳实践。</font>
-## How To Read This Book
-## 如何去读这本书？
+<p></p>
+**How To Read This Book**
+<p></p>
+**如何去读这本书？**
 <p></p>
 This book is divided in two parts.
 Part I focuses on how to write applications. It includes how to dive into a code base
@@ -111,10 +117,10 @@ Part I 集中讲怎么去写一个应用(applications).<br>
 章节6：如何通过crash dump文件来解剖系统;<br>
 章节7：如何识别和修复内存泄露;<br>
 章节8：如何找到CPU失控的原因;<br>
-章节9：怎样去在生产环境中使用recon<sup>6</sup>来追踪(trace)Erlang函数，从而在问题把系统搞挂之前就找到问题。<br>
+章节9：怎样去在生产环境中使用recon<sup>6</sup>来追踪(trace)Erlang函数，从而在问题把系统搞挂之前就定位到它。<br>
 
 每个章节都有一些练习，可用于动手尝试确保你明白了一切，这会让你理解更深刻。
-<font>
+</font>
 
 <p></p>
 [1]. life-critical systems are usually excluded from this category<br>

@@ -28,7 +28,7 @@ README?<br>
 <font color="green">
 下载代码：https://github.com/ferd/recon_demo. 这个是本书练习的实践代码，现在给你的是不熟悉的代码，实践下本章中提到的知识吧！<br>
 
-1. 这个applicaiton是一个library?还是一个独立的系统(standalone system)?<br>
+1. 这个applicaiton是一个library?还是一个独立的系统(standalone system)? <br>
 2. 它是用来做什么的？<br>
 3. 他有依赖的application么？如果有，请列出来？<br>
 4. README中提到的不确定的点，请验证是不是真的？<br>

@@ -21,7 +21,7 @@ Each OTP application should contain an app file, either ebin/<AppName>.app or mo
 <p></p>
 <font color="green" >
 可能会有轻微的差异，但通用结构都是一样的。
-每个OTP application 会包含一个app文件，放在 ebin/<AppName>.app 或更常见放在src/<AppName>.app.src <sup>2</sup>
+每个OTP application 会包含一个app文件，放在 ebin/<AppName>.app 或更常见放在src/<AppName>.app.src <sup>2</sup> 以下是2类app文件的结构：
 </font>
 <p></p>
  library application:<br>
@@ -42,8 +42,8 @@ Each OTP application should contain an app file, either ebin/<AppName>.app or mo
 `{mod, {dispcount, []}},`<br>
 `{modules, [dispcount, dispcount_serv, dispcount_sup,`<br>
 `dispcount_supersup, dispcount_watcher, watchers_sup]}`<br>
-`]}.`<br>
-
+`]}.`
+<p></p>
  [2]  A build system generates the final file that goes in ebin. Note that in these cases, many
 src/<AppName>.app.src files do not specify modules and let the build system take care of it.
 <p></p>

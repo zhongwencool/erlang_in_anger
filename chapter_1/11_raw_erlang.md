@@ -1,7 +1,5 @@
-# Raw Erlang
+# Raw Erlang(原生态)
 
-1.1 Raw Erlang
-1.1 原始的Erlang Code(Raw Erlang)
 <p></p>
 If you encounter a raw Erlang code base, you’re pretty much on your own. These rarely follow any specific standard, and you have to dive in the old way to fi gure out whatever happens in there.
 <p></p>
@@ -18,11 +16,12 @@ This means hoping for a README.md file or something similar that can point to an
 Fortunately, you should rarely encounter raw Erlang in the wild, and they are often beginner projects, or awesome projects that were once built by Erlang beginners and now need a serious rewrite. In general, the advent of tools such as rebar<sup>1</sup> made it so most people use OTP Applications.
 <p></p>
 <font color="green">
-很庆幸，你几乎不会遇到这种Raw Erlang 代码，这种代码基本上都是项目最初阶段创建的，或由Erlang初学者创建的需要重写的代码。
+但很庆幸的是，你几乎不会遇到这种Raw Erlang 代码，这种代码基本上都是项目最初阶段创建的，或由Erlang初学者创建的需要重写的代码。
 通常，Rebar<sup>1</sup>的工具的出现，使得绝大多数的人都使用OTP Applications。
 </font>
 <p></p>
 [1] [https://github.com/rebar/rebar/](https://github.com/rebar/rebar/) — a build tool briefly introduced in Chapter 2
+<p></p>
 <font color="green" >
 [注1]：https://github.com/rebar/rebar/ 会在chapter 2中介绍]
 </font>

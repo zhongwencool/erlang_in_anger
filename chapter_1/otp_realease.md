@@ -13,13 +13,13 @@ You’ll usually have a file similar to the configuration files used by systools
 当然，release 还有做得更多一点，但通常来讲， 你在OTP applications中的发现同样适用release.
 你通常会配置一些类似的文件，供systools或reltool使用(记录所有applications关于release的部分和一些选项<sup>8</sup>)。
 </font>
+<p></p>
 To understand them, I recommend reading existing documentation on them. If you’re lucky, the project may be using relx <sup>9</sup>, an easier tool that was officially released in early 2014.
 <p></p>
 <font color="green">
 为了理解他们，我推荐看看官方已有的文档，如果你幸运的话，项目可能会使用relx,一个官方在2014年上半年推出的非常简单的工具.
 </font>
-
-
+<p></p>
 [8] A lot <br>
 [9] https://github.com/erlware/relx/wiki
 <p></p>
