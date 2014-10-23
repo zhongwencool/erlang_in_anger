@@ -32,7 +32,7 @@ hierarchies can be found using the observer <sup>7</sup> application, but for in
 <p></p>
 [5]At the very least on the kernel and stdlib applications<br>
 [6]This script depends on graphviz<br>
-[7]：http://www.erlang.org/doc/apps/observer/observer_ug.html
+[7]http://www.erlang.org/doc/apps/observer/observer_ug.html
 <p></p>
 <font color="green">
 [注5]：最少都会依赖kernel和stdlib. <br>

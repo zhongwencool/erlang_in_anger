@@ -24,6 +24,6 @@ To understand them, I recommend reading existing documentation on them. If you�
 [9] https://github.com/erlware/relx/wiki
 <p></p>
 <font color="green">
-[注8：很多]<br>
-[注9：https://github.com/erlware/relx/wiki]
+[注8]：很多<br>
+[注9]：https://github.com/erlware/relx/wiki
 </font>
