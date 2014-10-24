@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>How Do You Drop | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_3__planning_for_overload/exercises.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_3__planning_for_overload/dealing_with_constant_overload.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="3.3.6" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -653,7 +653,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.3.6" data-path="chapter_3__planning_for_overload/how_do_you_drop.html">
+        <li class="chapter active" data-level="3.3.6" data-path="chapter_3__planning_for_overload/how_do_you_drop.html">
             
                 
                     <a href="../chapter_3__planning_for_overload/how_do_you_drop.html">
@@ -885,26 +885,43 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43580">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="how-do-you-drop">How Do You Drop</h1>
+<h1 id="">丢弃数据的原则</h1>
+<p>Most of the solutions outlined here work based on message quantity, but it’s also possible to try and do it based on message size, or expected complexity, if you can predict it. When using a queue or stack buffer, instead of counting entries, all you may need to do is count their size or assign them a given load as a limit.</p>
+<p></p> <font color="green">
+大部分这里列出的方法都是基于消息数量的，但也可以试下基本消息大小或你所能预知的更复杂的指标。当你使用队列或多缓冲区(stack buffer)，而不是计算消息总数量，你可能需要做的是给程序规定好它的大小，或限制它们的负载。
+</font> <p></p>
+I’ve found that in practice, dropping without regard to the specifics of the message works rather well, but each application has its share of unique compromises that can be acceptable or not <sup>25</sup>.
+<p></p> <font color="green">
+我在实践中发现：丢弃时不去管消息本身的用途非常好用，但每个application都会自己独特地妥协机制来决定这样可不可以<sup>25</sup>。
+</font> <p></p>
+There are also cases where the data is sent to you in a &quot;fire and forget&quot; manner — the entire system is part of an asynchronous pipeline — and it proves difficult to provide feedback to the end-user about why some requests were dropped or are missing.
+<p></p> <font color="green">
+还有一些情况是是数据发给你，然后就不管了的(&quot;fire and forget&quot;) ---那整个系统都是异步管道(asynchronous pipeline)的一部分----这个就很难给终端用户反馈为什么有些请求会被丢弃或丢失掉。
+</font> <p></p>
+If you can reserve a special type of message that accumulates dropped responses and tells the user &quot; N messages were dropped for reason X&quot;, that can, on its own, make the compromise far more acceptable to the user.
+<p></p> <font color="green">
+如果你可以规定一种特定的消息类型可能会被丢弃，并告诉用户&quot;N条消息被因某某原因被丢弃掉了&quot;,那么这就更能让用户接受点(相对什么都不找反馈来讲)。
+</font> <p></p>
+This is the choice that was made with Heroku’s logplex log routing system, which can spit out L10 errors, alerting the user that a part of the system can’t deal with all the volume right now.
+<p></p> <font color="green">
+HeroKu的logplex 就是这样为系统路由日志的，它可以把日志分成10个等级，并警告系统的那个等级的日志现在不能处理。
+</font> <p></p>
+In the end, what is acceptable or not to deal with overload tends to depend on the humans that use the system. It is often easier to bend the requirements a bit than develop new technology, but sometimes it is just not avoidable.
+<p></p> <font color="green">
+最后，是不是可处理或处理过载往往取决于使用这个系统的人。改一下需求可能会比开发一个新技术更加容易，但有时又是不可避免地(有进需要是不能改的)。
+</font> <p></p>
+
+<p>[25] Old papers such as Hints for Computer System Designs by Butler W. Lampson recommend dropping
+messages: &quot;Shed load to control demand, rather than allowing the system to become overloaded.&quot; The
+paper also mentions that &quot;A system cannot be expected to function well if the demand for any resource
+exceeds two-thirds of the capacity, unless the load can be characterized extremely well.&quot; adding that &quot;The
+only systems in which cleverness has worked are those with very well-known loads.&quot;</p>
+<p></p> <font color="green">
+[注25] ： Butler W.Lampson写的 Hints for Computer System Designs 论文中建议:&quot;宁愿控制负载，也不能让系统超负荷&quot;,论文还指出&quot;一个系统如果被要求工作大于2/3的负载之上，就不可以被认为是正常工作的&quot;，&quot;聪明的系统都会工作在适当的负载下&quot;。
+</font> <p></p>
 
                     
                     </section>
@@ -915,10 +932,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_3__planning_for_overload/dealing_with_constant_overload.html" class="navigation navigation-prev " aria-label="Previous page: Dealing With Constant Overload"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_3__planning_for_overload/exercises.html" class="navigation navigation-next " aria-label="Next page: Exercises"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

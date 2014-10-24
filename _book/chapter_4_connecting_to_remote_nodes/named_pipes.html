@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>Named Pipes | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_4_connecting_to_remote_nodes/exercises.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_4_connecting_to_remote_nodes/ssh_daemon.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="4.4" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -760,7 +760,7 @@
         </li>
     
         
-        <li class="chapter " data-level="4.4" data-path="chapter_4_connecting_to_remote_nodes/named_pipes.html">
+        <li class="chapter active" data-level="4.4" data-path="chapter_4_connecting_to_remote_nodes/named_pipes.html">
             
                 
                     <a href="../chapter_4_connecting_to_remote_nodes/named_pipes.html">
@@ -885,26 +885,42 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43591">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="named-pipes">Named Pipes</h1>
+<h1 id="named-pipes">命名管道(Named Pipes)</h1>
+<p>A little known way to connect with an Erlang node that requires no explicit distribution is through named pipes. This can be done by starting Erlang with run_erl, which wraps Erlang in a named pipe 5:</p>
+<p></p> <font color="green">
+还有一种鲜为人知连接Erlang节点的方法：命名管道(named pipes)，它不需要明确指定节点名.这可以通过使用run_erl 启动Erlang来完成<sup>5</sup>。
+</font> <p></p>
+-------------------------------------------------------------------------------------<br>
+<code>$ run_erl  /tmp/erl_pipe  /tmp/log_dir  &quot;erl&quot;</code><br>
+-------------------------------------------------------------------------------------<br>
+The first argument is the name of the file that will act as the named pipe. The second one is where logs will be saved <sup>6</sup>.
+<p></p> <font color="green">
+第一个参数是指定作为命名管道的文件，第三个就是指明日志要放在目录<sup>6</sup>。
+</font> <p></p>
+To connect to the node, you use the to_erl program:
+<p></p> <font color="green">
+你可以使用 to_erl程序连接到节点上：
+</font> <p></p>
+-------------------------------------------------------------------------------------<br>
+<code>$ to_erl  /tmp/erl_pipe</code><br>
+<code>Attaching to /tmp/erl_pipe (^D to exit)</code><br>
+<code>1&gt;</code><br>
+-------------------------------------------------------------------------------------<br>
+ <p></p>
+And the shell is connected. Closing stdio (with ˆD) will disconnect from the shell while leaving it running.
+<p></p> <font color="green">
+连接上后，你可以使用ctrl+D来断开远程节点(只是断开，不会终结远程节点).
+</font> <p></p>
+[5] &quot;erl&quot; is the command being run. Additional arguments can be added after it. For example
+&quot;erl +K true&quot; will turn kernel polling on.<br>
+[6] Using this method ends up calling fsync for each piece of output, which may give quite a performance hit if a lot of IO is taking place over standard output.<br>
+<p></p> <font color="green">
+[注5]：“erl”就是要运行的命令，你也可以在后面加上其它启动选项如&quot;erl +K ture&quot;会把打开内核kernel轮询。<br>
+[注6] ：这个方法最终fsync会同步每一块输入，如果你把大量的数据都输入到终端，性能会下降得很厉害。
+</font> <p></p>
 
                     
                     </section>
@@ -915,10 +931,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_4_connecting_to_remote_nodes/ssh_daemon.html" class="navigation navigation-prev " aria-label="Previous page: SSH Daemon"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_4_connecting_to_remote_nodes/exercises.html" class="navigation navigation-next " aria-label="Next page: Exercises"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

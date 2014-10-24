@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>Application Strategies | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_2_building_open_source_erlang_software/exercises.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_2_building_open_source_erlang_software/in_a_nutshell.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="2.2.5" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -357,7 +357,7 @@
         </li>
     
         
-        <li class="chapter " data-level="2.2.5" data-path="chapter_2_building_open_source_erlang_software/application_strategies.html">
+        <li class="chapter active" data-level="2.2.5" data-path="chapter_2_building_open_source_erlang_software/application_strategies.html">
             
                 
                     <a href="../chapter_2_building_open_source_erlang_software/application_strategies.html">
@@ -885,26 +885,30 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43565">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="application-strategies">Application Strategies</h1>
+<p>No matter what, a sequence of failures is not a death sentence for the node. Once a system has been divided into various OTP applications, it becomes possible to choose which applications are vital or not to the node.<br>
+Each OTP application can be started in 3 ways: temporary, transient, permanent, either by doing it manually in application:start(Name, Type) , or in the config file for your release:</p>
+<p></p> <font color="green">
+不管怎样，一系列的失败对节点来说并不可怕。一量系统被分成多个OTP applications时，就有可以在节点上按重要性排序applications.<br>
+每一个OTP application 都可以有3种启动方式：暂时(temporary),短暂(transient),永久(permanent),不管是手去用application:start(Name,Type)还是根据release里面的config文件启动。
+</font> <p></p>
+
+<p>• permanent: if the app terminates, the entire system is taken down, excluding manual termination of the app with application:stop/1.<br>
+• transient: if the app terminates for reason normal, that’s ok. Any other reason for termination shuts down the entire system.<br>
+• temporary: the application is allowed to stop for any reason. It will be reported, but nothing bad will happen.<br></p>
+<p></p> <font color="green">
+- 永久：如果这个app在除了手动调用用application:stop/1终结的其它情况下被终结(terminate)掉时，整个系统都会挂掉。<br>
+- 短暂：如果这个app 被正常理由(除了会把整个系统搞崩溃的原因外)终结的，这是ok的。<br>
+- 暂时：app允许随意停止，它只会报告，但不会发生什么错误的事件。<br>
+</font> <p></p>
+
+<p>It is also possible to start an application as an included application, which starts it under your own OTP supervisor with its own strategy to restart it.</p>
+<p></p> <font color="green">
+也可以在一个application A中再启动另一个application B.让这个application B被你自己的application A中的 OTP supervisor根据相应的策略来操作重启B。
+</font> <p></p>
+
 
                     
                     </section>
@@ -915,10 +919,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_2_building_open_source_erlang_software/in_a_nutshell.html" class="navigation navigation-prev " aria-label="Previous page: In a nutshell"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_2_building_open_source_erlang_software/exercises.html" class="navigation navigation-next " aria-label="Next page: Exercises"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>Chapter 4 Connecting to Remote Nodes | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_4_connecting_to_remote_nodes/job_control_mode.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_3__planning_for_overload/exercises.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="4" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -695,7 +695,7 @@
         </li>
     
         
-        <li class="chapter " data-level="4" data-path="chapter_4_connecting_to_remote_nodes/README.html">
+        <li class="chapter active" data-level="4" data-path="chapter_4_connecting_to_remote_nodes/README.html">
             
                 
                     <a href="../chapter_4_connecting_to_remote_nodes/README.html">
@@ -885,26 +885,48 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43589">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="chapter-4-connecting-to-remote-nodes">Chapter 4 Connecting to Remote Nodes</h1>
+<h1 id="">连接到远程节点</h1>
+<p>Interacting with a running server program is traditionally done in one of two ways. One is to do it through an interactive shell kept available by using a screen or tmux session that runs in the background and letting someone connect to it.</p>
+<p></p> <font color="green">
+通常有两种方法可以与运行中服务器程序交互。一个是使用一个通过屏幕的交互shell或tmux会话(在后台运行，让用户来主动连接它)来保持交互状态。
+</font> <p></p>
+The other is to program management functions or comprehensive configuration files that can be dynamically reloaded.<br>
+The interactive session approach is usually okay for software that runs in a strict ReadEval-Print-Loop (REPL). The programmed management and configuration approach requires careful planning in whatever tasks you think you’ll need to do, and hopefully getting it right.
+<p></p> <font color="green">
+另一个就是程序管理功能或可以动态加载的综合配置文件。<br>
+使用交互会话(session)的方法通常都是运行在严格遵守ReadEval-Print-Loop(REPL)标准的机器上.程序管理和配置文件方法则需要仔细规划好你需要要做的每个任务，并希望把它们都弄清楚。
+</font> <p></p>
+Pretty much all systems can try that approach, so I’ll skip it given I’m somewhat more interested in the cases where stuff is already bad and no function exists for it.
+<p></p> <font color="green">
+几乎所有的系统都可以尝试这种方法，所以我会跳过这部分，毕竟我对事情为什么会变坏和它为什么会产生不存在的函数更感兴趣。
+</font> <p></p>
+Erlang uses something closer to an &quot;interactor&quot; than a REPL. Basically, a regular Erlang virtual machine does not need a REPL, and will happily run byte code and stick with that, no shell needed.<br>
+However, because of how it works with concurrency and multiprocessing, and good support for distribution, it is possible to have in-software REPLs that run as arbitrary Erlang processes.
+<p></p> <font color="green">
+Erlang使用一个近似于交互器的东西(不是REPL). 基本上，一个正常的Erlang虚拟机根本不需要REPL,就能愉快地运行字节代码和一直保持会话，而且不需要shell.<br>
+但是，因为它要处理并发和多进程，并要支持分布式，这个需要就可能要使用REPL软件运行任意的Erlang进程。
+</font> <p></p>
+This means that, unlike a single screen session with a single shell, it’s possible to have as many Erlang shells connected and interacting with one virtual machine as you want at a time <sup>1</sup>.
+<p></p> <font color="green">
+这也就意味着，并不仅是使用单个shell的一个屏幕，可能同时会有很多Erlang shell与虚拟机相连接，来交互 <sup>1</sup>。
+Most common usages will depend on a cookie being present on the two nodes you want to connect together<sup>2</sup>, but there are ways to do it that do not include it.
+最常用的用法是依赖相同的cookie让2个节点连接在一起<sup>2</sup>，但也有其它方法可以做到这一点。
+</font> <p></p>
+Most usages will also require the use of named nodes, and all of them will require a priori measures to make sure you can contact the node.
+<p></p> <font color="green">
+大多数方法都需要知道连接的节点名，并且都需要你先确定好能连接到此节点。
+</font> <p></p>
+[1] More details on the mechanisms at <a href="http://ferd.ca/repl-a-bit-more-and-less-than-that.html" target="_blank">http://ferd.ca/repl-a-bit-more-and-less-than-that.html</a> <br>
+[2] More details at <a href="http://learnyousomeerlang.com/distribunomicon#cookies" target="_blank">http://learnyousomeerlang.com/distribunomicon#cookies</a> or <a href="http://www.erlang.org/doc/reference_manual/distributed.html#id83619" target="_blank">http://www.erlang.org/doc/reference_manual/distributed.html#id83619</a>
+
+<p></p> <font color="green">
+[注1] ：更多细节 <a href="http://ferd.ca/repl-a-bit-more-and-less-than-that.html" target="_blank">http://ferd.ca/repl-a-bit-more-and-less-than-that.html</a> <br>
+[注2] ：更多细节 <a href="http://learnyousomeerlang.com/distribunomicon#cookies" target="_blank">http://learnyousomeerlang.com/distribunomicon#cookies</a> 或 <a href="http://www.erlang.org/doc/reference_manual/distributed.html#id83619" target="_blank">http://www.erlang.org/doc/reference_manual/distributed.html#id83619</a>
+</font> <p></p>
+
 
                     
                     </section>
@@ -915,10 +937,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_3__planning_for_overload/exercises.html" class="navigation navigation-prev " aria-label="Previous page: Exercises"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_4_connecting_to_remote_nodes/job_control_mode.html" class="navigation navigation-next " aria-label="Next page: Job Control Mode"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

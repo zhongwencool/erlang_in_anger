@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>Side Effects | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_2_building_open_source_erlang_software/example_initializing_without_guaranteeing_connections.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_2_building_open_source_erlang_software/its_about_the_guarantees.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="2.2.2" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -309,7 +309,7 @@
         </li>
     
         
-        <li class="chapter " data-level="2.2.2" data-path="chapter_2_building_open_source_erlang_software/side_effects.html">
+        <li class="chapter active" data-level="2.2.2" data-path="chapter_2_building_open_source_erlang_software/side_effects.html">
             
                 
                     <a href="../chapter_2_building_open_source_erlang_software/side_effects.html">
@@ -885,26 +885,36 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43569">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="side-effects">Side Effects</h1>
+<p>Of course, the libraries and processes that call such a client will then error out if they don’t expect to work without a database.</p>
+<p></p> <font color="green">
+当然，如果他们期望工作状态是有数据库的，那么这个客户端上的进程就会出错。(the libraries and processes that call such a client will then error out if they don’t expect to work without a database. )
+</font> <p></p>
+
+<p>That’s an entirely different issue in a different problem space, one that depends on your business rules and what you can or can’t do to a client, but one that is possible to work around.</p>
+<p></p> <font color="green">
+
+这是2个在不同角度下，完全不同的问题，一个是取决于你的业务需求：客户端什么能做，什么不能做;另一个则是有没有可能正常工作。
+</font> <p></p>
+
+<p> For example, consider a client for a service that stores operational metrics — the code that calls that client could very well ignore the errors without adverse effects to the system as a whole.<br>
+ The difference in both initialization and supervision approaches is that the client’s callers make the decision about how much failure they can tolerate, not the client itself.</p>
+<p></p> <font color="green">
+
+比如，考虑到一个存储运营指标(编：应该是指服务器运行时的各种指标)(operational metrics)的客户端服务---客户端调用的代码就很可能忽略对系统产生不良影响的错误。<br>
+
+在初始化和监控方法的不同之处：客户端的使用者来决定他们能容忍什么程序的错误，而不是客户端自己本身决定的。
+</font> <p></p>
+
+<p>That’s a very important distinction when it comes to designing fault-tolerant systems.<br>
+Yes, supervisors are about restarts, but they should be about restarts to a stable known state.</p>
+<p></p> <font color="green">
+
+在设计容错系统中，这有非常大的区别。<br>
+总之,supervisor是可以重启进程，但他们应当重启到一个稳定的已知状态。
+</font> <p></p>
 
                     
                     </section>
@@ -915,10 +925,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_2_building_open_source_erlang_software/its_about_the_guarantees.html" class="navigation navigation-prev " aria-label="Previous page:  It’s About the Guarantees"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_2_building_open_source_erlang_software/example_initializing_without_guaranteeing_connections.html" class="navigation navigation-next " aria-label="Next page:  Example: Initializing without guaranteeing connections"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

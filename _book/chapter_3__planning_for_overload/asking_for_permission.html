@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>Asking For Permission | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_3__planning_for_overload/what_users_see.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_3__planning_for_overload/how_long_should_a_time_out_be.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="3.2.2" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -519,7 +519,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.2.2" data-path="chapter_3__planning_for_overload/asking_for_permission.html">
+        <li class="chapter active" data-level="3.2.2" data-path="chapter_3__planning_for_overload/asking_for_permission.html">
             
                 
                     <a href="../chapter_3__planning_for_overload/asking_for_permission.html">
@@ -885,26 +885,51 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43578">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="asking-for-permission">Asking For Permission</h1>
+<h1 id="">请求许可</h1>
+<p>A somewhat simpler approach to back-pressure is to identify the resources we want to block on, those that cannot be made faster and are critical to your business and users. Lock these resources behind a module or procedure where a caller must ask for the right to make a request and use them.</p>
+<p></p> <font color="green">
+back-pressure有一些简单的方法：把那些不能变快和对你业务和用户来说至关重要的资源，都打上标识，如果一个模块或程序想调用这个资源，就必须先申请到使用此资源的权限才能使用它。
+</font> <p></p>
+There’s plenty of variables that can be used: memory, CPU, overall load, a bounded number of calls, concurrency, response times, a combination of them, and so on.
+<p></p> <font color="green">
+这里有很多参考值可以作为衡量标准：内存，CPU,总负载，达到一定量的调用，并发活动，应答时间以及一系列他们的组合等等。
+</font> <p></p>
+The SafetyValve <sup>11</sup> application is a system-wide framework that can be used when you know back-pressure is what you’ll need.
+<p></p> <font color="green">
+安全阀值(SafetyValve) application就是一个可以让你得到你想了解的back-pressure指标的系统级的框架。
+</font> <p></p>
+For more specific use cases having to do with service or system failures, there are plenty of circuit breaker applications available. Examples include breaky <sup>12</sup>, fuse <sup>13</sup>, or Klarna’s circuit_breaker <sup>14</sup>.<br>
+Otherwise, ad-hoc solutions can be written using processes, ETS, or any other tool available.
+<p></p> <font color="green">
+下面还很多关于这方面的应用，你可以找到更具体的用例与服务或系统故障，比如：breaky<sup>12</sup>， fuse<sup>13</sup>， Klarna’s<sup>14</sup> circuit_breaker<br>
+另外，主流的解决方案是使用进程,ETS,或其它可用的工具。
+</font> <p></p>
+
+<p>The important part is that the edge of the system (or subsystem) may block and ask for the right to process data, but the critical bottleneck in code is the one to determine whether that right can be granted or not.<br>
+The advantage of proceeding that way is that you may just avoid all the tricky stuff about timers and making every single layer of abstraction synchronous.</p>
+<p></p> <font color="green">
+系统边缘(the edge of the system)或子系统中重要的部分可能会阻塞并请求处理数据，便是代码中关键的瓶颈在于什么情况下可以授权？<br>
+这样处理的优势在于：你可以禁止所有棘手的时间定时器和让每一个抽象层(single layer of abstraction)都同步.
+</font> <p></p>
+You’ll instead put guards at the bottleneck and at a given edge or control point, and everything in between can be expressed in the most readable way possible.
+<p></p> <font color="green">
+相反，你会在瓶颈处设置好防护，设置好一个阀值，在此范围内的所有都可以被描清楚。
+</font> <p></p>
+[11] <a href="https://github.com/jlouis/safetyvalve" target="_blank">https://github.com/jlouis/safetyvalve</a><br>
+[12] <a href="https://github.com/mmzeeman/breaky" target="_blank">https://github.com/mmzeeman/breaky</a><br>
+[13] <a href="https://github.com/jlouis/fuse" target="_blank">https://github.com/jlouis/fuse</a><br>
+[14] <a href="https://github.com/klarna/circuit_breaker" target="_blank">https://github.com/klarna/circuit_breaker</a><br>
+<p></p> <font color="green">
+[注11]：1<a href="https://github.com/jlouis/safetyvalve" target="_blank">https://github.com/jlouis/safetyvalve</a> .<br>
+[注12]：2<a href="https://github.com/mmzeeman/breaky" target="_blank">https://github.com/mmzeeman/breaky</a> <br>
+[注13]：<a href="https://github.com/jlouis/fuse" target="_blank">https://github.com/jlouis/fuse</a><br>
+[注14]：<a href="https://github.com/klarna/circuit_breaker" target="_blank">https://github.com/klarna/circuit_breaker</a>
+</font> <p></p>
+
+
 
                     
                     </section>
@@ -915,10 +940,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_3__planning_for_overload/how_long_should_a_time_out_be.html" class="navigation navigation-prev " aria-label="Previous page: How Long Should a Time Out Be"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_3__planning_for_overload/what_users_see.html" class="navigation navigation-next " aria-label="Next page: What Users See"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

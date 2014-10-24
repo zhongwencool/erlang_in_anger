@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Library Applications | Introduction</title>
+        <title>Stack Buffers | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../chapter_1/regular_applications.html" />
+    <link rel="next" href="../chapter_3__planning_for_overload/time-sensitive_buffers.html" />
     
     
-    <link rel="prev" href="../chapter_1/otp_applications.html" />
+    <link rel="prev" href="../chapter_3__planning_for_overload/queue_buffers.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.2.1" data-basepath=".." data-revision="1414082137407">
+    <div class="book"  data-level="3.3.3" data-basepath=".." data-revision="1414082137407">
     
 
 <div class="book-summary">
@@ -115,7 +115,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.2.1" data-path="chapter_1/library_applications.html">
+        <li class="chapter " data-level="1.2.1" data-path="chapter_1/library_applications.html">
             
                 
                     <a href="../chapter_1/library_applications.html">
@@ -605,7 +605,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.3.3" data-path="chapter_3__planning_for_overload/stack_buffers.html">
+        <li class="chapter active" data-level="3.3.3" data-path="chapter_3__planning_for_overload/stack_buffers.html">
             
                 
                     <a href="../chapter_3__planning_for_overload/stack_buffers.html">
@@ -885,26 +885,41 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_43553">
+                    <section class="normal" id="section-gitbook_43582">
                     
-                        <h1 id="library-applications">Library Applications</h1>
-<p>Library applications will usually have modules named appname _something, and one module named appname . This will usually be the interface module that’s central to the library and contains a quick way into most of the functionality provided.</p>
-<p><p></p></p>
-<font color="green">
-Library application 通常会有一些叫appname_something和一个叫appname的模块名组成，他们通常是通向中央libary的接口模块，或提供搞定大部分功能的快捷函数。
-</font>
-<p></p>
-By looking at the source of the module, you can figure out how it works with little effort: If the module adheres to any given behaviour (gen_server, gen_fsm, etc.), you’re most likely expected to start a process under one of your own supervisors and call it that way.
-<p></p>
-<font color="green">
-通过看这些模块的源文件，你会明白：它是如何与behaviour(gen_server,gen_fsm等)相互协调工作的。你最有可能预期就是在自己的一个监控进程(supervisors)创建一个普通的工作进程。
-</font>
-<p></p>
-If no behaviour is included, then you probably have a functional, stateless library on your hands. For this case, the module’s exported functions should give you a quick way to understand its purpose.
-<p></p>
-<font color="green">
-如果没有包括behaviour, 这些代码很可能是一个没有状态信息(stateless)的函数工具代码库，对于这种情况，这个模块导出的函数是为了让你快速地理解它们。
-</font>
+                        <h1 id="stack-buffers">Stack Buffers</h1>
+<h1 id="">堆栈缓冲区</h1>
+<p>Stack buffers are ideal when you want the amount of control offered by queue buffers, but you have an important requirement for low latency.<br>
+To use a stack as a buffer, you’ll need two processes, just like you would with queue buffers, but a list 20 will be used instead of a queue data structure.</p>
+<p></p> <font color="green">
+堆栈缓冲区适用场景：当你李 、想拥有队列缓冲区提供的大量控制，但你又更重要的低延迟要求。<br>
+使用堆栈来作缓冲，你也需要2个进程，就和队列缓冲一样的，但一个列表(List)
+</font> <p></p>
+The reason the stack buffer is particularly good for low latency is related to issues similar to buffer bloat <sup>21</sup>. If you get behind on a few messages being buffered in a queue, all the messages in the queue get to be slowed down and acquire milliseconds of wait time.<br>
+Eventually, they all get to be too old and the entire buffer needs to be discarded.
+<p></p> <font color="green">
+堆栈缓冲特别好的一个重要原因是：不容易引起缓冲膨胀相关的问题<sup>21</sup>。如果你想从缓冲队列中得到几个后面的消息，所有的在队列中的消息处理都会变慢并且需要毫秒级的等待时间。<br>
+最终，他们会因为延时太久，整个缓冲区都要被丢弃掉。
+</font> <p></p>
+
+<p>On the other hand, a stack will make it so only a restricted number of elements are kept waiting while the newer ones keep making it to the server to be processed in a timely manner.<br>
+Whenever you see the stack grow beyond a certain size or notice that an element in it is too old for your QoS requirements you can just drop the rest of the stack and keep going from there. PO Box also offers such a buffer implementation.</p>
+<p></p> <font color="green">
+而另一方面，堆栈缓冲区会对保持等待的消息数量有一个严格的限制，并可以让服务器及时处理新来的。<br>
+当你看到堆栈缓冲区已增长到一定大小或注意到里面的元素达不到你需要的服务质量(QoS)，你就可以把堆栈余下的部分都丢弃掉，然后再继续工作，POBox就实现了这样的缓冲buffer。
+</font> <p></p>
+
+<p>A major downside of stack buffers is that messages are not necessarily going to be processed in the order they were submitted — they’re nicer for independent tasks, but will ruin your day if you expect a sequence of events to be respected.</p>
+<p></p> <font color="green">
+堆栈缓冲区主要的缺点就是消息并不是按他们提交顺序领奖依次处理的，他们对独立的任务支持非常好，但你千万不要期望它按先来先处理的原则执行。
+</font> <p></p>
+
+<p>[20] Erlang lists are stacks. For all we care, they provide push and pop operations that take O(1) complexity and are very fast.<br>
+[21] <a href="http://queue.acm.org/detail.cfm?id=2071893" target="_blank">http://queue.acm.org/detail.cfm?id=2071893</a></p>
+<p></p> <font color="green">
+[注20]：Erlang List就是一个堆栈，我们都关心地是他提供压栈和弹出操作且只有O(1)的复杂度。<br>
+[注21]：<a href="http://queue.acm.org/detail.cfm?id=2071893" target="_blank">http://queue.acm.org/detail.cfm?id=2071893</a>
+</font> <p></p>
 
                     
                     </section>
@@ -915,10 +930,10 @@ If no behaviour is included, then you probably have a functional, stateless libr
         </div>
 
         
-        <a href="../chapter_1/otp_applications.html" class="navigation navigation-prev " aria-label="Previous page: OTP Applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter_3__planning_for_overload/queue_buffers.html" class="navigation navigation-prev " aria-label="Previous page: Queue Buffers"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter_1/regular_applications.html" class="navigation navigation-next " aria-label="Next page: Regular Applications"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter_3__planning_for_overload/time-sensitive_buffers.html" class="navigation navigation-next " aria-label="Next page: Time-Sensitive Buffers"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
