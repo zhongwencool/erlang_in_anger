@@ -82,4 +82,9 @@
    * [System Monitors](chapter_8_cpu_and_scheduler_hogs/system_monitors.md)
        * [Suspended Ports](chapter_8_cpu_and_scheduler_hogs/suspended_ports.md)
    * [Exercises](chapter_8_cpu_and_scheduler_hogs/exercises.md)
+* [Chapter 9 Tracing](chapter_9_tracing/README.md)
+   * [Tracing Principles](chapter_9_tracing/tracing_principles.md)
+   * [Tracing with Recon](chapter_9_tracing/tracing_with_recon.md)
+   * [Example Sessions](chapter_9_tracing/example_sessions.md)
+   * [Exercises](chapter_9_tracing/exercises.md)
 
