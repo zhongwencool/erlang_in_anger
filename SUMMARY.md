@@ -77,4 +77,9 @@
        * [Erlang's Memory Model](chapter_7_memory_leaks/erlangs_memory_model.md)
        * [Fixing Memory Fragmentation with a Different Allo cation Strategy](chapter_7_memory_leaks/fixing_memory_fragmentation_with_a_different_allo_cation_strategy.md)
    * [Exercises](chapter_7_memory_leaks/exercises.md)
+* [Chapter 8 CPU and Scheduler Hogs](chapter_8_cpu_and_scheduler_hogs/README.md)
+   * [Profiling and Reduction Counts](chapter_8_cpu_and_scheduler_hogs/profiling_and_reduction_counts.md)
+   * [System Monitors](chapter_8_cpu_and_scheduler_hogs/system_monitors.md)
+       * [Suspended Ports](chapter_8_cpu_and_scheduler_hogs/suspended_ports.md)
+   * [Exercises](chapter_8_cpu_and_scheduler_hogs/exercises.md)
 
