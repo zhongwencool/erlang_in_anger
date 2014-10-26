@@ -1,6 +1,6 @@
 # Part I：Writing Applications
 
-# Chapter 1 How to Dive into a Co de Base
+# Chapter 1 How to Dive into a Code Base
 
 ## 如何深入代码库
 <p></p>
