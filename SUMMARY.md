@@ -54,4 +54,11 @@
        * [OTP Processes](chapter_5_runtime_metrics/otp_processes.md)
        * [Ports](chapter_5_runtime_metrics/ports.md)
    * [Exercises](chapter_5_runtime_metrics/exercises.md)
+* [Chapter 6 Reading Crash Dumps](chapter_6_reading_crash_dumps/README.md)
+   * [General View](chapter_6_reading_crash_dumps/general_view.md)
+   * [Full Mailboxes](chapter_6_reading_crash_dumps/full_mailboxes.md)
+   * [Too Many (or to o few) Processes](chapter_6_reading_crash_dumps/too_many_or_to_o_few_processes.md)
+   * [Too Many Ports](chapter_6_reading_crash_dumps/to_o_many_ports.md)
+   * [Can’t Allocate Memory](chapter_6_reading_crash_dumps/cant_allocate_memory.md)
+   * [Exercises](chapter_6_reading_crash_dumps/exercises.md)
 
