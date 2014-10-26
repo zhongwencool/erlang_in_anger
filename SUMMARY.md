@@ -43,7 +43,7 @@
    * [SSH Daemon](chapter_4_connecting_to_remote_nodes/ssh_daemon.md)
    * [Named Pipes](chapter_4_connecting_to_remote_nodes/named_pipes.md)
    * [Exercises](chapter_4_connecting_to_remote_nodes/exercises.md)
-* [Chapter 5 Runtime Metrics ](chapter_5_runtime_metrics/README.md)
+* [Runtime Metrics ](chapter_5_runtime_metrics/README.md)
    * [Global View](chapter_5_runtime_metrics/global_view.md)
        * [Memory](chapter_5_runtime_metrics/memory1.md)
        * [CPU](chapter_5_runtime_metrics/cpu.md)
