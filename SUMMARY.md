@@ -87,4 +87,5 @@
    * [Tracing with Recon](chapter_9_tracing/tracing_with_recon.md)
    * [Example Sessions](chapter_9_tracing/example_sessions.md)
    * [Exercises](chapter_9_tracing/exercises.md)
+* [Conclusion](conclusion/README)
 
