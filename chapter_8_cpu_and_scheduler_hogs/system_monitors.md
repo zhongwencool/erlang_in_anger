@@ -10,6 +10,10 @@ busy processes, either through NIFs or some other means, that end up making them
 to de-schedule. <sup>8</sup>
 <br>&emsp;We’ve seen how to set such a system monitor In Garbage Collection in 7.1.5, but here’s
 a different pattern <sup>9</sup> I’ve used before to catch long-running items:<br>
+<p></p> <font color="green">
+&emsp;如果通过profiling或检查reduction counts没有看出什么问题，
+</font> <p></p>
+
 ----------------------------------------------------------------<br>
 `1> F = fun(F) ->`<br>
 `receive`<br>
