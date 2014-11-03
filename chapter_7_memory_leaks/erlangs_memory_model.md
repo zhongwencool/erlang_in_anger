@@ -99,7 +99,6 @@ allocated will be free to go look into the many multiblock carriers to find some
 &emsp;*Address order best fit *(**aobf**)工作也类似best fit，但这颗树是基于数据块的地址。所以VM会先找可以容纳数据的最小可用数据块，但如果有很多一样的块存在，它会优先选择地址小的。如果我有一个需要3个块的数据，我依然想存在区域3中，但我需要2个块，那么这个策略就会在表7.3中区域1(代替区域5)的第一个mbcs中
 </font> <p></p>
 
-
 <br>&emsp;*Address order first fit* (**aoff**) will favor the address order for its search, and as soon as a
 block fits, aoff uses it. Where **aobf** and **bf** would both have picked area 3 to allocate four
 blocks in Figure 7.3, this one will get area 2 as a first priority given its address is lowest.
