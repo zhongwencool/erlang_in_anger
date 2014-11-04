@@ -6,10 +6,10 @@
 [3]. What can be said of processes under a one_for_all scheme for supervision?<br>
 [4]. Why would someone use a gen_fsm behaviour over a gen_server?<br>
 <font color="green">
-[1]. 如何判断代码库是一个application，还是release?<br>
+[1]. 如何判断代码是一个application，还是release?<br>
 [2]. application和library application有什么区别？<br>
 [3]. 什么场景会使用one_for_all监控模式?<br>
-[4]. 什么场景会使用gen_fsm替换gen_server?<br>
+[4]. 什么场景应该使用gen_fsm替换gen_server?<br>
 </font>
 
 ## Hands-On
