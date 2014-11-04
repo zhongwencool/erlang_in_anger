@@ -3,7 +3,7 @@
 The following code attempts to guarantee a connection as part of the process’ state:
 <p></p> <font color="green">
 
-下面代码认为进程可以在初始化过程中必然连接成功。
+&emsp;下面代码认为进程可以在初始化过程中必然连接成功。
 </font> <p></p>
 
 ----------------------------------------------------------------------------------<br>
@@ -21,9 +21,9 @@ The following code attempts to guarantee a connection as part of the process’ 
 12 `          _ -> self() ! reconnect, {noreply, S}`<br>
 13 `end;`<br>
 ----------------------------------------------------------------------------------<br>
-Instead, consider rewriting it as:
+&emsp;Instead, consider rewriting it as:
 <p></p> <font color="green">
-重写如下：
+&emsp;重写如下：
 </font> <p></p>
 
 ----------------------------------------------------------------------------------<br>
@@ -46,5 +46,5 @@ Instead, consider rewriting it as:
 You now allow initializations with fewer guarantees: they went from the connection is available to the connection manager is available.
 <p></p> <font color="green">
 
-重写后，能保证初始化必然成功，因为他的重连都是在初始化之后的handle_info中。
+&emsp;重写后，能保证初始化必然成功，因为他的重连都是在初始化之后的handle_info中。
 </font> <p></p>

@@ -2,13 +2,13 @@
 For releases, the structure should be a bit different <sup>4</sup>. Releases are collections of applications, and their structures should reflect that.
  <p></p>
  <font color="green">
-对于Releases,结构会有一点小小的变化。Releases是applicaitons的集合，他们的结构也应当反映出这些。
+&emsp;对于Releases,结构会有一点小小的变化。Releases是applicaitons的集合，他们的结构也应当反映出这些。
 </font>
 <p></p>
 Instead of having a top-level app, applications should be nested one level deeper and divided into two categories: apps and deps. The apps directory contains your applications’ source code (say, internal business code), and the deps directory contains independently managed dependency applications.
 <p></p>
 <font color="green">
-applications应当使用嵌套的形式并分成apps和deps两种类型来取代这种自上而下的app, apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖application。<br>
+&emsp;applications应当使用嵌套的形式并分成apps和deps两种类型来取代那些自上而下的app, apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖application。<br>
 </font>
 ---------------------------------------------------------------------------------<br>
 1 `apps/`<br>
@@ -23,8 +23,8 @@ This structure lends itself to generating releases. Tools such as Systool and Re
 A relx configuration file for the directory structure above would look like:
 <p></p>
 <font color="green">
-这种结构有助于自动生成releases.Systool,Reltool等工具以前都会支持，用起来非常给力。相对容易上手的还有最近推出的一个简单点的工作：relx。<sup>6</sup><br>
-relx的配置文件格式如下：<br>
+&emsp;这种结构有助于自动生成releases。Systool,Reltool等工具以前都会支持，用起来非常给力。相对容易上手的还有最近推出的一个简单点的工作：relx。<sup>6</sup><br>
+&emsp;relx的配置文件格式如下：<br>
 ----------------------------------------------------------------------------------<br>
 1 `{paths, ["apps", "deps"]}.`<br>
 2 `{include_erts, false}. % will use currently installed Erlang`<br>
@@ -38,23 +38,23 @@ relx的配置文件格式如下：<br>
 ----------------------------------------------------------------------------------<br>
 </font>
 <p></p>
-Calling ./relx (if the executable is in the current directory) will build a release, to be found in the _rel/ directory.
+Calling **./relx** (if the executable is in the current directory) will build a release, to be found in the _rel/ directory.
 <p></p>
 <font color="green">
-你可以调用./relx(在当前文件夹下调用)来创建一个release,你可以在 _rel/文件夹来找到这个release.
+&emsp;你可以调用**./relx**(在当前文件夹下调用)来创建一个release,就能在 _rel/文件夹来找到这个release.
 </font>
 <p></p>
 If you really like using rebar, you can build a release as part of the project’s compilation by using a rebar hook in rebar.config:
 <p></p>
 <font color="green">
-如果你更喜欢使用rebar来创建，你可能通过使用在rebar.config里面的rebar hook 来把创建release作为项目编译的一部分。<br>
+&emsp;如果你更喜欢使用rebar来创建，你可能通过使用在rebar.config里面的rebar hook 来把创建release作为项目编译的一部分。<br>
 </font>
 ----------------------------------------------------------------------------------<br>
 1 `{post_hooks,[{compile, "./relx"}]}.`<br>
 ----------------------------------------------------------------------------------<br>
 <p></p>
 And every time rebar compile will be called, the release will be generated.
-<font color="green">
+<p></p><font color="green">
 每次运行rebar compile时，都会新建一个release.
 </font>
 <p></p>
@@ -66,7 +66,7 @@ which is less than ideal for distribution purposes and conflicts with assumption
 <p></p>
 
 <font color="green">
-[注4]：我说应当(should),是因为大量的Erlang开发者都会把最终的系统放在src做成单一的应用(a single top-level application),而不是在deps使用依赖项，这并不能理想地解决由于OTP文件结构引起的冲突.开发者之所以这样做，是因为他们想从源代码构建产品并使用自定义的命令来驱动(boot)他们的application.<br>
-[注5]:http://learnyousomeerlang.com/release-is-the-word <br>
+[注4]：我说应当(should),是因为大量的Erlang开发者都会把最终的系统放在src做成单一的应用(a single top-level application),而不是在deps使用依赖项，这并不能完美地解决由于OTP文件结构引起的冲突.开发者之所以这样做，是因为他们想从源代码构建产品并使用自定义的命令来驱动(boot)他们的application.<br>
+[注5]: http://learnyousomeerlang.com/release-is-the-word <br>
 [注6]：https://github.com/erlware/relx/wiki]。
 </font>
