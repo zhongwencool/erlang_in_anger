@@ -5,8 +5,8 @@ An initialized process should be stable no matter what happens. That way, when i
 <p></p>
 <font color="green">
 
-&emsp;重启一个进程的目标是为了它回归已知的稳定状态。当进程的初始化都不稳定,supervision重启就不是很值得了。<br>
-&emsp;一个进程的初始化应当在任何情况下都非常稳定.这样的话，当他的兄弟姐妹都启动后，他们可以在启动时全面确认系统出来之前的其它部分都是正常健康的。
+&emsp;重启一个进程的目标是为了它回归已知的稳定状态。当进程的初始化都不稳定，supervision重启策略就不值一提了。<br>
+&emsp;一个进程的初始化应当在任何情况下都非常稳定.这样的话，当他的兄弟姐妹都成功启动后，就可以完成肯定之前启动的系统都是正常健康的。
 </font>
 <p></p>
 
@@ -14,7 +14,7 @@ If you don’t provide that stable state, or if you were to start the entire sys
 <p></p>
 <font color="green">
 
-&emsp;如果你不能确保稳定的状态，或你是异步启动整个系统，你就很难从一个在一个循环结构中使用了try...catch得到线索.
+&emsp;如果你不能确保稳定的状态，或你是异步启动整个系统，你就很难从一个在一个使用了try...catch循环结构中得到线索.
 </font>
 <p></p>
 
@@ -22,7 +22,7 @@ Supervised processes provide guarantees in their initialization phase, not a bes
 This means that when you’re writing a client for a database or service, you shouldn’t need a connection to be established as part of the initialization phase unless you’re ready to say it will always be available no matter what happens.
 <p></p>
 <font color="green">
-&emsp;保证被监控的进程能在初始化中稳定启动，但并不是最好的策略。<br>
+&emsp;保证被监控的进程能在初始化中稳定启动非常好，但这并不是最好的策略。<br>
 &emsp;这意味着，当你为一个数据库或服务(database or service)写客户端时，你不能在初始化中建立连接，除非你已准备处理所有会发生的情况了。
 </font>
 <p></p>

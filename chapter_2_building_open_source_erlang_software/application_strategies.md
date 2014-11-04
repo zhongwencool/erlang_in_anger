@@ -3,7 +3,7 @@ No matter what, a sequence of failures is not a death sentence for the node. Onc
 Each OTP application can be started in 3 ways: temporary, transient, permanent, either by doing it manually in application:start(Name, Type) , or in the config file for your release:
 <p></p> <font color="green">
 &emsp;不管怎样，一连串的失败对节点来说并不可怕。一旦系统被分成多个OTP applications时，就有可以在节点上按重要性排序applications.<br>
-&emsp;每一个OTP application 都可以有3种启动方式：暂时(temporary),短暂(transient),永久(permanent),不管是手动用application:start(Name,Type)还是根据release里面的config文件启动。
+&emsp;不论是手动用application:start(Name,Type)还是根据release里面的config文件启动，每一个OTP application 都可以有3种启动方式：暂时(temporary),短暂(transient),永久(permanent),
 </font> <p></p>
 
 • permanent: if the app terminates, the entire system is taken down, excluding manual termination of the app with application:stop/1.<br>

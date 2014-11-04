@@ -22,7 +22,7 @@ That’s because there is no canonical package management in Erlang.  People ins
 <p></p>
 <font color="green">
 &emsp;新加的文件夹:**deps/** 非常有用的一个文件夹。这个文件夹如果有必要也可以直接通过rebar自动生成<sup>2</sup>。<br>
-这是因为在Erlang没有标准的包管理器(canonical package management).现在的做法是用rebar来做为每一个项目在本地获取依赖项的工作。
+这是因为在Erlang没有标准的包管理器(canonical package management)。现在的做法是用rebar来做为每一个项目在本地获取依赖项的工作。
 </font>
 <p></p>
 This is fine and removes a truckload of conflicts, but means that each project you have may have to download its own set of dependencies.<br>
@@ -48,6 +48,7 @@ This is accomplished with rebar by adding a few config lines to rebar.config:
 Feel free to install rebar globally on your system, or keep a local copy if you require a specific version to build your system.
 Applications are fetched directly from a git (or hg, or svn) source, recursively. They can then be compiled, and specific compile options can be added with the {erl_opts, List}.option in the config file <sup>3 </sup>.<br>
 Within these directories, you can do your regular development of an OTP application.
+<p></p>
  <font color="green">
 &emsp;Applications会递归地从git(或hg,或svn)中直接拿到源代码.他们可以被编译，并使用特定的选项{erl_opts,List}来编译. 这个选项也在config文件中定义<sup>3 </sup>。<br>
 你可以在这些文件夹中，为自己的OTP application开发功能。

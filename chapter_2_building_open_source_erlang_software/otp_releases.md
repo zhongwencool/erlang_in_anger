@@ -8,7 +8,7 @@ For releases, the structure should be a bit different <sup>4</sup>. Releases are
 Instead of having a top-level app, applications should be nested one level deeper and divided into two categories: apps and deps. The apps directory contains your applications’ source code (say, internal business code), and the deps directory contains independently managed dependency applications.
 <p></p>
 <font color="green">
-&emsp;applications应当使用嵌套的形式并分成apps和deps两种类型来取代那些自上而下的app, apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖application。<br>
+&emsp;applications应当使用嵌套的形式并分成apps和deps两种类型，而不是那些自上而下的app结构, apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖application。<br>
 </font>
 ---------------------------------------------------------------------------------<br>
 1 `apps/`<br>
@@ -23,7 +23,7 @@ This structure lends itself to generating releases. Tools such as Systool and Re
 A relx configuration file for the directory structure above would look like:
 <p></p>
 <font color="green">
-&emsp;这种结构有助于自动生成releases。Systool,Reltool等工具以前都会支持，用起来非常给力。相对容易上手的还有最近推出的一个简单点的工作：relx。<sup>6</sup><br>
+&emsp;这种结构有助于自动生成releases。Systool,Reltool等工具以前都会支持，用起来非常给力。相对容易上手的还有最近推出的一个简单点的工作：relx<sup>6</sup>。<br>
 &emsp;relx的配置文件格式如下：<br>
 ----------------------------------------------------------------------------------<br>
 1 `{paths, ["apps", "deps"]}.`<br>

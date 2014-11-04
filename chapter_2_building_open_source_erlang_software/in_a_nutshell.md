@@ -12,11 +12,11 @@ On the other hand, code that depends on non-local databases and external service
 and later.
 <p></p> <font color="green">
 
-&emsp;另一方面，依赖非本地数据库的代码和对应的外部服务，会采用更快异步的监控树启动(不在初始化中做可能会失败的重连操作)，因为如果在正常操作中失败也经常发生，现在启动还是晚点再启动就没有区别了。
+&emsp;另一方面，依赖非本地数据库的代码和对应的外部服务，会采用更快异步的监控树启动(不在初始化中做可能会失败的重连操作)，因为如果在正常操作中失败也经常发生，现在启动还是晚点再启动就没有区别。
 </font> <p></p>
 
  You have to handle it the same, and for these parts of the system, far less strict guarantees are often the better solution.
 <p></p> <font color="green">
-&emsp;你不得不处理它，对于这部分的系统，更严格的保证(far less strict guarantees)常常是一个更好的解决方案。
+&emsp;，对于这你不得不同步处理的系统，不做严格的限制(far less strict guarantees)往往是更好的解决方案。
 </font>
 <p></p>
