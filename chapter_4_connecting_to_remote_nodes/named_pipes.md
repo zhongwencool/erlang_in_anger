@@ -2,18 +2,18 @@
 # 命名管道(Named Pipes)
 A little known way to connect with an Erlang node that requires no explicit distribution is through named pipes. This can be done by starting Erlang with run_erl, which wraps Erlang in a named pipe 5:
 <p></p> <font color="green">
-还有一种鲜为人知连接Erlang节点的方法：命名管道(named pipes)，它不需要明确指定节点名.这可以通过使用run_erl 启动Erlang来完成<sup>5</sup>。
+&emsp;还有一种鲜为人知连接Erlang节点的方法：命名管道(named pipes)，它不需要明确指定节点名.这可以通过使用run_erl 启动Erlang来完成<sup>5</sup>。
 </font> <p></p>
 -------------------------------------------------------------------------------------<br>
 `$ run_erl  /tmp/erl_pipe  /tmp/log_dir  "erl"`<br>
 -------------------------------------------------------------------------------------<br>
 The first argument is the name of the file that will act as the named pipe. The second one is where logs will be saved <sup>6</sup>.
 <p></p> <font color="green">
-第一个参数是指定作为命名管道的文件，第三个就是指明日志要放在目录<sup>6</sup>。
+&emsp;第一个参数是指定作为命名管道的文件，第三个就是指明日志要放在目录<sup>6</sup>。
 </font> <p></p>
 To connect to the node, you use the to_erl program:
 <p></p> <font color="green">
-你可以使用 to_erl程序连接到节点上：
+&emsp;你可以使用 to_erl程序连接到节点上：
 </font> <p></p>
 -------------------------------------------------------------------------------------<br>
 `$ to_erl  /tmp/erl_pipe`<br>
@@ -23,7 +23,7 @@ To connect to the node, you use the to_erl program:
  <p></p>
 And the shell is connected. Closing stdio (with ˆD) will disconnect from the shell while leaving it running.
 <p></p> <font color="green">
-连接上后，你可以使用ctrl+D来断开远程节点(只是断开，不会终结远程节点).
+&emsp;连接上后，你可以使用ctrl+D来断开远程节点(只是断开，不会终结远程节点).
 </font> <p></p>
 [5] "erl" is the command being run. Additional arguments can be added after it. For example
 "erl +K true" will turn kernel polling on.<br>
