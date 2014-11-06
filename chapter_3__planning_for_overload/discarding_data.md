@@ -7,11 +7,11 @@ When nothing can slow down outside of your Erlang system and things can’t be s
 
 It’s a sad reality that nobody really wants to deal with. Programmers, software engineers, and computer scientists are trained to purge the useless data, and keep everything that’s useful. Success comes through optimization, not giving up.
 <p></p> <font color="green">
-&emsp;这是个悲伤的事实：没有人真的想处理。程序员，软件工程师，或计算机科学家都被告之要减少没用的数据，并保持所有都是有用的数据，成功来自于优化，而不是放弃。
+&emsp;这是个悲伤的事实：没有人真的想丢弃。程序员，软件工程师，或计算机科学家都被告之要减少没用的数据，并保持所有都是有用的数据，成功来自于优化，而不是放弃。
 </font> <p></p>
 However, there’s a point that can be reached where the data that comes in does so at a rate faster than it goes out, even if the Erlang system on its own is able to do everything fast enough. In some cases,  It’s the component after it that blocks.
 <p></p> <font color="green">
-&emsp;然后，必须要指出的一点是：为什么数据的输入会比输出快得多，即使在Erlang系统自身可以快速处理一切的时候，在一些场合时，是由于组合在一起后，就阻塞了。
+&emsp;然后，必须要指出的一点是：为什么数据的输入会比输出快得多，即使在Erlang系统自身可以快速处理一切的时候，在一些场合时，是由于凑合在一起后，就阻塞了。
 </font> <p></p>
 If you don’t have the option of limiting how much data you receive, you then have to drop messages to avoid crashing.
 <p></p> <font color="green">

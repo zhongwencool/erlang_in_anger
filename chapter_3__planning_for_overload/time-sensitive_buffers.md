@@ -10,4 +10,4 @@ An interesting approach could be done with buckets, where multiple stacks are us
 </font> <p></p>
 It may sound counter-intuitive to make some requests a lot worse to benefit the majority — you’ll have great medians but poor 99 percentiles — but this happens in a state where you would drop messages anyway, and is preferable in cases where you do need low latency.
 <p></p> <font color="green">
-&emsp;这听起来有悖常理：让一些请求失败来造福其余的大多数----你会有一个非常好的medians便只有可怜的99%处理质量指标，但这只是针对一个无论如何都要丢弃消息的状态，特别是你要保证低延迟的场合。
+&emsp;这听起来有悖常理：让一些请求失败来造福其余的大多数----你会有一个非常好的medians便只能达到可怜的99%以下的处理指标，但这只是针对一个无论如何都要丢弃消息的状态，特别是你要保证低延迟的场合。

@@ -22,7 +22,7 @@ Otherwise, ad-hoc solutions can be written using processes, ETS, or any other to
 The important part is that the edge of the system (or subsystem) may block and ask for the right to process data, but the critical bottleneck in code is the one to determine whether that right can be granted or not.<br>
 The advantage of proceeding that way is that you may just avoid all the tricky stuff about timers and making every single layer of abstraction synchronous.
 <p></p> <font color="green">
-&emsp;系统边缘(the edge of the system)或子系统中重要的部分可能会阻塞并请求处理数据，便是代码中关键的瓶颈在于什么情况下可以授权？<br>
+&emsp;系统边缘(the edge of the system)或子系统中重要的部分可能会阻塞并请求处理数据，但是代码中关键的瓶颈在于什么情况下可以授权？<br>
 &emsp;这样处理的优势在于：你可以禁止所有棘手的时间定时器和让每一个抽象层(single layer of abstraction)都同步.
 </font> <p></p>
 You’ll instead put guards at the bottleneck and at a given edge or control point, and everything in between can be expressed in the most readable way possible.

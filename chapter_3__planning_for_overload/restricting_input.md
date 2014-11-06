@@ -5,12 +5,12 @@ It’s the simplest approach because it basically means you’re slowing the use
 On the other hand, it can lead to a really crappy experience for the user.
 <p></p> <font color="green">
 &emsp;限制输入是处理Erlang系统日益增长的消息队列中最简单的方法。<br>
-&emsp;之所以简单，是因为这意味着减慢了用户(相对于满负荷:back-pressure工作来说)，这可以马上修复问题且不要求做更多的优化。<br>
+&emsp;之所以简单，是因为这意味着减慢了用户(相对于满负荷:back-pressure工作来说)，这可以马上修复问题且不必要做更多的优化。<br>
 &emsp;但另一方面，这会给用户一个非常糟糕的体验。
 </font> <p></p>
 The most common way to restrict data input is to make calls to a process whose queue would grow in uncontrollable ways synchronously. By requiring a response before moving on to the next request, you will generally ensure that the direct source of the problem will be slowed down.
 <p></p> <font color="green">
-&emsp;最常用的限制输入的方法就是使无法控制自己消息队列增长的进程变成同步处理。在处理下一个请求(request)之前需要前一个请求的回应(response),这样同步处理肯定会使效率慢下来。
+&emsp;最常用的限制输入的方法就是使无法控制自己消息队列增长的进程变成同步处理。在处理下一个请求(request)之前需要得到一个请求的回应(response),这样同步处理肯定会使效率慢下来。
 </font> <p></p>
 The difficult part for this approach is that the bottleneck causing the queue to grow is usually not at the edge of the system, but deep inside it, which you find after optimizing nearly everything that came before. Such bottlenecks will often be database operations, disk operations, or some service over the network.
 <p></p> <font color="green">
@@ -26,7 +26,7 @@ Developers that see this pattern will often try to put API limits per user <sup>
 </font> <p></p>
 [8] There’s a tradeoff between slowing down all requests equally or using rate-limiting, both of which are valid. Rate-limiting per user would mean you’d still need to increase capacity or lower the limits of all users when more new users hammer your system, whereas a synchronous system that indiscriminately blocks
 should adapt to any load with more ease, but possibly unfairly.<br>
-<p></p> <font color="red">
+<p></p> <font color="green">
 [注8]：减缓所有请求和使用速度限制之间有一个权衡，两者可以结合使用。速度限制每个用户将意味着你仍然需要增加容量或放宽对新用户加放系统的限制，而对于同步系统来说,就是不加选择地放宽限制来适应任何负载,但可能存在不公平。
 </font> <p></p>
 

@@ -14,7 +14,7 @@ there. If there are errors, new versions will need to be shipped.
 <font color="green">
 &emsp;相对于大多数其它编程语言，Erlang处理失败(failure)方法非常独特的。 常见处理错误的思维模式是费尽心机防止发生错误，不允许在运行时出错，如果不能杜绝错误，它的行为就会超出设计者原本的设想（变得不可控）。<br>
 
-一旦程序写完，并发布为产品放出去，如果程序在这个变化莫测的生产环境中出了问题，，那么必须为修复它重新发布新版本。  </font>
+&emsp;一旦程序写完，并发布为产品放出去，如果程序在这个变化莫测的生产环境中出了问题，，那么必须为修复它重新发布新版本。  </font>
 <p></p>
 Erlang, on the other hand, takes the approach that failures will happen no matter what,
 whether they’re developer-, operator-, or hardware-related. It is rarely practical or even possible to get rid of all errors in a program or a system. <sup>1</sup> If you can deal with some errors rather than preventing them at all cost, then most undefined behaviours of a program can go in that "deal with it" approach.

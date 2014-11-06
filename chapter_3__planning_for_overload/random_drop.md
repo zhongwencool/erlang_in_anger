@@ -31,7 +31,7 @@ If you aim to keep 95% of the messages you send, the authorization could be writ
 `     false -> drop()`<br>
 `end.`<br>
 -------------------------------------------------------------------—----<br>
-&emsp;如果你不需要在丢弃时做任何时，就可以更简洁一些：<br>
+&emsp;如果你不需要在丢弃时做任何处理，就可以更简洁一些：<br>
 -------------------------------------------------------------------—----<br>
 `drop:random(0.95) andalso send().`<br>
 -------------------------------------------------------------------—----<br>
@@ -60,7 +60,7 @@ Similar techniques could also be used to implement different drop ratios for dif
 <p></p> <font color="green">
 
 &emsp;这个比例要设定为多少是基于负荷的，使用application:get_env/2来得到数据比把这个值存在配置文件中让所有的进程中能取到的方法高效得多。<br>
-&emsp;类似的技术可以实现对不到的消息优先级设定不同的丢弃率，而不是统一标准解决一切。
+&emsp;类似的技术可以实现对不同消息优先级设定不同的丢弃率，而不是统一标准解决一切。
 </font> <p></p>
 
 [15] Any process tasked with checking the load of specific processes using heuristics such as process_info(Pid, message_queue_len) could be a monitor

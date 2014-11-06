@@ -20,14 +20,14 @@ There is a choice to be made when designing the system. Are your users going to 
 System-global or node-global limits are usually easy to implement, but will have the downside that they may be unfair. A user doing 90% of all your requests may end up
 making the platform unusable for the vast majority of the other users.
 <p></p> <font color="green">
-&emsp;还有一个设计系统时要考虑的一个因素。你的用户每次限制，还是只在系统全局做个限制？<br>
+&emsp;还有一个设计系统时要考虑的一个因素。是用户每次做限制，还是只在系统全局做个限制？<br>
 &emsp;在系统层面或节点层面上做全局限制是非常容易的，但也有个缺点，就是不公平。其中一个用户请求占总数的90%，可能会导致其它用户完全不能使用这个平台了。
 </font> <p></p>
 
 Per-account limits, on the other hand, tend to be very fair, and allow fancy schemes such as having premium users who can go above the usual limits. This is extremely nice, but has the downside that the more users use your system, the higher the effective global system limit tends to move. Starting with 100 users that can do 100 requests a minute gives you a global 10000 requests per minute.<br>
 Add 20 new users with that same rate allowed, and suddenly you may crash a lot more often.
 <p></p> <font color="green">
-&emsp;而另一方面，如果对每个用户都作限制，就会非常公平，可以容许高级用户直接突破规则，这真的非常好，但这也会降低更多的用户使用你的系统，相比而言，全局限制的效率就更高一些，如果100个用户可以使用100请求/min，就相当于10000 请求/min的全局限制效果。<br>
+&emsp;而另一方面，如果对每个用户都作限制，就会非常公平，可以容许高级用户直接突破规则，这真的非常好，但这也会限制了更多用户来使用你的系统，相比而言，全局限制的效率就更高一些，如果100个用户可以使用100请求/min，就相当于10000 请求/min的全局限制效果。<br>
 &emsp;再在相同条件下新加20个新用户，你就有可能经常崩溃。
 </font> <p></p>
 It’s important to consider the tradeoffs your business can tolerate from that point of view, because users will tend not to appreciate seeing their allowed usage go down all the time, possibly even more so than seeing the system go down entirely from time to time.

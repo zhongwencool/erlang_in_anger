@@ -3,7 +3,7 @@
 Messages you didn’t know about tend to be rather rare when using OTP applications.<br>
 Because OTP behaviours pretty much expect you to handle anything with some clause in handle_info /2, unexpected messages will not accumulate much.
 <p></p> <font color="green">
-&emsp;OTP applications里面几乎没有不可预料的消息存在。
+&emsp;OTP applications里面几乎没有出乎意料的消息存在。
 因为OTP behaviours 会用handle_info/2来处理所有的消息，所以基本不会堆积很多不明的消息。
 </font> <p></p>
 However, all kinds of OTP-compliant systems end up having processes that may not implement a behaviour, or processes that go in a non-behaviour stretch where it overtakes message handling.
@@ -12,11 +12,11 @@ However, all kinds of OTP-compliant systems end up having processes that may not
 </font> <p></p>
 If you’re lucky enough, monitoring tools <sup>6</sup> will show a constant memory increase, and inspecting for large queue sizes <sup>7</sup> will let you find which process is at fault.
 <p></p> <font color="green">
-&emsp;如果你吉星高照，监控工具<sup>6</sup>会监测到不断增长的内存，通过检查大型队列<sup>7</sup>帮你找到那个进程出错了。
+&emsp;如果你吉星高照，监控工具<sup>6</sup>会监测到噌噌往上涨的内存，通过检查大型队列<sup>7</sup>帮你找到哪个进程出错了。
 </font> <p></p>
 You can then fix the problem by handling the messages as required.
 <p></p> <font color="green">
-&emsp;那么你按要求处理好这些没有处理的消息就可以修复问题啦。
+&emsp;那么你按需求处理好这些没有被处理的消息就可以修复问题啦。
 </font> <p></p>
 
 [6] See Section 5.1 <br>

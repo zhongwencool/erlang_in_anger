@@ -3,7 +3,7 @@
 By far, the most common cause of failure I’ve encountered in real-world scenarios is due to the node running out of memory. Furthermore, it is usually related to message queues going out of bounds. <sup>1</sup>
 <p></p> <font color="green">
 
-&emsp;到目前为止,我在真实场景中遇到过最常见导致失败的原因：节点耗尽内存。而且，内存耗尽常常是由于消息队列超出限度。
+&emsp;目前为止,在真实场景中,我遇到过最常见导致失败的原因：节点耗尽内存。而且，内存耗尽常常是由于消息队列超出限度。
 </font> <p></p>
 
 There are plenty of ways to deal with this, but knowing which one to use will require a decent understanding of the system you’re working on.<br>

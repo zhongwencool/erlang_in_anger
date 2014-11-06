@@ -9,7 +9,7 @@ Even though the regular mailbox for a process has the form of a queue, you’ll 
 • A new process that will do nothing but buffer the messages. Messages from the outside should go to this process.<br>
 
 <p></p> <font color="green">
-&emsp;即使通常的进程信箱都有队列，你平时只要把所有的消息都尽可能地放进去就行了。一个队列缓冲则需要2个进程都是安全的：<br>
+&emsp;即便一般进程信箱都有队列，你平时只要把所有的消息都尽可能地放进去就行了。但一个队列缓冲则需要2个进程都是安全的：<br>
 &emsp;•  常规的工作进程(就像gen_server)。<br>
 &emsp;•  一个只做缓冲消息工作的新进程，外界的消息应当先路由到这个进程中。
 </font> <p></p>
@@ -20,7 +20,7 @@ To make things work, the buffer process only has to remove all the messages it c
 </font> <p></p>
 Whenever the server is ready to do more work, it can ask the buffer process to send it a given number of messages that it can work on. The buffer process picks them from its queue, forwards them to the server, and goes back to accumulating data.
 <p></p> <font color="green">
-&emsp;只要工作进程已准备好可以接受更多的工作时，它就可以请求缓冲进程把定量的消息发给自己来处理。缓冲进程从队列中拿出这些消息，把它们交给工作进程，并回去堆积更多的消息。
+&emsp;只要工作进程已准备好可以接受更多的工作时，它就可以请求缓冲进程把定量的消息发给自己来处理。缓冲进程从队列中拿出这些消息，把它们交给工作进程，接着回去堆积更多的消息。
 </font> <p></p>
 Whenever the queue grows beyond a certain size 17 and you receive a new message, you can then pop the oldest one and push the new one in there, dropping the oldest elements as you go. <sup>18</sup>
 <p></p> <font color="green">
@@ -29,9 +29,9 @@ Whenever the queue grows beyond a certain size 17 and you receive a new message,
 This should keep the entire number of messages received to a rather stable size and provide a good amount of resistance to overload, somewhat similar to the functional version of a ring buffer.<br>
 The PO Box <sup>19</sup> library implements such a queue buffer.
 <p></p> <font color="green">
-&emsp;这就能要保证能处理稳定的消息流，并提供一个强抗过载能力，有点类似于循环缓冲(ring buffer)的功能版。
+&emsp;这就能要保证能处理稳定的消息流，并提供一个强抗过载能力，有点类似于循环缓冲(ring buffer)的功能版。<br>
+&emsp;PO Box<sup>19</sup>就提供了这样一个缓冲队列。<br>
 
-PO Box<sup>19</sup>就提供了这样一个缓冲队列。
 [16] The queue module in Erlang provides a purely functional queue data structure that can work fine for such a buffer.<br>
 [17] To calculate the length of a queue, it is preferable to use a counter that gets incremented and decremented on each message sent or received, rather than iterating over the queue every time. It takes slightly more memory, but will tend to distribute the load of counting more evenly, helping predictability and avoiding more sudden build-ups in the buffer’s mailbox. <br>
 [18] You can alternatively make a queue that pops the newest message and queues up the oldest ones if you feel previous data is more important to keep.<br>
