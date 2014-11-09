@@ -67,7 +67,7 @@ stacktrace as a list of ’current locations’.<br>
 form {Mod, Fun, Arity}. This may help identify what the process was spawned
 as, rather than what it’s running right now.<br>
 <p></p> <font color="green">
-**Signals**<br>
+**Location**<br>
 &emsp;**current_function** 显示当前运行的函数：返回值为{Mod, Fun, Arity}的元组。<br>
 &emsp;**current_location** 显示当前运行的函数模块位置。返回值为：{Mod, Fun, Arity, [{File, FileName}, {line, Num}]}。<br>
 &emsp;**current_stacktrace** 前缀选项里面一个非常详细选项;显示'current_locations'列表的当前堆栈(stacktrace)。<br>
