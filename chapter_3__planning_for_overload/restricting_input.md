@@ -8,16 +8,12 @@ On the other hand, it can lead to a really crappy experience for the user.
 &emsp;之所以简单，是因为这意味着减慢了用户(相对于满负荷:back-pressure工作来说)，这可以马上修复问题且不必要做更多的优化。<br>
 &emsp;但另一方面，这会给用户一个非常糟糕的体验。
 </font> <p></p>
-The most common way to restrict data input is to make calls to a process whose queue would grow in uncontrollable ways synchronously. By requiring a response before moving on to the next request, you will generally ensure that the direct source of the problem will be slowed down.
-<p></p> <font color="green">
-&emsp;最常用的限制输入的方法就是使无法控制自己消息队列增长的进程变成同步处理。在处理下一个请求(request)之前需要得到一个请求的回应(response),这样同步处理肯定会使效率慢下来。
-</font> <p></p>
-The difficult part for this approach is that the bottleneck causing the queue to grow is usually not at the edge of the system, but deep inside it, which you find after optimizing nearly everything that came before. Such bottlenecks will often be database operations, disk operations, or some service over the network.
-<p></p> <font color="green">
-&emsp;这个方法的难度在于造成消息队列增长的短板通常不是系统边缘(the edge of the system)导致的，当你深入理解后，你就会发现要去优化系统的每个细节。这个瓶颈通常来自于数据库操作，硬盘读写，或其它要借住网络的服务。
-</font> <p></p>
+The most common way to restrict data input is to make calls to a process whose queue would grow in uncontrollable ways synchronously. By requiring a response before moving on to the next request, you will generally ensure that the direct source of the problem will be slowed down.<br>
+The difficult part for this approach is that the bottleneck causing the queue to grow is usually not at the edge of the system, but deep inside it, which you find after optimizing nearly everything that came before. Such bottlenecks will often be database operations, disk operations, or some service over the network.<br>
 This means that when you introduce synchronous behaviour deep in the system, you’ll possibly need to handle back-pressure, level by level, until you end up at the system’s edges and can tell the user, "please slow down."
 <p></p> <font color="green">
+&emsp;最常用的限制输入的方法就是使无法控制自己消息队列增长的进程变成同步处理。在处理下一个请求(request)之前需要得到一个请求的回应(response),这样同步处理肯定会使效率慢下来。<br>
+&emsp;这个方法的难度在于造成消息队列增长的短板通常不是系统边缘(the edge of the system)导致的，当你深入理解后，你就会发现要去优化系统的每个细节。这个瓶颈通常来自于数据库操作，硬盘读写，或其它要借住网络的服务。<br>
 &emsp;这就意味当你介绍系统的深度同步的行为时，你可能从系统内部到边缘一层层地限制负荷，并还要忠告用户：”请悠着点用“。
 </font> <p></p>
 Developers that see this pattern will often try to put API limits per user <sup>8</sup> on the system entry points. This is a valid approach, especially since it can guarantee a basic quality of service (QoS) to the system and allows one to allocate resources as fairly (or unfairly) as desired.

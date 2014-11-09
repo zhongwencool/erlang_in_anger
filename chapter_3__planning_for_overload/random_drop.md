@@ -44,21 +44,14 @@ There is one ‘gotcha’ to this method, though: the random drop must ideally b
 </font> <p></p>
 
 The best way to avoid overloading a queue is to not send data its way in the first place. Because there are no bounded mailboxes in Erlang, dropping in the receiving process only guarantees that this process will be spinning wildly, trying to get rid of messages, and fighting the schedulers to do actual work.<br>
-
-On the other hand, dropping at the producer level is guaranteed to distribute the work equally across all processes.
-<p></p> <font color="green">
-&emsp;防止队列过载的最好方法是：最初就不要给它发消息。因为Elrang的信箱并没有限制大小，如果是在接收消息时才丢弃就只能保证这个进程会疯狂地运转来试图驾驭这些消息，并且要做调度工作来丢弃消息。<br>
-&emsp;另一方面，在生产消息时就丢弃能保证在所有进程都是均等工作的。
-</font> <p></p>
-This can give place to interesting optimizations where the working process or a given monitor process<sup>15</sup> uses values in an ETS table or application:set_env/3 to dynamically increase and decrease the threshold to be used with the random number.
-<p></p> <font color="green">
-&emsp;关于怎么控制工作进程或一个给定的监控进程中的那个丢弃数据比例值，可以把它存入在一个ETS表里面或使用applicaiton:set_env/3来动态增加或减少这个比例<sup>15</sup>。
-</font> <p></p>
+On the other hand, dropping at the producer level is guaranteed to distribute the work equally across all processes.<br>
+This can give place to interesting optimizations where the working process or a given monitor process<sup>15</sup> uses values in an ETS table or application:set_env/3 to dynamically increase and decrease the threshold to be used with the random number.<br>
 This allows control over how many messages are dropped based on overload, and the configuration data can be fetched by any process rather efficiently by using application:get_env/2.<br>
-
 Similar techniques could also be used to implement different drop ratios for different message priorities, rather than trying to sort it all out at the consumer level.
 <p></p> <font color="green">
-
+&emsp;防止队列过载的最好方法是：最初就不要给它发消息。因为Elrang的信箱并没有限制大小，如果是在接收消息时才丢弃就只能保证这个进程会疯狂地运转来试图驾驭这些消息，并且要做调度工作来丢弃消息。<br>
+&emsp;另一方面，在生产消息时就丢弃能保证在所有进程都是均等工作的。<br>
+&emsp;关于怎么控制工作进程或一个给定的监控进程中的那个丢弃数据比例值，可以把它存入在一个ETS表里面或使用applicaiton:set_env/3来动态增加或减少这个比例<sup>15</sup>。<br>
 &emsp;这个比例要设定为多少是基于负荷的，使用application:get_env/2来得到数据比把这个值存在配置文件中让所有的进程中能取到的方法高效得多。<br>
 &emsp;类似的技术可以实现对不同消息优先级设定不同的丢弃率，而不是统一标准解决一切。
 </font> <p></p>

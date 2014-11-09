@@ -1,13 +1,9 @@
 # OTP Releases
-For releases, the structure should be a bit different <sup>4</sup>. Releases are collections of applications, and their structures should reflect that.
+For releases, the structure should be a bit different <sup>4</sup>. Releases are collections of applications, and their structures should reflect that.<br>
+Instead of having a top-level app, applications should be nested one level deeper and divided into two categories: apps and deps. The apps directory contains your applications’ source code (say, internal business code), and the deps directory contains independently managed dependency applications.
  <p></p>
  <font color="green">
-&emsp;对于Releases,结构会有一点小小的变化。Releases是applicaitons的集合，他们的结构也应当反映出这些。
-</font>
-<p></p>
-Instead of having a top-level app, applications should be nested one level deeper and divided into two categories: apps and deps. The apps directory contains your applications’ source code (say, internal business code), and the deps directory contains independently managed dependency applications.
-<p></p>
-<font color="green">
+&emsp;对于Releases,结构会有一点小小的变化。Releases是applicaitons的集合，他们的结构也应当反映出这些。<br>
 &emsp;applications应当使用嵌套的形式并分成apps和deps两种类型，而不是那些自上而下的app结构, apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖application。<br>
 </font>
 ---------------------------------------------------------------------------------<br>
@@ -38,15 +34,11 @@ A relx configuration file for the directory structure above would look like:
 ----------------------------------------------------------------------------------<br>
 </font>
 <p></p>
-Calling **./relx** (if the executable is in the current directory) will build a release, to be found in the _rel/ directory.
-<p></p>
-<font color="green">
-&emsp;你可以调用**./relx**(在当前文件夹下调用)来创建一个release,就能在 _rel/文件夹来找到这个release.
-</font>
-<p></p>
+Calling **./relx** (if the executable is in the current directory) will build a release, to be found in the _rel/ directory.<br>
 If you really like using rebar, you can build a release as part of the project’s compilation by using a rebar hook in rebar.config:
 <p></p>
 <font color="green">
+&emsp;你可以调用**./relx**(在当前文件夹下调用)来创建一个release,就能在 _rel/文件夹来找到这个release.<br>
 &emsp;如果你更喜欢使用rebar来创建，你可能通过使用在rebar.config里面的rebar hook 来把创建release作为项目编译的一部分。<br>
 </font>
 ----------------------------------------------------------------------------------<br>

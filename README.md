@@ -9,33 +9,20 @@ Commons Attribution-NonCommercial-ShareAlike 4.0 International License.](http://
 ## 运行时软件
 There’s something rather unique in Erlang in how it approaches failure compared to most other programming languages. There’s this common way of thinking where the language, programming environment, and methodology do everything possible to prevent errors. Something going wrong at run-time is something that needs to be prevented, and if it cannot be prevented, then it’s out of scope for whatever solution people have been thinking about.<br>
 The program is written once, and after that, it’s off to production, whatever may happen
-there. If there are errors, new versions will need to be shipped.
+there. If there are errors, new versions will need to be shipped.<br>
+Erlang, on the other hand, takes the approach that failures will happen no matter what,
+whether they’re developer-, operator-, or hardware-related. It is rarely practical or even possible to get rid of all errors in a program or a system. <sup>1</sup> If you can deal with some errors rather than preventing them at all cost, then most undefined behaviours of a program can go in that "deal with it" approach.
 
 <font color="green">
 &emsp;相对于大多数其它编程语言，Erlang处理失败(failure)方法非常独特的。 常见处理错误的思维模式是费尽心机防止发生错误，不允许在运行时出错，如果不能杜绝错误，它的行为就会超出设计者原本的设想（变得不可控）。<br>
 
-&emsp;一旦程序写完，并发布为产品放出去，如果程序在这个变化莫测的生产环境中出了问题，，那么必须为修复它重新发布新版本。  </font>
-<p></p>
-Erlang, on the other hand, takes the approach that failures will happen no matter what,
-whether they’re developer-, operator-, or hardware-related. It is rarely practical or even possible to get rid of all errors in a program or a system. <sup>1</sup> If you can deal with some errors rather than preventing them at all cost, then most undefined behaviours of a program can go in that "deal with it" approach.
-<p></p>
-<font color="green">
+&emsp;一旦程序写完，并发布为产品放出去，如果程序在这个变化莫测的生产环境中出了问题，，那么必须为修复它重新发布新版本。<br>
 &emsp;但Erlang有办法对付这种错误，不管它是开发者设计不周引起的，还是操作符引起的或与硬件相关的因素，它甚至有可能驾驭来自于程序或系统的所有错误<sup>1</sup>。如果你能处理错误，而不是千方百计去杜绝错误，那么程序所有的不确定行为都会跑到指定的错误处理方法中。
 </font>
 <p></p>
 This is where the "Let it Crash" <sup>2</sup> idea comes from: Because you can now deal with failure, and because the cost of weeding out all of the complex bugs from a system before it hits production is often prohibitive, programmers should only deal with the errors they know how to handle, and leave the rest for another process (a supervisor) or the virtual machine to deal with.<br>
-Given that most bugs are transient <sup>3</sup>, simply restarting processes back to a state known to be stable when encountering an error can be a surprisingly good strategy.
-<p></p>
-<font color="green">
-&emsp;这就是"Let it Crash"<sup>2</sup> 的Erlang理念。这个idea起源于：如果想在系统部署到生产环境前，找出所有复杂的bugs，并把它们斩尽杀绝，这几乎是不可能的。设计者应当先处理他们知道原因的错误，让其它不可遇料的错都交给另一个进程(supervisor进程)或虚拟机(virtual machine)来处理。<br>
-鉴于大多数bugs转瞬即逝<sup>3</sup>，简单地重启出现错误的进程，让其重新工作到正常状态，无疑是一个非常好的策略。
-</font>
-<p></p>
-Erlang is a programming environment where the approach taken is equivalent to the human body’s immune system, where as most other languages only care about hygiene to make sure no germ enters the body. Both forms appear extremely important to me. Almost every environment offers varying degrees of hygiene. Nearly no other environment offers the immune system where errors at run time can be dealt with and seen as survivable.
-<p></p>
-<font color="green">
-&emsp;Erlang 这种处理方式与类身体的免疫系统非常像，但其它语言只是关注环境是否可以防止病菌进入身体。这两者的区别对我来说非常重要，因为几乎所有的环境都只提供不同程度的卫生，几乎没有其它系统能提供类似于免疫系统一样机制，可以在运行时容许不明病毒进入，并把病毒隔离或消灭掉。</font>
-<p></p>
+Given that most bugs are transient <sup>3</sup>, simply restarting processes back to a state known to be stable when encountering an error can be a surprisingly good strategy.<br>
+Erlang is a programming environment where the approach taken is equivalent to the human body’s immune system, where as most other languages only care about hygiene to make sure no germ enters the body. Both forms appear extremely important to me. Almost every environment offers varying degrees of hygiene. Nearly no other environment offers the immune system where errors at run time can be dealt with and seen as survivable.<br>
 Because the system doesn’t collapse the first time something bad touches it, Erlang/OTP
 also allows you to be a doctor. You can go in the system, pry it open right there in production, carefully observe everything inside as it runs, and even try to fix it interactively.
 To continue with the analogy, Erlang allows you to perform extensive tests to diagnose the
@@ -43,6 +30,9 @@ problem and various degrees of surgery (even very invasive surgery), without the
 needing to sit down or interrupt their daily activities.
 <p></p>
 <font color="green">
+&emsp;这就是"Let it Crash"<sup>2</sup> 的Erlang理念。这个idea起源于：如果想在系统部署到生产环境前，找出所有复杂的bugs，并把它们斩尽杀绝，这几乎是不可能的。设计者应当先处理他们知道原因的错误，让其它不可遇料的错都交给另一个进程(supervisor进程)或虚拟机(virtual machine)来处理。<br>
+鉴于大多数bugs转瞬即逝<sup>3</sup>，简单地重启出现错误的进程，让其重新工作到正常状态，无疑是一个非常好的策略。<br>
+&emsp;Erlang 这种处理方式与类身体的免疫系统非常像，但其它语言只是关注环境是否可以防止病菌进入身体。这两者的区别对我来说非常重要，因为几乎所有的环境都只提供不同程度的卫生，几乎没有其它系统能提供类似于免疫系统一样机制，可以在运行时容许不明病毒进入，并把病毒隔离或消灭掉。<br>
 &emsp;人体免疫系统运行时可以处理病毒被视为生存的希望。这种机制使得系统不会在第一次遇到错误时崩溃掉，Erlang/OTP也可以让你成为一位这样的医生，你可以深入系统，在运行时纠正错误行为，仔细查看运行时的所有信息，甚至可以一步步交互式地去修复它。
 Erlang 允许你做各种各样的测试来诊断问题，在不打扰病人的日常活动情况下执行不同程度的手术(甚至开刀手术)。</font>
 <p></p>
@@ -60,20 +50,17 @@ debug production systems that were built in Erlang.
 **这本书适合什么人？**
 <p></p>
 
-This book is not for beginners. There is a gap left between most tutorials, books, training sessions, and actually being able to operate, diagnose, and debug running systems once they’ve made it to production. There’s a fumbling phase implicit to a programmer’s learning of a new language and environment where they just have to figure how to get out of the guidelines and step into the real world, with the community that go es with it.
+This book is not for beginners. There is a gap left between most tutorials, books, training sessions, and actually being able to operate, diagnose, and debug running systems once they’ve made it to production. There’s a fumbling phase implicit to a programmer’s learning of a new language and environment where they just have to figure how to get out of the guidelines and step into the real world, with the community that go es with it.<br>
+This book assumes that the reader is proficient in basic Erlang and the OTP framework.
+Erlang/OTP features are explained as I see fit — usually when I consider them tricky —
+and it is expected that a reader who feels confused by usual Erlang/OTP material will have an idea of where to look for explanations if necessary <sup>4</sup>.
+What is not necessarily assumed is that the reader knows how to debug Erlang software,
+dive into an existing code base, diagnose issues, or has an idea of the best practices about deploying Erlang in a production environment <sup>5</sup>.
 <p></p>
 <font color="green">
 &emsp;这本书不适合于初学者。
-大多数的Erlang书都没有讲如何在生产环境中操作，诊断，和调试运行时系统，但这个摸索阶段却隐含着一个程序员学习新的语言和环境时，摆脱纸上谈兵并进入现实世界，与社区共同成长的过程。</font>
-<p></p>
-This book assumes that the reader is proficient in basic Erlang and the OTP framework.
-Erlang/OTP features are explained as I see fit — usually when I consider them tricky —
-and it is expected that a reader who feels confused by usual Erlang/OTP material will have an idea of where to lo ok for explanations if necessary 4.
-What is not necessarily assumed is that the reader knows how to debug Erlang software,
-dive into an existing code base, diagnose issues, or has an idea of the best practices about deploying Erlang in a production environment 5.
-<p></p>
-<font color="green">
-&emsp;阅读此书需要读者精通(proficient)基本的Erlang知识和OTP框架，我只会在认为OTP很棘手时解释。希望感到困惑的读者能仔细阅读Erlang/OTP相关的资料。但这并不需要读者掌握调试Erlang 软件，深入现有的代码库，诊断问题，或掌握在生产环境中部署Erlang的最佳实践。</font>
+大多数的Erlang书都没有讲如何在生产环境中操作，诊断，和调试运行时系统，但这个摸索阶段却隐含着一个程序员学习新的语言和环境时，摆脱纸上谈兵并进入现实世界，与社区共同成长的过程。<br>
+&emsp;阅读此书需要读者精通(proficient)基本的Erlang知识和OTP框架，我只会在认为OTP很棘手时解释 <sup>4</sup>。希望感到困惑的读者能仔细阅读Erlang/OTP相关的资料。但这并不需要读者掌握调试Erlang 软件，深入现有的代码库，诊断问题，或掌握在生产环境中部署Erlang的最佳实践<sup>5</sup>。</font>
 <p></p>
 **How To Read This Book**
 <p></p>

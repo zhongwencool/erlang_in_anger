@@ -17,6 +17,6 @@ and later.
 
  You have to handle it the same, and for these parts of the system, far less strict guarantees are often the better solution.
 <p></p> <font color="green">
-&emsp;，对于这你不得不同步处理的系统，不做严格的限制(far less strict guarantees)往往是更好的解决方案。
+&emsp;对于那种你不得不处理的系统，不做严格的限制(far less strict guarantees)往往是更好的解决方案。
 </font>
 <p></p>

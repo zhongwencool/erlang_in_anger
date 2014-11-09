@@ -18,17 +18,13 @@ For OTP applications, the proper structure is pretty much the same as what was e
 ----------------------------------------------------------------------------------<br>
 
 What’s new in this one is the** deps/** directory, which is fairly useful to have, but that will be generated automatically by rebar <sup>2</sup> if necessary.<br>
-That’s because there is no canonical package management in Erlang.  People instead adopted rebar, which fetches dependencies locally, on a per-project basis.
-<p></p>
-<font color="green">
-&emsp;新加的文件夹:**deps/** 非常有用的一个文件夹。这个文件夹如果有必要也可以直接通过rebar自动生成<sup>2</sup>。<br>
-这是因为在Erlang没有标准的包管理器(canonical package management)。现在的做法是用rebar来做为每一个项目在本地获取依赖项的工作。
-</font>
-<p></p>
+That’s because there is no canonical package management in Erlang.  People instead adopted rebar, which fetches dependencies locally, on a per-project basis.<br>
 This is fine and removes a truckload of conflicts, but means that each project you have may have to download its own set of dependencies.<br>
 This is accomplished with rebar by adding a few config lines to rebar.config:
 <p></p>
 <font color="green">
+&emsp;新加的文件夹:**deps/** 非常有用的一个文件夹。这个文件夹如果有必要也可以直接通过rebar自动生成<sup>2</sup>。<br>
+这是因为在Erlang没有标准的包管理器(canonical package management)。现在的做法是用rebar来做为每一个项目在本地获取依赖项的工作。<br>
 &emsp;这可以解决一大堆的冲突，但也意味着生个项目都要下载自己的依赖项目啦。<br>
 &emsp;下面是通过在rebar.config里面增加一些配置项来配置rebar：<br>
 </font>
@@ -47,24 +43,16 @@ This is accomplished with rebar by adding a few config lines to rebar.config:
 <p></p>
 Feel free to install rebar globally on your system, or keep a local copy if you require a specific version to build your system.
 Applications are fetched directly from a git (or hg, or svn) source, recursively. They can then be compiled, and specific compile options can be added with the {erl_opts, List}.option in the config file <sup>3 </sup>.<br>
-Within these directories, you can do your regular development of an OTP application.
+Within these directories, you can do your regular development of an OTP application.<br>
+To compile them, call rebar get-deps compile, which will download all dependencies,and then build them and your app at once.<br>
+When making your application public to the world, distribute it without the dependencies. It’s quite possible that other developers’ applications depend on the same applications yours do, and it’s no use shipping them all multiple times.<br>
+The build system in place (in this case, rebar) should be able to figure out duplicated entries and fetch everything necessary only once.
 <p></p>
  <font color="green">
 &emsp;Applications会递归地从git(或hg,或svn)中直接拿到源代码.他们可以被编译，并使用特定的选项{erl_opts,List}来编译. 这个选项也在config文件中定义<sup>3 </sup>。<br>
-你可以在这些文件夹中，为自己的OTP application开发功能。
- </font>
- <p></p>
-To compile them, call rebar get-deps compile, which will download all dependencies,and then build them and your app at once.<br>
-When making your application public to the world, distribute it without the dependencies. It’s quite possible that other developers’ applications depend on the same applications yours do, and it’s no use shipping them all multiple times.
- <p></p>
- <font color="green">
+你可以在这些文件夹中，为自己的OTP application开发功能。<br>
 &emsp;为了编译他们，你可以使用rebar get-deps把依赖项也下载下来编译，并马上构建依赖项和你自己的app。<br>
-&emsp;当你把自己的application开源出来时，要把它的依赖项给去掉。因为其他开发者的application很有可能和你一样依赖同样的application，没有必要重复装载他们多次。
- </font>
- <p></p>
-The build system in place (in this case, rebar) should be able to figure out duplicated entries and fetch everything necessary only once.
- <p></p>
- <font color="green">
+&emsp;当你把自己的application开源出来时，要把它的依赖项给去掉。因为其他开发者的application很有可能和你一样依赖同样的application，没有必要重复装载他们多次。<br>
 &emsp;构建系统(在这里，指rebar）应当能判断出重复的依赖项并这些重复的项只会被加载一次。
 </font>
 <p></p>

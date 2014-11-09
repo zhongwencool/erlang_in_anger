@@ -21,7 +21,7 @@ Using the code at https://github.com/ferd/recon_demo:<br>
 [3]. The main application’s workers (council_member) starts a server and connects to it in its init/1 function. Can you make this connection happen outside of the init function’s? Is there a benefit to doing so in this specific case?
 <p></p> <font color="green">
 
-&emsp;使用这里的code: https://github.com/ferd/recon_demo:<br>
+使用这里的code: https://github.com/ferd/recon_demo:<br>
 [1]. 提取托管在release中的主application,让他变得独立，可被其它项目包含.<br>
 [2]. 把application托管在(github,bibucket,locl server)上，然后使用application的依赖项来构建一个release.<br>
 [3]. 主application的工作进程(council_member)开启了一个server并在init/1中连接到了它，请将这个连接搬到init/1外面来，再思考一下这一操作有什么具体的好处？
