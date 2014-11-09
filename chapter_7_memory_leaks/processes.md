@@ -5,7 +5,7 @@ specific processes leaking their memory, and so on. It’s possible there’s mo
 cause, so multiple metrics are worth investigating. Note that the process count itself is
 skipped and has been covered before.
 <p></p> <font color="green">
-进程内存增长的方法也有各种各样的途径。大部分有意思的原因都是以下这几种情况引起的：进程泄露(就和字面意思一样，你在泄露进程),特定的进程内存泄漏等。可能不只一个原因，所以你可以多个指标一起分析。注意，我们现在跳过了进程数的分析，因为前面已讲过啦。
+&emsp;进程内存增长也有各种各样的途径。大部分有意思的原因都是以下这几种情况引起的：进程泄露(就和字面意思一样，你在泄露进程),特定的进程内存泄漏等。可能不只一个原因，所以你可以多个指标一起分析。注意，我们现在跳过了进程数的分析，因为前面已讲过啦。
 </font> <p></p>
 
 ## Links and Monitors
@@ -54,7 +54,7 @@ memory attribute. You can look things up either as absolute terms or as a slidin
 -----------------------------------------------------<br>
 &emsp;Attributes that may be interesting to check other than memory may be any other fields in Subsection 5.2.1, including **message_queue_len**, but memory will usually encompass all other types.
 <p></p> <font color="green">
-&emsp;内存的其它有意思的属性可以在章节5.2.1看到，比如**message_queue_len**,但内存通常会涵盖其它类型。
+&emsp;内存的其它有意思的属性可以在章节5.2.1看到，比如**message_queue_len**,但内存通常会包涵其它类型。
 </font> <p></p>
 
 ## Garbage Collections
@@ -67,7 +67,7 @@ setting up Erlang’s system monitor <sup>7</sup> might be the best way to go at
 Erlang’s system monitor will allow you to track information such as long garbage collection periods and large process heaps, among other things. A monitor can temporarily
 be set up as follows:<br>
 <p></p> <font color="green">
-&emsp;一个进程只在一个非常短的时间内使用了大量内存的情况也是非常有可能发生的。对于一个处于大负荷操作的长期运行的节点来说，这种情况通常不会引起问题，但是当内存增长到难以统计时(非常大)，这种突然的行为就有可能是你想要摆脱的东西。<br>
+&emsp;一个进程只在一个非常短的时间内使用了大量内存的情况也是非常有可能发生的。对于一个处于大负荷操作的长期运行的节点来说，这种情况通常不会引起问题，但是当内存增长到难以统计时(非常大)，这种突然的行为就有可能是你想要摆脱。<br>
 &emsp;在shell里面实时监测所有垃圾回收情况是代价是非常大的。取而代之，设置Erlang系统本身的monitor<sup>7</sup>可能最处理它的最好方式。Erlang系统监控会允许你追踪长周期的垃圾回收和大进程的堆情况，此外，监控可以用以下方式来临时设置：
 </font> <p></p>
 
@@ -97,14 +97,13 @@ values at first if you’re unsure. You don’t want to flood your process’ ma
 of heaps that are 1-word large or more, for example.
 <br>&emsp;Command 5 unsets the system monitor (exiting or killing the monitor process also frees
 it up), and command 6 validates that everything worked.
+<br>&emsp;You can then find out if such monitoring messages tend to coincide with the memory increases that seem to result in leaks or overuses, and try to catch culprits before things are too bad. Quickly reacting and digging into the process (possibly with recon:info/1)
+may help find out what’s wrong with the application.
 <p></p> <font color="green">
 &emsp;第一个命令作用：检查下sysytem_monitor有没有被其它使用--你不能从一个已存在的application或合作进程中把它抢过来。<br>
 &emsp;第二个命令作用：设置垃圾回收每500ms就通知一下shell，shell得到结果要通过第三个命令刷新一下才能看到。如果你想检测大小，那么可以随时检查**{large_heap, NumWords}**。如果你不确定，那么就不要在开始时就监测lager values。你肯定也不想你的信箱被大量的大于1-word的堆撑爆吧。<br>
 &emsp;第五个命令作用：释放system monitory(退出或杀掉你的进程也可以释放),第六个命令作用：验证下一切工作正常。
 </font> <p></p>
-
-<br>&emsp;You can then find out if such monitoring messages tend to coincide with the memory increases that seem to result in leaks or overuses, and try to catch culprits before things are too bad. Quickly reacting and digging into the process (possibly with recon:info/1)
-may help find out what’s wrong with the application.
 <p></p> <font color="green">
 &emsp;通过这样监视消息，找到内存增长原因往往是内存泄漏或过度使用，试图在一切变得糟糕之前就找出罪犯。快速地反应并深入到进程当中(可能会使用到recon:info/1)可能会有助于找到application出了出了什么问题。
 </font> <p></p>

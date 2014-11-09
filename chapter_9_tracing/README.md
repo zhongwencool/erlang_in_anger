@@ -3,11 +3,10 @@ One of the lesser known and absolutely under-used features of Erlang and the BEA
 machine is just about how much tracing you can do on there.
 <br>&emsp;Forget your debuggers, their use is too limited. <sup>1</sup> Tracing makes sense in Erlang at all steps of your system’s life cycle, whether it’s for development or for diagnosing a running production system.
 <p></p> <font color="green">
-&emsp;Erlang有一个不太为人知的但绝对未充分利用的特性，BEAM虚拟机可以让你尽情地trace。<br>
-&emsp;扔掉你的debuggers吧，他们的使用时限制太多了<sup>1</sup>。Erlang trace的意义在于你可以trace你系统生命周期的所有步骤，不论是为了开发，还是为了诊断生产环境下运行的系统。
+&emsp;Erlang有一个不太为人知的但绝对未充分利用的特性：BEAM虚拟机可以让你尽情地trace。<br>
+&emsp;扔掉你的debuggers吧，他们的使用时限制实在是太多了<sup>1</sup>。Erlang trace的意义在于你可以trace你系统生命周期的所有步骤，不论是为了开发，还是为了诊断生产环境下运行的系统。
 </font> <p></p>
-
-<br>&emsp;There are a few options available to trace Erlang programs:
+&emsp;There are a few options available to trace Erlang programs:
 <br>&emsp;• **sys** <sup>2</sup> comes standard with OTP and allows to set custom tracing functions, log all
 kinds of events, and so on. It’s generally complete and fine to use for development. It
 suffers a bit in production because it doesn’t redirect IO to remote shells, and doesn’t
@@ -23,7 +22,7 @@ on the node and kill one in under two seconds.
 <br>&emsp;This chapter will focus on tracing with **recon_trace**, but the terminology and the concepts used mostly carry over to any other Erlang tracing tool that can be used.
 <p></p> <font color="green">
 &emsp;下面介绍几个trace Erlang进程利器：<br>
-&emsp;• **sys** <sup>2</sup>是一个标准的OTP，可以允许自定义trace函数，记录所有类型的事件等等。它非常完善且可以很好地用于开发。但它会稍微影响处于生产环境的系统，因为它没有把IO重定向到远程的shell中，而且他没有限制trace消息的速度。不过还是推荐阅读的文档模块。<br>
+&emsp;• **sys** <sup>2</sup>是一个标准的OTP，可以允许自定义trace函数，记录所有类型的事件等等。它非常完善且可以很好地用于开发。但它会稍微影响处于生产环境的系统，因为它没有把IO重定向到远程的shell中，而且他没有限制trace消息的速度。不过还是推荐阅读其文档模块。<br>
 &emsp;• **dbg** <sup>3</sup>也是一个标准的OTP。它的接口在可用性方面显得有点笨拙。但它完全足以满足你所需。问题在于：你必须要知道你要做什么,因为dbg可以记录一切，并在2秒把系统搞崩溃。<br>
 &emsp;• *tracing **BIF**s*作为一个Erang的模块可用。它们大多作为原始块(the raw blocks)由这个列表中提到的application所调用,但由于他们处于较底层，比较抽象，用起来也非常困难。<br>
 &emsp;• **redbug** <sup>4</sup>是可以在正式的生产运行系统中使用的trace库，是**eper** <sup>5</sup>的一部分，它有一个内部的速度限制开关，和一个不错的可用接口。为了使用它，你必须把eper的所有依赖项都加上。这个工具箱非常全面，你会有一个非常有趣的安装。<br>
@@ -45,7 +44,7 @@ on the node and kill one in under two seconds.
 [注4]：https://github.com/massemanet/eper/blob/master/doc/redbug.txt<br>
 [注5]：https://github.com/massemanet/eper<br>
 [注6]：http://ferd.github.io/recon/recon_trace.html<br>
-[注7]：消息可能在将来的版本有支持库。在实践中，鉴于行为和匹配特定的参数大致相同，作者认为当使用OTP时根本没有必要支持消息trace的特性。
+[注7]：消息可能在将来的版本有支持库。在实践中，鉴于行为和匹配特定的参数大致相同，其作者认为当使用OTP时根本没有必要支持消息trace的特性。
 </font> <p></p>
 
 

@@ -12,7 +12,7 @@ The other approach will be to run recon:proc_window/3 as introduced in Subsectio
 &emsp;就像前面所说，为了定位到问题的具体Erlang代码，这也有两种方法。一个针对旧的标准分析程序的，可能使用了下面的application <sup>2</sup>:<br>
 &emsp;• **eprof** <sup>3</sup>,最古老的Erlang分析工具。它可以得到通用的百分比数据和以terms形式返回的报告时间。<br>
 <br>&emsp;• **fprof**<sup>4</sup>,一个强有力取代eprof的工具。它支持完整的并发和生成深度报告。事实上，报告嵌套非常深,通常被认为是不透明的,难以阅读。<br>
-<br>&emsp;• **eflame** <sup>5</sup> ,最新的分析工具。它可以生成图表形式，用来显示指定代码的所有的调用序列(call sequences)和使用热点(hot-spots in usage)。它可以让你只简单的看下最终结果就能快速找到问题。<br>
+<br>&emsp;• **eflame** <sup>5</sup> 最新的分析工具。它可以生成图表形式，用来显示指定代码的所有的调用序列(call sequences)和使用热点(hot-spots in usage)。它可以让你只简单的看下最终结果就能快速找到问题。<br>
 &emsp;读者仔细阅读每一个application的文档哦。<br>
 &emsp;另一个方法就是如章节5.2.1中所说的调用用recon:proc_window/3:<br>
 </font> <p></p>

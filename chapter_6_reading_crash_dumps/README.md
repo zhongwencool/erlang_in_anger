@@ -5,13 +5,12 @@ Whenever an Erlang node crashes, it will generate a crash dump <sup>1</sup>.<br>
 at that documentation. There will be specific data that is hard to understand without also
 understanding the part of the VM they refer to, but that might be too complex for this
 document.<br>
+&emsp;The crash dump is going to be named **erl_crash.dump** and be located wherever the Erlang process was running by default. This behaviour (and the file name) can be overridden
+by specifying the **ERL_CRASH_DUMP** environment variable <sup>3</sup>.
 <p></p> <font color="green">
 不管Erlang节点什么时间崩溃，都会生成一个crash dump<sup>1</sup>文件。<br>
 &emsp;文件的格式说明大部分都在Erlang的官方文档<sup>2</sup>中，任何想深入了解里面的数据含意的，都可以通过查看这份文档。还有一些特定的数据，除非你理解VM相关的信息，才能看得懂，否则就非常难以理解，但对于这份文档可能太复杂了。
 </font> <p></p>
-
-&emsp;The crash dump is going to be named **erl_crash.dump** and be located wherever the Erlang process was running by default. This behaviour (and the file name) can be overridden
-by specifying the **ERL_CRASH_DUMP** environment variable <sup>3</sup>.
 <p></p> <font color="green">
 &emsp;那个crash输出文件叫作：**erl_crash.dump**，默认在Erlang进程运行的地方生成。这个默认行为(和文件的名字)都可以通过改变**ERL_CRASH_DUMP**环境变量<sup>2</sup>做到。
 </font> <p></p>

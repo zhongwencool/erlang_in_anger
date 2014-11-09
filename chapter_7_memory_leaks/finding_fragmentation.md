@@ -19,19 +19,20 @@ just using a lot of it.
 <br>&emsp;2. check if **recon_alloc:memory(allocated)** matches what the OS reports. <sup>12</sup> It should
 match it fairly closely if the problem is really about fragmentation or a memory leak
 from Erlang terms.
-That should confirm if memory seems to be fragmented or not.
-<p></p> <font color="green">
-&emsp;调用**recon_alloc:memory/1**来查看内存指标会比**erlang:memory/0**更加灵活。下面给出一些可能有关的参数。<br>
-&emsp;1.调用** recon_alloc:memory(usage)** 。它会返回一个0~1的值，表示Erlang term与Erlang VM从操作系统得到的总内存的百分比。如果这个值接近100%,那么你可能就不会有内存碎片问题，全有的内存都处于使用状态。<br>
-&emsp; 2.使用**recon_alloc:memory(allocated)**查看数据与系统的报告<sup>12</sup>是不是一致，如果真的存在内存碎片或Erlang terms内存泄露,那么这个返回值应该和系统报告的一致。这就可以确定内存是不是有碎片<br>
-</font> <p></p>
-## Find the Guilty Allocator
+That should confirm if memory seems to be fragmented or not.<br>
+** Find the Guilty Allocator **<br>
 Call **recon_alloc:memory(allocated_types)** to see which type of util allocator (see Section 7.3.2) is allocating the most memory. See if one looks like an obvious culprit when you
 compare the results with **erlang:memory()** .<br>
 Try **recon_alloc:fragmentation(current) **. The resulting data dump will show different allocators on the node with various usage ratios. <sup>13</sup>
 <br>&emsp;If you see very low ratios, check if they differ when calling **recon_alloc:fragmentation(max)** ,
 which should show what the usage patterns were like under your max memory load.
 <br>&emsp;If there is a big difference, you are likely having issues with memory fragmentation for a few specific allocator types following usage spikes.
+<p></p> <font color="green">
+&emsp;调用**recon_alloc:memory/1**来查看内存指标会比**erlang:memory/0**更加灵活。下面给出一些可能有关的参数。<br>
+&emsp;1.调用** recon_alloc:memory(usage)** 。它会返回一个0~1的值，表示Erlang term与Erlang VM从操作系统得到的总内存的百分比。如果这个值接近100%,那么你可能就不会有内存碎片问题，全部的内存都处于使用状态。<br>
+&emsp; 2.使用**recon_alloc:memory(allocated)**查看数据与系统的报告<sup>12</sup>是不是一致，如果真的存在内存碎片或Erlang terms内存泄露,那么这个返回值应该和系统报告的一致。这就可以确定内存是不是有碎片<br>
+</font> <p></p>
+
 <p></p> <font color="green">
 &emsp;调用**recon_alloc:memory(allocated_types)**查看哪一种util分配器(详见章节7.3.2)分配的内存最多。再对比一下调用**erlang:memory()**的结果，看看像不像一个明显的原因。<br>
 &emsp;试试**recon_alloc:fragmentation(current) **。返回的结果会显示节点上不同的分配器(allocators)的各项指标<sup>13</sup>。<br>

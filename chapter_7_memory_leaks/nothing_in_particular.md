@@ -5,6 +5,6 @@ possible a C driver, NIF, or even the VM itself is leaking. Of course, a possibl
 up being leaky or modified. The system just needs more resources or nodes.
 
 <p></p> <font color="green">
-&emsp;如果前面所说的部分都没有看出问题，那么章节7.2的二进制泄露和章节7.3的内存碎片可能是罪魁祸首。如果这也没有找出问题，变有可能是c dirver,NIF或VM自身存在溢出。当然，也有可能是节点上的负载和内存的使用比例太高，并没有特别的溢出或修改，只是系统需要更多的资源或节点。
+&emsp;如果前面所说的部分都没有看出问题，那么章节7.2的二进制泄露和章节7.3的内存碎片可能是罪魁祸首。如果这也没有找出问题，便有可能是c dirver,NIF或VM自身存在溢出。当然，也有可能是节点上的负载和内存的使用比例太高，并没有特别的溢出或修改，只是系统需要更多的资源或节点。
 </font> <p></p>
 

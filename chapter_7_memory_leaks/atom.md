@@ -4,11 +4,10 @@
 for places where you call **erlang:binary_to_term/1** and** erlang:list_to_atom/1**, and
 consider switching to safer variants (**erlang:binary_to_term(Bin, [safe])** and
 **erlang:list_to_existing_atom/1**).<br>
+&emsp;If you use the xmerl library that ships with Erlang, consider open source alternatives <sup>2</sup>or figuring the way to add your own SAX parser that can be safe <sup>3</sup>.<br>
 <p></p> <font color="green">
 &emsp;*不要动态生成atoms！*，Atoms都是存在一个全局表中，并会被永远保存下来。找到你使用**erlang:binary_to_term/1**和** erlang:list_to_atom/1**的地方，考虑用更安全的它们的变体函数(**erlang:binary_to_term(Bin, [safe])**和**erlang:list_to_existing_atom/1**)代替它们.<br>
 </font> <p></p>
-
-&emsp;If you use the xmerl library that ships with Erlang, consider open source alternatives <sup>2</sup>or figuring the way to add your own SAX parser that can be safe <sup>3</sup>.<br>
 <p></p> <font color="green">
 &emsp;如果你使用xmerl库来过度(ships with)Erlang,那么请再考虑下开源替代方案<sup>2</sup>或找到一种可以安全增添你自己的SAX解析<sup>3</sup>。<br>
 </font> <p></p>
@@ -28,9 +27,9 @@ them from a fixed set, or slowly enough that it won’t be a problem in the long
 [4] This is a common approach to figuring out how to connect nodes together: have one or two central nodes with fixed names, and have every other one log to them. Connections will then propagate automatically.
 <p></p> <font color="green">
 [注1] 如果你想连接到一个运行中的节点上，请看章节4<br>
-[注2] 我不讨厌 exml 或 erlsom<br>
+[注2] 我并不讨厌 exml 或 erlsom<br>
 [注3] 查看 Ulf Wiger ： http://erlang.org/pipermail/erlang-questions/2013-July/074901.html<br>
-[注4] 如果把节点连接在一起的常用方法：有1到2个固定名字的中央节点，让其它的节点都连接上来。连接将会自动 传播开来。
+[注4] 如果把节点连接在一起的常用方法：有1到2个固定名字的中央节点，让其它的节点都连接上来。连接将会自动传播开来。
 </font> <p></p>
 
 

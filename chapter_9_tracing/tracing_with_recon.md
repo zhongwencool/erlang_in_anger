@@ -6,14 +6,13 @@ specification of trace patterns. Recon support a few basic ways to declare them.
 these may also be replaced by wildcards (’_’ ). Recon will forbid forms that match too
 widely on everything (such as {’_’,’_’,’_’}), as they could be plain dangerous to run in
 production.
+<br>&emsp;A fancier form will be to replace the arity by a function to match on lists of arguments. The function is limited to those usable by match specifications similar to what is available in ETS <sup>10</sup>. Finally, multiple patterns can be put into a list to broaden the matching scope.
+<br>&emsp;It will also be possible to rate limit based on two manners: a static count, or a number of matches per time interval. Rather than going more in details, here’s list of examples and how to trace for them.<br>
 <p></p> <font color="green">
-&emsp;Recon默认会匹配(match)所以进程。这对于大量的debug场景都非常好。大多数情况下，你想玩的有趣部分是特定的trace paterns。Recon支持一些基本的定义它们的方法。<br>
+&emsp;Recon默认会匹配(match)所有进程。这对于大量的debug场景都非常好。大多数情况下，你要处理的有趣部分是特定的trace paterns。Recon支持一些基本的定义它们的方法。<br>
 &emsp;最常用的形式就是 {Mod, Fun, Arity}，Mod就是模块名，Fun就是一个函数名，Arity就是需要trace的函数的参数个数。他们中的任意一个都可以使用通配符(’_’)来替换。Recon禁止匹配形式太过宽泛(比如``
 {’_’ , ’_’ , ’_’}``),因为他们在生产环境下运行非常危险。<br>
 </font> <p></p>
-
-<br>&emsp;A fancier form will be to replace the arity by a function to match on lists of arguments. The function is limited to those usable by match specifications similar to what is available in ETS <sup>10</sup>. Finally, multiple patterns can be put into a list to broaden the matching scope.
-<br>&emsp;It will also be possible to rate limit based on two manners: a static count, or a number of matches per time interval. Rather than going more in details, here’s list of examples and how to trace for them.<br>
 <p></p> <font color="green">
 &emsp;一种更漂亮的形式就是通过一个函数匹配的参数列表来替换arity。函数被用match spcifications限制住，与ETS <sup>10</sup>表的形式类似。最终，可以放入多个模式扩大匹配范围列表。<br>
 &emsp;它还有可能基于两种方法限制速率一个静态统计,或每个时间间隔的匹配数。与其说更多细节，不如给一系统的例子来说明如何trace他们。
@@ -50,10 +49,6 @@ production.
 `recon_trace:calls({Mod,Fun,[{’_’, [], [{return_trace}]}]}, Max, Opts)`<br>
 -----------------------------------------------------------------<br>
 <br>&emsp;Each call made will override the previous one, and all calls can be cancelled with **recon_trace: clear/0**.
-<p></p> <font color="green">
-&emsp;每次调用都会覆盖前面的调用，所有的调用会可以用**recon_trace: clear/0**清除掉。
-</font> <p></p>
-
 <br>&emsp;There’s a few more combination possible, with more options:
 <br>&emsp;**{pid, PidSpec}** Which processes to trace. Valid options is any of all, new, existing, or a process descriptor ({A,B,C}, "<A.B.C>", an atom representing a name, {global, Name},**{via, Registrar, Name}**, or a pid). It’s also possible to specify more than one by putting them in a list.
 <br>&emsp;**{timestamp, format ter | trace}**
@@ -64,6 +59,10 @@ production.
 <br>&emsp;By default, only ’global’ (fully qualified function calls) are traced, not calls made internally. To force tracing of local calls, pass in {scope, local}. This is useful whenever you want to track the changes of code in a process that isn’t called with
 **Module:Fun(Args)** , but just** Fun(Args)** .
 <br>&emsp;With these options, the multiple ways to pattern match on specific calls for specific functions and whatnot, a lot of development and production issues can more quickly be diagnosed. If the idea ever comes to say "hm, maybe I should add more logging there to see what could cause that funny behaviour", tracing can usually be a very fast shortcut to get the data you need without deploying any code or altering its readability.
+<p></p> <font color="green">
+&emsp;每次调用都会覆盖前面的调用，所有的调用会可以用**recon_trace: clear/0**清除掉。
+</font> <p></p>
+
 <p></p> <font color="green">
 &emsp;接下来说说更多选项可能组合的成的结果：<br>
 &emsp;**{pid, PidSpec}**trace特定的进程。有效的选项是any of all, new, existing, 或一个进程描述符({A,B,C}, "<A.B.C>", 一个代表进程的名字atom , {global, Name},**{via, Registrar, Name}**, 或 a pid)，可以把他们放在一个列表里面同时trace多个。<br>

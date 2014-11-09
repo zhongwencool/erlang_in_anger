@@ -8,7 +8,7 @@ enough that the amount of memory copied to the shell process and used to print i
 All the values can be obtained by calling process_info(Pid, Key) or
 process_info(Pid, [Keys]) <sup>17</sup>. Here are the commonly used keys <sup>18</sup>:<br>
 <p></p> <font color="green">
-&emsp;无论如何，进程信息(processes)都是运行时Erlang系统一个非常重要的指标。因为他们是一切的核心，关于他们，还有很多需要知道。幸运的是，VM虚拟机有很多有用的信息，一些可以安全使用，一些则是在生产环境时使用不安全的(因为他们可能会返回的数据非常大，千万大量的内存复制到shell进程中，打印这些数据会使用节点被崩溃掉)。<br>
+&emsp;无论如何，进程信息(processes)都是运行时Erlang系统一个非常重要的指标。因为他们是一切的核心，关于他们，还有很多需要知道。幸运的是，VM虚拟机有很多有用的信息，一些可以安全使用，一些则是在生产环境时使用不安全的(因为他们可能会返回的数据非常大，大量的内存复制到shell进程中，打印这些数据会使用节点被崩溃掉)。<br>
 &emsp;所有的值都可以使用process_info(Pid,Key)或process_info(pid,[<eys])<sup>17</sup>来查看。下面给出一些常用的keys<sup>18</sup>：<br>
 </font> <p></p>
 
@@ -29,8 +29,8 @@ again once the port is no longer busy.<br>
 <p></p> <font color="green">
 &emsp;**Meta**<br>
 &emsp;1.**dictionary** 返回进程中所有的进程字典值<sup>19</sup>。通常使用都安全，因为开发都不会把千兆级的数据入到进程字典里面。<br>
-&emsp;2.**grpu_leader** 进程所属于的组(group),定义在IO输入输出的(files,使用io:format/1-3输入的地方)。<br>
-&emsp;3.**status** 被调度器使用的进程属性值，可能有人值如下：<br>
+&emsp;2.**grpu_leader** 进程所属于的组(group),定义在IO输入输出的(files,使用io:format/1-3输出的地方)。<br>
+&emsp;3.**status** 被调度器使用的进程属性值，可能的值如下：<br>
 &emsp;a) **exiting** 进程工作已完成，但是还没有全部被清理掉;<br>
 &emsp;b) **waiting** 进程工作处于receive....end;<br>
 &emsp;c) **running** 自我描述(self-descriptive);<br>
@@ -114,7 +114,7 @@ Fortunately, for all the common ones that are also safe, recon contains the reco
 function to help:<br>
 <p></p> <font color="green">
 **Work**<br>
-&emsp;**reductions** Erlang VM调度器是基于归约(reductions)，可以方便地调度任意单位的工作(基于时间的调度器通常都很难把工作做得跟Erlang一样有效率)。归约越高，进程消夏在CUP和函数调用的工作量越大。<br>
+&emsp;**reductions** Erlang VM调度器是基于归约(reductions)，可以方便地调度任意单位的工作(基于时间的调度器通常都很难把工作做得跟Erlang一样有效率)。归约越高，进程消耗在CUP和函数调用的工作量越大。<br>
 &emsp;幸运的是，这些常用的参数都是可以被安全调用的。你可以使用recon中的recon:info/1来查看：<br>
 </font> <p></p>
 

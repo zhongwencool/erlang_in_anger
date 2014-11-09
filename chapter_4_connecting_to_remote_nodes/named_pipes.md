@@ -7,12 +7,10 @@ A little known way to connect with an Erlang node that requires no explicit dist
 -------------------------------------------------------------------------------------<br>
 `$ run_erl  /tmp/erl_pipe  /tmp/log_dir  "erl"`<br>
 -------------------------------------------------------------------------------------<br>
-The first argument is the name of the file that will act as the named pipe. The second one is where logs will be saved <sup>6</sup>.
-<p></p> <font color="green">
-&emsp;第一个参数是指定作为命名管道的文件，第三个就是指明日志要放在目录<sup>6</sup>。
-</font> <p></p>
+The first argument is the name of the file that will act as the named pipe. The second one is where logs will be saved <sup>6</sup>.<br>
 To connect to the node, you use the to_erl program:
 <p></p> <font color="green">
+&emsp;第一个参数是指定作为命名管道的文件，第三个就是指明日志要放在目录<sup>6</sup>。<br>
 &emsp;你可以使用 to_erl程序连接到节点上：
 </font> <p></p>
 -------------------------------------------------------------------------------------<br>

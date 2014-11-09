@@ -3,7 +3,7 @@
 For a view of the VM in the large, it’s useful to track statistics and metrics general to the VM, regardless of the code running on it. Moreover, you should aim for a solution that allows long-term views of each metric — some problems show up as a very long accumulation over weeks that couldn’t be detected over small time windows.<br>
 &emsp;Good examples for issues exposed by a long-term view include memory or process leaks, but also could be regular or irregular spikes in activities relative to the time of the day or week, which can often require having months of data to be sure about it.
 <p></p> <font color="green">
-&emsp;对于大型的VM,跟踪统计(statistics)和指标(metrics)通常对VM很有用，不是针对运行时的代码。此外，你应该致力于允许长时间观察每个指标的方案---一些问题只能通过长时间的累积才浮现出来。<br>
+&emsp;对于大型的VM,通常不去针对运行时的代码，从而跟踪统计(statistics)和指标(metrics)，对VM很有用。此外，你应该致力于允许长时间观察每个指标的方案---一些问题只能通过长时间的累积才浮现出来。<br>
 &emsp;一个需要长时间观测才能暴露的典型例子：内存或进程泄漏，当然也可能是在一天或一周时间内相关活动的一些规则或不规则的峰值造成的，这可往往需要分析几个月的数据才能找出问题。
 </font> <p></p>
 &emsp;For these cases, using existing Erlang metrics applications is useful. Common options are:<br>

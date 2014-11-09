@@ -10,13 +10,6 @@ reduction counter. After a given number of reductions, the process gets deschedu
 &emsp;• To avoid going to sleep when work is low, the threads that control the Erlang schedulers will do busy looping. This ensures the lowest latency possible for sudden load
 spikes. The VM flag +sbwt none|very_short|short|medium|long|very_long can
 be used to change this value.<br>
-<p></p> <font color="green">
-对Erlang开发者来说，非常不幸的是，CPU指标非常难以验证。有以下几个原因：<br>
-&emsp;+ VM在做大量调度工作或Erlang进程在做大量很难被测定(characterize)的工作时，VM会做很多与工作进程不相关的大量工作。<br>
-&emsp;+ VM内部使用一个基于归约(reductions)的模型(可以表示任意数量的工作行为)。每个函数的调用，包括BIFs,这会增加一个进程的归约数(reduction counter)。进程被分配了一定数量的归约数后，会被切换到不执行的状态(descheduled)。
-&emsp;+ 为了防止进程在负载低时休眠，控制Erlang调度的进程会频繁地在一个loop里面跑。这是为了确保在非常低负荷的情况下，实然忙起来时也能正常。可以用VM的+sbwt none|very_short|short|medium|long|very_long 选项来调整这个值。
-</font> <p></p>
-
 &emsp;These factors combine to make it fairly hard to find a good absolute measure of how
 busy your CPU is actually running Erlang code. It will be common for Erlang nodes in
 production to do a moderate amount of work and use a lot of CPU, but to actually fit a
@@ -26,6 +19,12 @@ metric that needs to be turned on by hand on a node, and polled at regular inter
 will reveal the time percentage a scheduler has been running processes and normal Erlang
 code, NIFs, BIFs, garbage collection, and so on, versus the amount of time it has spent
 idling or trying to schedule processes.<br>
+<p></p> <font color="green">
+对Erlang开发者来说，非常不幸的是，CPU指标非常难以验证。有以下几个原因：<br>
+&emsp;+ VM在做大量调度工作或Erlang进程在做大量很难被测定(characterize)的工作时，VM会做很多与工作进程不相关的大量工作。<br>
+&emsp;+ VM内部使用一个基于归约(reductions)的模型(可以表示任意数量的工作行为)。每个函数的调用，包括BIFs,这会增加一个进程的归约数(reduction counter)。进程被分配了一定数量的归约数后，会被切换到不执行的状态(descheduled)。
+&emsp;+ 为了防止进程在负载低时休眠，控制Erlang调度的进程会频繁地在一个loop里面跑。这是为了确保在非常低负荷的情况下，实然忙起来时也能正常。可以用VM的+sbwt none|very_short|short|medium|long|very_long 选项来调整这个值。
+</font> <p></p>
 <p></p> <font color="green">
 &emsp;这些因素使得制定一个完全掌握CPU真实运行Erlang代码时的负荷的方案变得非常困难。所以这只适用于在生产中常见的Erlang节点在做适量的工作和使用大量的CPU的情况，并不适用于高负载工作时。<br>
 &emsp;可以提高CPU表现的就是调试器墙时间(scheduler wall time).这是一个可选指标，需要手动找开一个节点并做定期的轮询。它显示运行进程，正常的Erlang代码，NIFs,BIFs,垃圾回收等的时间与花在空转或试图调度进程时间的百分比。

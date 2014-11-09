@@ -20,12 +20,7 @@ Erlang VM大多数工具的内存报告都是通过erlang:memory()的变种实�
 &emsp;This requires some explaining.<br>
 &emsp;First of all, all the values returned are in bytes, and they represent memory allocated
 (memory actively used by the Erlang VM, not the memory set aside by the operating system
-for the Erlang VM). It will sooner or later look much smaller than what the operating system reports.
-<p></p> <font color="green">
-&emsp;这里需要解释下：<br>
-&emsp;首先，所有的返回值都是字节(bytes)为单位的，他们表示内存被分配(Erlang VM实际使用的内存，不是操作系统给Erlang VM分配的内存)。所以他迟早会比操作系统报告的内存小得多。
-</font> <p></p>
-
+for the Erlang VM). It will sooner or later look much smaller than what the operating system reports.<br>
 &emsp;The total field contains the sum of the memory used for processes and system (which
 is incomplete, unless the VM is instrumented!). processes is the memory used by Erlang
 processes, their stacks and heaps. system is the rest: memory used by ETS tables, atoms
@@ -34,6 +29,8 @@ in the VM, refc binaries<sup>11</sup>, and some of the hidden data I mentioned w
 that will trip system limits (ulimit), this value is more difficult to get from within the VM.<br>
 &emsp;If you want the data without calling top or htop, you have to dig down into the VM’s memory allocators to find things out<sup>12</sup>.
 <p></p> <font color="green">
+&emsp;这里需要解释下：<br>
+&emsp;首先，所有的返回值都是字节(bytes)为单位的，他们表示内存被分配(Erlang VM实际使用的内存，不是操作系统给Erlang VM分配的内存)。所以他在将来总会比操作系统报告的内存小得多。<br>
 &emsp;总字段包含了所有进程和系统(除instrumented模式外，其它并不完整!)的总内存占用大小。返回的processes项是指Erlang进程使用的堆栈总内存。system项就包含其余的：被ETS表，VM中的原子，二进制的引用<sup>11</sup>(refc),和一些我没有提及到的隐藏数据。<br>
 &emsp;如果你想得到VM占用的总内存，这个值在访问系统的限制下(ulimit),很难从VM内部获得。<br>
 &emsp;如果你想不调用top或htop命令来得到数据，你就不得不深入VM内存管理分配来找到你想要的<sup>12</sup>。

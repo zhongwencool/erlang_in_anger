@@ -2,10 +2,6 @@
 Once you’ve established you’ve got a binary memory leak using **recon:bin_leak(Max)** , it
 should be simple enough to look at the top processes and see what they are and what kind
 of work they do.
-<p></p> <font color="green">
-&emsp;一量你使用**recon:bin_leak(Max)**确定了你有binary 内部泄露问题，找出前几名的进程并查看他们是什么，负责的是什么工作是非常简单的一件事。
-</font> <p></p>
-
 <br>&emsp;Generally, refc binaries memory leaks can be solved in a few different ways, depending
 on the source:
 <br>&emsp;• call garbage collection manually at given intervals (icky, but somewhat efficient);
@@ -19,9 +15,13 @@ processes).
 <br>&emsp;The first two options are frankly not agreeable and should not be attempted before all
 else failed. The last three options are usually the best ones to be used.
 <p></p> <font color="green">
+&emsp;一量你使用**recon:bin_leak(Max)**确定了你有binary 内部泄露问题，找出前几名的进程并查看他们是什么，负责的是什么工作是非常简单的一件事。
+</font> <p></p>
+
+<p></p> <font color="green">
 &emsp;通常，refc binaries内存泄露可能通过以下几种方式解决（这取决于源代码实现）：<br>
 &emsp;• 指定周期内手动调用垃圾回收。(很讨厌，但是效果显著)<br>
-&emsp;• 停止使用binaries(经常不能随你意的);<br>
+&emsp;• 停止使用binaries(经常不能随你意的，你不可能不使用binaries);<br>
 &emsp;• 使用**binary:copy1-2**<sup>10</sup> 如果只是操作一小块<sup>11</sup>的binary的话(常常小于64bytes);<br>
 &emsp;• 把涉及到大块binaries的操作都放到短暂的一次性进程中，这个进程完成任务就会死掉触发GC(一种较小的手动GC);<br>
 &emsp;• 或者在适当的时候调用休眠(hibernation)(对于不活跃的进程来讲可能是最彻底的方案)。<br>

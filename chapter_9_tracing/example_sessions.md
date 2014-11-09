@@ -15,7 +15,7 @@ First let’s trace the queue:new functions in any process:<br>
 was reached.<br>
 &emsp;Let’s instead look for all the queue:in/2 calls, to see what it is we’re inserting in queues:<br>
 <p></p> <font color="green">
-&emsp;把trace消息的限制最大为1，来试试recon怎样通知我们已到限制。<br>
+&emsp;把trace消息的限制最大为1，来试试recon通知我们已到最大限制的情况。<br>
 &emsp;接着再调用queue:in/2，查看下我们什么消息被塞进了队列：<br>
 </font> <p></p>
 

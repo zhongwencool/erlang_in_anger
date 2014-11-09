@@ -3,7 +3,7 @@ Detecting leaks for reference-counted binaries is easy enough: take a measure of
 each process’ list of binary references (using the binary attribute), force a global garbage collection, take another snapshot, and calculate the difference.
 <br>&emsp;This can be done directly with recon:bin_leak(Max) and looking at the node’s total memory before and after the call:<br>
 <p></p> <font color="green">
-检测引用记数的binaries泄露非常容易：对所有的进程列表的binary references(使用binary 属性)都采取措施，强制一个全局的垃圾回收，把结果与回收前的对比一下，计算下差异。<br>
+&emsp;检测引用记数的binaries泄露非常容易：对所有的进程列表的binary references(使用binary 属性)都采取措施，强制一个全局的垃圾回收，把结果与回收前的对比一下，计算下差异。<br>
 &emsp;你可以直接使用recon:bin_leak(Max)来完成它，并在调用前后比较节点的总内存变化：
 </font> <p></p>
 

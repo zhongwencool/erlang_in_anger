@@ -6,7 +6,7 @@ UDP sockets, SCTP sockets, file descriptors, and so on.<br>
 However, this function merges in all types of ports into a single entity. Instead, one can
 use recon to get them sorted by type:<br>
 <p></p> <font color="green">
-&emsp;端口数(Ports)也是跟进程数相类似的指标，端口是一个数据类型,他包含了连接和向外界开放的套接字：TCP 套接字,UDP套接字，SCTP套接字，文件描述符等。<br>
+&emsp;Ports也是跟Processes相类似的指标，ports是一个数据类型,他包含了连接和向外界开放的套接字：TCP 套接字,UDP套接字，SCTP套接字，文件描述符等。<br>
 &emsp;有一个通用的函数(和进程数的processes()类似)来计算它们：length(erlang:ports()).但这个函数把所有的端口类型都集中在了一起，你可以使用recon的port_type来根据类型排序他们。
 </font> <p></p>
 ---------------------------------------------------------<br>
@@ -32,7 +32,7 @@ and so on.
 &emsp;上面这个列表包含了每种类型的端口和数量。端口类型名是一个Erlang VM自己定义的字符串。<br>
 &emsp;所有以XXX_inet的端口通常都是套接字，前缀就是所使用的协议(TCP,UDP,SCTP)。那个efile类型是针对文件的，"0/1" 和 "2/2" 就是对标准I/O(stdin和stdout),和错误处理stderr的文件描述符。<br>
 &emsp;大多数其它的类型在与驱动(dirver)交互时被给定一个名字，会成为prot programs<sup>14</sup>或prot drivers<sup>15</sup>的参照。<br>
-&emsp;和进程数一样，全程跟踪端口数会对分析负载或侦察进程泄漏有极大的帮助。
+&emsp;和进程数一样，全程跟踪端口数Ports会对分析负载或侦察进程泄漏有极大的帮助。
 </font> <p></p>
 
 [14] http://www.erlang.org/doc/tutorial/c_port.html<br>
