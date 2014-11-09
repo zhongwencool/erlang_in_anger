@@ -96,10 +96,9 @@ allocated will be free to go look into the many multiblock carriers to find some
 </font> <p></p>
 &emsp;*Address order best fit *(**aobf**) will work similarly, but the tree instead is based on the addresses of the blocks. So the VM will look for the smallest block available that can accommodate the data, but if many of the same size exist, it will favor picking one that has a lower address. If I have a piece of data that requires three blocks, I’ll still likely end up in area 3, but if I need two blocks, this strategy will favor the first mbcs in Figure 7.3 with area 1 (instead of area 5). This could make the VM have a tendency to favor the same carriers for many allocations.
 <p></p> <font color="green">
-&emsp;*Address order best fit *(**aobf**)工作也类似best fit，但这颗树是基于数据块的地址。所以VM会先找可以容纳数据的最小可用数据块，但如果有很多一样的块存在，它会优先选择地址小的。如果我有一个需要3个块的数据，我依然想存在区域3中，但我需要2个块，那么这个策略就会在表7.3中区域1(代替区域5)的第一个mbcs中
+&emsp;*Address order best fit *(**aobf**)工作也类似best fit，但这颗树是基于数据块的地址。所以VM会先找可以容纳数据的最小可用数据块，但如果有很多一样的块存在，它会优先选择地址小的。如果我有一个需要3个块的数据，我依然想存在区域3中，但我需要2个块，那么这个策略就会在表7.3中区域1(代替区域5)的第一个mbcs中。这可以让VM支持更多的分配相同的allocations。
 </font> <p></p>
-
-<br>&emsp;*Address order first fit* (**aoff**) will favor the address order for its search, and as soon as a
+&emsp;*Address order first fit* (**aoff**) will favor the address order for its search, and as soon as a
 block fits, aoff uses it. Where **aobf** and **bf** would both have picked area 3 to allocate four
 blocks in Figure 7.3, this one will get area 2 as a first priority given its address is lowest.
 In Figure 7.4, if we were to allocate four blocks, we’d favor block 1 to block 3 because its
@@ -131,6 +130,10 @@ pool. This can be done across multiple alloc_util allocators of the same type ac
 schedulers. This allows to cache mostly-empty carriers without forcing deallocation of their
 memory. <sup>21</sup> It also enables the migration of carriers across schedulers when they contain
 little data, according to their needs.
+<p></p> <font color="red">
+神啊，谁来帮我看看这段，完成不明白在说什么呀！！！
+</font> <p></p>
+
 ## The Process Level
 On a smaller scale, for each Erlang process, the layout still is a bit different. It basically
 has this piece of memory that can be imagined as one box:<br>
@@ -153,8 +156,17 @@ memory is marked as available in the sub-allocator and can be taken back by new 
 or other ones that may need to be resized. Only after having this memory unused — and
 the multiblock carrier unused also — is it returned to mseg_alloc or sys_alloc, which
 may or may not keep it for a while longer.
-
-
+<p></p> <font color="green">
+&emsp;在小范围内,对于每一个Erlang进程，他们的的分配还是略有不同。这取决于他有那一个类似于框的内存段。<br>
+`1 [                                           ]`<br>
+&emsp;框的一侧存heap,别一侧是stack:<br>
+`1 [heap | | stack]`<br>
+&emsp;在实际情况中，你还有更多的数据(你会有一个old heap和一个new heap，对于一般的GC来说，你还会有一个虚拟的binary heap,用来管理在特定sub-allocator 上的(并不被进程直接使用)reference-counted binaries---**binary_alloc** 和 **eheap_alloc**)<br>
+`1 [heap || stack]`<br>
+&emsp;空间分配越来越多直到stack或heap不能适应了,这会触发一个最小的GC，它会把数据移到并保存到old heap中。然后收集其它的，并最终可能会重新分配更多的空间。<br>
+&emsp;进入了几轮的最小GCs后，一个全面的GC会被执行，这意味着new heaps ，old heaps都会被释放更多的空间。当进程死掉时，stack和heap都会一次性释放掉，reference-counted binaries会相应的减少，如果计数减至0，也会释放掉。<br>
+&emsp;当上面这些发生时，在超过80%的情况下，发生这种情况的唯一原因就是内存被标记为可用的sub-allocator并可以采用新方法来调整大小。只有当这些内存不再被使用和multiblock carrier也没有被使用的情况下---才会返回mseg_alloc 或 sys_alloc，还不确定它能保存多久。
+</font> <p></p>
 
 [14] The complete list of where each data type lives can be found in erts/emulator/beam/erl_alloc.types<br>
 [15] http://erlang.org/doc/man/erts_alloc.html#M_sbct<br>
@@ -164,3 +176,14 @@ may or may not keep it for a while longer.
 [19] http://www.erlang.org/doc/man/erts_alloc.html#M_mbsd<br>
 [20] The threshold is configurable through http://www.erlang.org/doc/man/erts_alloc.html#M_acul<br>
 [21] In cases this consumes too much memory, the feature can be disabled with the options +MBacul 0.<br>
+<p></p> <font color="green">
+[注14]：完整的alloc 类型都可以在erts/emulator/beam/erl_alloc.types中找到<br>
+[注15]：http://erlang.org/doc/man/erts_alloc.html#M_sbct<br>
+[注16]：http://erlang.org/doc/man/erts_alloc.html#M_mmsbc <br>
+[注17]：http://erlang.org/doc/man/erts_alloc.html#M_mmsbc<br>
+[注18]：http://erlang.org/doc/man/erts_alloc.html#M_as<br>
+[注19]：http://www.erlang.org/doc/man/erts_alloc.html#M_mbsd<br>
+[注20]：这个临界值配置项在：http://www.erlang.org/doc/man/erts_alloc.html#M_acul<br>
+[注21]：为了避免消耗更多的内存，可以使用+MBacul 0来禁用这个功能。<br>
+
+</font> <p></p>
