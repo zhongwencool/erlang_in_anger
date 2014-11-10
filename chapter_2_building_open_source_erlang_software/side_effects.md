@@ -2,7 +2,7 @@
 Of course, the libraries and processes that call such a client will then error out if they don’t expect to work without a database.<br>
 That’s an entirely different issue in a different problem space, one that depends on your business rules and what you can or can’t do to a client, but one that is possible to work around.
 <p></p> <font color="green">
-&emsp;当然，如果他们期望工作状态是有数据库的，那么这个客户端上的进程就会出错。(the libraries and processes that call such a client will then error out if they don’t expect to work without a database. )<br>
+&emsp;当然,调用这个Client的类库或者进程如果不想在数据库宕机的情况下运行,那就报错吧.不同的问题域有迥然不同的处理方式,这取决于业务逻辑和你能对client做什么处理不能做什么处理,而另一种情况下可能继续运行下去。<br>
 &emsp;这是两个在不同角度下，完全不同的问题，一个是取决于你的业务需求：客户端什么能做，什么不能做;另一个则是有没有可能正常工作。
 </font> <p></p>
 

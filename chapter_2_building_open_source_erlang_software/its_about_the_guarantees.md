@@ -7,10 +7,10 @@ Supervised processes provide guarantees in their initialization phase, not a bes
 <p></p>
 <font color="green">
 
-&emsp;重启一个进程的目标是为了它回归已知的稳定状态。当进程的初始化都不稳定，supervision重启策略就不值一提了。<br>
+&emsp;重启一个进程的目标是为了它回归已知的稳定状态。当进程的初始化都不稳定，如果初始化都不稳定,后续的监控策略也就意义不大了。<br>
 &emsp;一个进程的初始化应当在任何情况下都非常稳定.这样的话，当他的兄弟姐妹都成功启动后，就可以完成肯定之前启动的系统都是正常健康的。<br>
-&emsp;如果你不能确保稳定的状态，或你是异步启动整个系统，你就很难从一个在一个使用了try...catch循环结构中得到线索.<br>
-&emsp;保证被监控的进程能在初始化中稳定启动非常好，但这并不是最好的策略。<br>
+&emsp;如果不能保证稳定的状态,或者是异步启动整个系统,这种结构相比try..catch循环方式的优势也就荡然无存了。<br>
+&emsp;保证被监控的进程能在初始化中稳定状态下启动,而不是"尽量保证稳定"。<br>
 </font>
 <p></p>
 This means that when you’re writing a client for a database or service, you shouldn’t need a connection to be established as part of the initialization phase unless you’re ready to say it will always be available no matter what happens.<br>
@@ -19,7 +19,7 @@ In case of something incomprehensible and unexpected that breaks these guarantee
  It’s a system-wide assertion that failed.
 <p></p>
 <font color="green">
-&emsp;这意味着，当你为一个数据库或服务(database or service)写客户端时，你不能在初始化中建立连接，除非你已准备处理所有会发生的情况了。<br>
+&emsp;这意味着，当你为一个数据库或服务(database or service)写客户端时，你可以选择不在初始化过程中创建连接，除非你已准备处理所有会发生的情况了。<br>
 &emsp;如果你确定数据库在同一个主机下，并会在Erlang系统启动时就已启动了，那们你可以在初始化中强制建立连接。<br>
 &emsp;当某些不可思议(incomprehensible and unexpected)的情况破坏了这种稳定性，这个节点就会崩溃，但正是我们期望的。因为并没有满足启动你的系统的前提条件。<br>
 &emsp;这是一个系统级的错误。
@@ -39,7 +39,7 @@ calls during a net split, for example.
  <p></p> <font color="green">
 
 &emsp;不管你用什么手段(冷却时间或你认为最佳的补偿策略)，都必须确保数据库的重连，以便不影响整个系统的稳定性。可以尝试在初始化中做一个优化，但进程应该能在断开连接的情况下能重连回来。<br>
-&emsp;你不要期望一个有保证的系统中的失败只发生在一个外部的服务上(an external service)。我们现在处理的是真实的世界，失败的外部依赖(failure of external dependencies )是常见的情景。
+&emsp;如果你预料到一个外部的服务有可能出错,那么不要假设这种情况不会发生到你头上.我们面对的是残酷现实,外部依赖不靠谱的事情屡见不鲜。
 </font> <p></p>
 [8] Or latency shoots up enough that it is impossible to tell the difference from failure.
 <p></p>
