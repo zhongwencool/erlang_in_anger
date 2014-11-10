@@ -49,7 +49,7 @@ When making your application public to the world, distribute it without the depe
 The build system in place (in this case, rebar) should be able to figure out duplicated entries and fetch everything necessary only once.
 <p></p>
  <font color="green">
-&emsp;:rebar会递归地从git(或hg,或svn)中直接拿到application的源代码。他们可以被编译，并使用特定的选项{erl_opts,List}来编译. 这个选项也在config文件中定义<sup>3 </sup>。<br>
+&emsp;rebar会递归地从git(或hg,或svn)中直接拿到application的源代码。他们可以被编译，并使用特定的选项{erl_opts,List}来编译. 这个选项也在config文件中定义<sup>3 </sup>。<br>
 你可以在这些文件夹中，为自己的OTP application开发功能。<br>
 &emsp;为了编译他们，你可以使用rebar get-deps把依赖项也下载下来编译，并马上构建依赖项和你自己的app。<br>
 &emsp;当你把自己的application开源出来时，要把它的依赖项给去掉。因为其他开发者的application很有可能和你一样依赖同样的application，没有必要重复装载他们多次。<br>
