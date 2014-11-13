@@ -9,20 +9,20 @@ The reason behind this degradation was that when the remote server would go down
 roughly 18,000 messages a second and things got out of hand.<br>
 The solution we came up with was to leave the task of connecting to the caller process, and enforce the limits as if the manager had done it on its own. The blocking operations were now distributed to all users of the library, and even less work was required to be done by the manager, now free to accept more requests.
 <p></p> <font color="green">
-&emsp;锁和阻塞操作经常会执行出乎意料长的时间，随之新任务又源源不断地袭来，自然就会堆积成了问题。<br>
-&emsp;一个我见过最常见的例子：一个进程阻塞着为了接受连接(accepting a connection)或等待TCP sockets消息。<br>
+&emsp;锁和阻塞操作执行的时间经常会出乎意料的长，随之新任务又源源不断地袭来，自然就会堆积成问题。<br>
+&emsp;一个我见过最常见的例子：一个进程为了接受连接(accepting a connection)或等待TCP sockets消息而阻塞着。<br>
 &emsp;在这种阻塞操作期间，大量其它消息都堆积在进程的消息队列中。<br>
 &emsp;另一个是非常糟糕的例子：我写的一个lhttpc 库(a fork of the lhttpc)用于HTTP连接的进程池管理。 它在绝大多数test cases里都工作正常，我们甚至把一个连接的timeout设置为10ms，来确保它不会花太多时间。<br>
 &emsp;完美地运行了几个星期后，一个远程服务器崩溃了，引起了HTTP进程池(HTTP client pool)中断。<br>
-&emsp;这次中断背后的原因是：当远程服务器挂掉后，突然所有的连接操作都要用至少10ms(放弃尝试连接的最小时间)的时间. 大约有9000条每秒的消息袭向中央进程，每个处理要花费5ms，这就相当于18000条每秒，然后服务器就失控啦。<br>
+&emsp;这次中断背后的原因是：当远程服务器挂掉后，突然所有的连接操作都要用至少10ms(放弃尝试连接的最小时间)的时间. 大约有9000条每秒的消息袭向中央进程，每个处理要花费5ms，这就相当于18000条每秒，然后服务器就失控了。<br>
 &emsp;我们随后的解决方案就是：让manager把连接工作交给工作调用进程，并让manager认为是自己已完成连接。这样阻塞操作就会被分发给所有的工作进程，manager需要做的活变少了，就可以处理更多的请求。
 </font> <p></p>
 When there is any point of your program that ends up being a central hub for receiving messages, lengthy tasks should be moved out of there if possible. Handling predictable overload <sup>4</sup> situations by adding more processes — which either handle the blocking operations or instead act as a buffer while the "main" process blocks — is often a good idea.<br>
 There will be increased complexity in managing more processes for activities that aren’t intrinsically concurrent, so make sure you need them before programming defensively.
 <p></p> <font color="green">
-&emsp;尽可能不要把冗长的任务入在用于接受消息的中央枢纽中。一个常见的好实践：通过增加进程的方案来处理可预测的负载<sup>4</sup>。<br>
+&emsp;尽可能不要把冗长的任务放在用于接受消息的中央枢纽中。一个常见的好实践：通过增加进程的方案来处理可预测的负载<sup>4</sup>。<br>
 &emsp;这些进程用于处理阻塞操作或作为主处理进程(中央枢纽)的一个缓冲。<br>
-&emsp;但你在编程前先考虑好是否需要它们，因为为了这本质上不是并发的活动而增加管理更多进程，要控制好复杂度。
+&emsp;但在你编程前先考虑好是否有必要，因为为了本质上不是并发的活动而增加管理更多进程，要权衡好复杂度。
 </font> <p></p>
 Another option is to transform the blocking task into an asynchronous one. If the type of work allows it, start the long-running job and keep a token that identifies it uniquely, along with the original requester you’re doing work for. When the resource is available, have it send a message back to the server with the aforementioned token. The server will eventually get the message, match the token to the requester, and answer back, without being blocked by other requests in the mean time. <sup>5</sup><br>
 This option tends to be more obscure than using many processes and can quickly devolve into callback hell, but may use fewer resources.
@@ -41,6 +41,6 @@ aspects to the caller — this allows the caller to know that only one call fail
 [注3]：10ms是非常短，但这却只是用于配置用于实时竞争的服务器。<br>
 [注4]：一些你了解的关于负载的事实。<br>
 [注5]：redo application就是这样的示例，在redo_block模块中...The [underdocumented] module turns a pipelined connection into a blocking one, but does so while maintaining pipeline<br>
-aspects to the caller — this allows the caller to know that only one call failed when a timeout occurs, not all of the in-transit ones, without having the server stop accepting requests.
+aspects to the caller — this allows the caller to know that only one call failed when a timeout occurs, not all of the in-transit ones, without having the server stop accepting requests.【求助，这段怎么译啊】
 </font> <p></p>
 
