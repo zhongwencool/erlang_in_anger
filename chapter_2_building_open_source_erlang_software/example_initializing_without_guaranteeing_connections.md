@@ -3,7 +3,7 @@
 The following code attempts to guarantee a connection as part of the process’ state:
 <p></p> <font color="green">
 
-&emsp;下面代码认为进程可以在初始化过程中必然连接成功。
+&emsp;下面代码试图保证进程在初始化过程中必然连接成功。
 </font> <p></p>
 
 ----------------------------------------------------------------------------------<br>
@@ -23,7 +23,7 @@ The following code attempts to guarantee a connection as part of the process’ 
 ----------------------------------------------------------------------------------<br>
 &emsp;Instead, consider rewriting it as:
 <p></p> <font color="green">
-&emsp;重写如下：
+&emsp;考虑重写如下：
 </font> <p></p>
 
 ----------------------------------------------------------------------------------<br>
@@ -46,5 +46,5 @@ The following code attempts to guarantee a connection as part of the process’ 
 You now allow initializations with fewer guarantees: they went from the connection is available to the connection manager is available.
 <p></p> <font color="green">
 
-&emsp;重写后，能保证初始化必然成功，因为他的重连都是在初始化之后的handle_info中。
+&emsp;重写后，用更少的操作来保证初始化的成功，因为他在初始化之后立即在handle_info中连接socket，并在不连接不成功后马上重连(对比于第一种情况的连接失败就不断重启进程明显好用多啦)。
 </font> <p></p>

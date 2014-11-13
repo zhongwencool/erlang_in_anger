@@ -3,8 +3,8 @@ For releases, the structure should be a bit different <sup>4</sup>. Releases are
 Instead of having a top-level app, applications should be nested one level deeper and divided into two categories: apps and deps. The apps directory contains your applications’ source code (say, internal business code), and the deps directory contains independently managed dependency applications.
  <p></p>
  <font color="green">
-&emsp;对于Releases,结构会有一点小小的变化。Releases是applicaitons的集合，他们的结构也应当反映出这些。<br>
-&emsp;applications应当使用嵌套的形式并分成apps和deps两种类型，而不是那些自上而下的app结构, apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖application。<br>
+&emsp;对于Releases,结构会有一点小小的变化。Releases是applicaitons的集合，他们的结构也应当反映出这种集合特性。<br>
+&emsp;一个applications应当拆分成apps和deps两类，deps里的依赖项又有自己的子deps的嵌套结构，而不是那些自上而下的app结构(所有依赖项都放在一个deps里面的形式是不可取的)， apps文件夹里面包括你自己applicaitons的源文件(内部业务代码)，deps文件夹包括独立管理依赖applications。<br>
 </font>
 ---------------------------------------------------------------------------------<br>
 1 `apps/`<br>
@@ -19,7 +19,7 @@ This structure lends itself to generating releases. Tools such as Systool and Re
 A relx configuration file for the directory structure above would look like:
 <p></p>
 <font color="green">
-&emsp;这种结构有助于自动生成releases。Systool,Reltool等工具以前都会支持，用起来非常给力。相对容易上手的还有最近推出的一个简单点的工作：relx<sup>6</sup>。<br>
+&emsp;这种结构有助于自动生成releases。Systool,Reltool等工具以前都会支持这种结构，用起来非常给力。相对容易上手的还有最近推出的一个简单点的工具：relx<sup>6</sup>。<br>
 &emsp;relx的配置文件格式如下：<br>
 ----------------------------------------------------------------------------------<br>
 1 `{paths, ["apps", "deps"]}.`<br>
@@ -39,7 +39,7 @@ If you really like using rebar, you can build a release as part of the project�
 <p></p>
 <font color="green">
 &emsp;你可以调用**./relx**(在当前文件夹下调用)来创建一个release,就能在 _rel/文件夹来找到这个release.<br>
-&emsp;如果你更喜欢使用rebar来创建，你可能通过使用在rebar.config里面的rebar hook 来把创建release作为项目编译的一部分。<br>
+&emsp;如果你更喜欢使用rebar创建release，可以通过rebar.config里面的rebar hook 来把创建release，这装会把构建release工作作为项目编译的一部分。<br>
 </font>
 ----------------------------------------------------------------------------------<br>
 1 `{post_hooks,[{compile, "./relx"}]}.`<br>
