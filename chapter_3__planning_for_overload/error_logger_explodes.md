@@ -14,7 +14,7 @@ The best solution for this at the time of writing is to use lager as a substitut
 While lager will not solve all your problems, it will truncate voluminous log messages, optionally drop OTP-generated error messages when they go over a certain threshold, and will automatically switch between asynchronous and synchronous modes for user-submitted messages in order to self-regulate.<br>
 It won’t be able to deal with very specific cases, such as when user-submitted messages are very large in volume and all coming from one-off processes. This is, however, a much rarer occurrence than everything else, and one where the programmer tends to have more control.
 <p></p> <font color="green">
-&emsp;当lager不能承载你所有问题时，它会截断冗长的日志消息，并在超过某个阀值时就会选择性地忽略OTP自身产生的错误信息，并且为了自我调节，会根据用户提交的信息自动在同步和异步模式中切换。
+&emsp;当lager解决有了你所有问题时，它会截断冗长的日志消息，并在超过某个阈值时就会选择性地忽略OTP自身产生的错误信息，并且为了自我调节，会根据用户提交的信息自动在同步和异步模式中切换。
 <br>
 &emsp;它不会处理那些非常特殊的情况，比如：用户产生的信息非常大并所有的信息都来自于一次性进程(one-off processes).因为这毕竟很少会发生，一旦发生，开发者往往会想出更多的控制方法。
 </font> <p></p>

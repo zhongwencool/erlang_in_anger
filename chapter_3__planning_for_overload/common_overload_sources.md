@@ -4,8 +4,6 @@ There are a few common causes of queues blowing up and overload in Erlang system
 They’re usually symptomatic of having your system grow up and require some help scaling up, or of an unexpected type of failure that ends up cascading much harder than it should have.
 <p></p> <font color="green">
 
-&emsp;不论你怎么折腾，你迟早会遇到几个常见的导致Erlang系统过载和队列崩坏的问题。<br>
-
-&emsp;他们通常的症状：随着系统不断壮大，你需要的协助也越来越多，或者总是出现你出乎意料的问题。
+&emsp;不管如何系统设计,大家或早或晚总会遇到那么几个常见的状况使得队列爆满,系统过载.通常表现出来的症状是系统膨胀需要扩展,意料之外的执行失败几经传播难以定位
 </font> <p></p>
 

@@ -150,7 +150,7 @@ names registered with a third-party registry (e.g. with **gproc: {via, gproc, Na
 tuples (**{0,12,0}**). The process just needs to be local to the node you’re debugging.<br>
 If only a category of information is wanted, the category can be used directly:<br>
 <p></p> <font color="green">
-&emsp;为了方便起见，recon:info/1可以接受任意像pid类型的参数：文字的pids,或字符串("<0.12.0>")，注册的原子，全局的消息名(**{global, Atom}**)，使用第三方的注册流程注册过的进程名(比如：**gproc: {via, gproc, Name}**)，或元组(**{0,12,0}**)。这些进程只需要是你调试的本地节点的进程就ok。如果你只需要某项信息，你可以使用下面的选项：
+&emsp;为了方便起见，recon:info/1可以接受任意像pid类型的参数：文字的pids,或字符串("<0.12.0>")，注册的原子，全局名称(**{global, Atom}**)，使用第三方的注册流程注册过的进程名(比如：**gproc: {via, gproc, Name}**)，或元组(**{0,12,0}**)。这些进程只需要是你调试的本地节点的进程就ok。如果你只需要某项信息，你可以使用下面的选项：
 </font> <p></p>
 
 -------------------------------------------------------------------<br>

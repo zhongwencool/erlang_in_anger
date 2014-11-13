@@ -15,7 +15,7 @@ On the other hand, a stack will make it so only a restricted number of elements 
 Whenever you see the stack grow beyond a certain size or notice that an element in it is too old for your QoS requirements you can just drop the rest of the stack and keep going from there. PO Box also offers such a buffer implementation.<br>
 A major downside of stack buffers is that messages are not necessarily going to be processed in the order they were submitted — they’re nicer for independent tasks, but will ruin your day if you expect a sequence of events to be respected.
 <p></p> <font color="green">
-&emsp;而另一方面，堆栈缓冲区会对保持等待的消息数量有一个严格的限制，并可以让服务器及时处理新来的。<br>
+&emsp;而另一方面，堆栈缓冲区会对保持等待的消息质量有一个严格的限制，并可以让服务器及时处理新来的。<br>
 &emsp;当你看到堆栈缓冲区已增长到一定大小或注意到里面的元素质量达不到你需求的服务标准(QoS)，你就可以把堆栈余下的部分都丢弃掉，然后再继续工作，POBox就实现了这样的缓冲buffer。<br>
 &emsp;堆栈缓冲区主要的缺点就是消息并不是按他们提交顺序依次处理的，他们对独立的任务支持非常好，但你千万不要期望它按先来先处理的原则执行。
 </font> <p></p>

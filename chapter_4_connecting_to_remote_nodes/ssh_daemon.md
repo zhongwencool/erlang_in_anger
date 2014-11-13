@@ -36,7 +36,8 @@ And with this you can interact with an Erlang installation without having it ins
 If you have trouble connecting, you can add the -oLogLevel=DEBUG option to ssh to get debug output.
 <p></p> <font color="green">
 &emsp;这样你就可以不用本地安装Erlang也使用远程的Erlang了。直接断开SSH session(关闭终端)就可以安全离开。但千万不能输出q()或init:stop()之类终结远程shell的命令<sup>4</sup>。<br>
-&emsp;如果你还有是不能连接成功，你可以加一个选项 -oLogLevel=DEBUG 让把debug信息输出。
+&emsp;
+如果你连接遇到问题，你可以加一个选项 -oLogLevel=DEBUG 让把debug信息输出。
 </font> <p></p>
 
 [3] Complete instructions with all options to get this set up are available at

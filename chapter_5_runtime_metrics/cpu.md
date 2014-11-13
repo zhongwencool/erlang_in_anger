@@ -27,7 +27,7 @@ idling or trying to schedule processes.<br>
 </font> <p></p>
 <p></p> <font color="green">
 &emsp;这些因素使得制定一个完全掌握CPU真实运行Erlang代码时的负荷的方案变得非常困难。所以这只适用于在生产中常见的Erlang节点在做适量的工作和使用大量的CPU的情况，并不适用于高负载工作时。<br>
-&emsp;可以提高CPU表现的就是调试器墙时间(scheduler wall time).这是一个可选指标，需要手动找开一个节点并做定期的轮询。它显示运行进程，正常的Erlang代码，NIFs,BIFs,垃圾回收等的时间与花在空转或试图调度进程时间的百分比。
+&emsp;可以提高CPU表现的就是调度器墙时间(scheduler wall time).这是一个可选指标，需要手动找开一个节点并做定期的轮询。它显示运行进程，正常的Erlang代码，NIFs,BIFs,垃圾回收等的时间与花在空转或试图调度进程时间的百分比。
 </font> <p></p>
 
 &emsp;The value here represents scheduler utilization rather than CPU utilization. The higher
@@ -47,7 +47,7 @@ can be obtained by calling recon:<br>
 &emsp;The function recon:scheduler_usage(N) will poll for N milliseconds (here, 1 second)
 and output the value of each scheduler. In this case, the VM has two very loaded schedulers (at 99.2% and 93.7% repectively), and two mostly unused ones at far below 1%. Yet, a tool like htop would report something closer to this for each core:
 <p></p> <font color="green">
-&emsp;reco:scheduler_usage(N)会做N毫秒间隔的轮询(这里是1s)，定时地把每个调度器的值都输出来。在这个例子中，VM有2个正在运行的调度器(一个99.2%,一个93.7%).还有2个大部分没有的（低于1%)。一个类似于htop的工具也可以提供类似每个核的指标：
+&emsp;recon:scheduler_usage(N)会做N毫秒间隔的轮询(这里是1s)，定时地把每个调度器的值都输出来。在这个例子中，VM有2个正在运行的调度器(一个99.2%,一个93.7%).还有2个大部分没有的（低于1%)。一个类似于htop的工具也可以提供类似每个核的指标：
 </font> <p></p>
 -----------------------------------------------------------------------<br>
 `1 [||||||||||||||||||||||||| 70.4%]`<br>

@@ -8,8 +8,7 @@ What’s particularly tricky about applying back-pressure to handle overload via
 
 The best way to express the problem is that the first timer to be started will be at the edge of the system, but the critical operations will be happening deep within it.This means that the timer at the edge of the system will need to have a longer wait time that those within, unless you plan on having operations reported as timing out at the edge even though they succeeded internally.
 <p></p> <font color="green">
-&emsp;最好表述这一问题的方法就是：计时器开始于系统边缘(the edge of the system)，但关键的操作却发生在系统的深处。这意味着系统边缘的计时器将需要更长的等待时间。除非你打算即便他们成功了，也要加上系统边缘的超时。[神啊，来帮我翻译下这段吧！！]
-(This means that the timer at the edge of the system will need to have a longer wait time that those within, unless you plan on having operations reported as timing out at the edge even though they succeeded internally.)
+&emsp;表述这一问题最好的方法就是:timer是在系统边缘启动,但关键的操作却是在内部执行,换句话说,timer由于内部执行损耗需要更长的等待时间,除非你就想这样的结果:内部执行已经执行成功了,最后却报了超时错误。
 </font> <p></p>
 
 An easy way out of this is to go for infinite timeouts. Pat Helland <sup>9</sup> has an interesting answer to this:<br>
