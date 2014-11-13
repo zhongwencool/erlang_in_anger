@@ -13,3 +13,22 @@ the point of their collapse.
 &emsp;我只希望阅读本文之后,下一次遇到问题,它不会太糟糕了。尽管如此,可能还是会有很多调试生产系统的机会。为了避免小腐蚀引来大崩溃，即便最坚实的桥梁需要重新粉刷。<br>
 &emsp;祝你好运。
 </font> <p></p>
+
+<br>
+<br>
+<p></p> <font color="blue">
+&emsp;特别感谢：坚强2002的细心指导。<br>
+ &emsp;由于时间仓促，加之译者水平有限，如果你发现本册子翻译有错误或更恰当的建议：<br>
+ &emsp;1.直接给我发邮件zhongwencool(at)gmail.com[PS:确认章节前请确定你读的是最新版哦];<br>
+ &emsp;2.使用github一起翻译：github地址：https://github.com/zhongwencool/erlang_in_anger <br>
+<br>
+&emsp;一经采用，你的名字将会出现在这里：<br>
+&emsp;感谢：
+<font color="green">
+[yuanmenggo]
+</font>
+
+
+
+
+</font>
