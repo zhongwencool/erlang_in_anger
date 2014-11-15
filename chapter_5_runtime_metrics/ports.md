@@ -1,10 +1,10 @@
 # Ports
 Similarly to processes, Erlang ports allow a lot of introspection. The info can be accessed
 by calling **erlang:port_info(Port, Key)** , and more info is available through the inet
-module. Most of it has been regrouped by the recon:port_info/1-2 functions, which
+module. Most of it has been regrouped by the **recon:port_info/1-2** functions, which
 work using a somewhat similar interface to their process-related counterparts.<br>
 <p></p> <font color="green">
-&emsp;同进程的选项类似，Erlang的端口(ports)也允许非常多的内部数据查看。这些信息可以调用**erlang:prot_info(Port,Key)**来得到，其它更多信息可以通过inet模块得到。大部分的都被recon:prot_info/1-2函数所包含了，它们都是调用想类似的接口来实现的。
+&emsp;同进程的选项类似，Erlang的端口(ports)也允许非常多的内部数据查看。这些信息可以调用**erlang:prot_info(Port,Key)**来得到，其它更多信息可以通过inet模块得到。大部分的都被**recon:prot_info/1-2**函数所包含了，它们都是调用想类似的接口来实现的。
 </font> <p></p>
 
 **Meta**<br>
@@ -116,7 +116,7 @@ what is going on with it.<br>
 &emsp;Or in any other case, we can look at what is sending the most data within any time
 window <sup>27</sup> with the** recon:inet_window(Attribute, Count, Milliseconds)** function:<br>
 <p></p> <font color="green">
-&emsp;可以发现一些端口只输入并吃掉了大量的bytes。你可以使用**recon:port_info("#Port<0.6821166>")**来挖出它所属于的socket，找出它为什么这样的原因。<br>
+&emsp;从上面结果可以发现一些端口只输入并吃掉了大量的bytes。你可以使用**recon:port_info("#Port<0.6821166>")**来挖出它所属于的socket，找出它为什么这样。<br>
 &emsp;或者其它情况，我们可以使用窗口<sup>27</sup>全程查看数据的流向：** recon:inet_window(Attribute, Count, Milliseconds)**
 </font> <p></p>
 

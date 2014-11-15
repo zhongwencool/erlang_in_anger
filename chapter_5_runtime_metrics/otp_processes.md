@@ -6,7 +6,7 @@ on it and you’ll discover why it’s so useful. It contains the following feat
 process:<br>
 <p></p> <font color="green">
 &emsp;当发生问题的进程是OTP进程时(大部分产品级的系统都是OTP 进程),你就可以立即得到更多的工具来检查它们。<br>
-&emsp;一般你可以在sys<sup>23</sup>模块找到你想要的。查阅它的文档，你会发现这什么它这么有用啦。它包括了针对OTP进程的以下特性：
+&emsp;一般你可以在sys<sup>23</sup>模块找到你想要的。查阅它的文档，你会发现为什么它这么有用啦。它包括了针对OTP进程的以下特性：
 </font> <p></p>
 
 &emsp;• logging of all messages and state transitions, both to the shell or to a file, or even in

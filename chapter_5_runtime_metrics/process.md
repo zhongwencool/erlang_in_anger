@@ -9,7 +9,7 @@ All the values can be obtained by calling process_info(Pid, Key) or
 process_info(Pid, [Keys]) <sup>17</sup>. Here are the commonly used keys <sup>18</sup>:<br>
 <p></p> <font color="green">
 &emsp;无论如何，进程信息(processes)都是运行时Erlang系统一个非常重要的指标。因为他们是一切的核心，关于他们，还有很多需要知道。幸运的是，VM虚拟机有很多有用的信息，一些可以安全使用，一些则是在生产环境时使用不安全的(因为他们可能会返回的数据非常大，大量的内存复制到shell进程中，打印这些数据会使用节点被崩溃掉)。<br>
-&emsp;所有的值都可以使用process_info(Pid,Key)或process_info(pid,[<eys])<sup>17</sup>来查看。下面给出一些常用的keys<sup>18</sup>：<br>
+&emsp;所有的值都可以使用**process_info(Pid,Key)**或**process_info(pid,[<eys])**<sup>17</sup>来查看。下面给出一些常用的keys<sup>18</sup>：<br>
 </font> <p></p>
 
  **Meta**<br>
@@ -28,16 +28,15 @@ because a socket or port buffer is full. The process only becomes runnable
 again once the port is no longer busy.<br>
 <p></p> <font color="green">
 &emsp;**Meta**<br>
-&emsp;1.**dictionary** 返回进程中所有的进程字典值<sup>19</sup>。通常使用都安全，因为开发都不会把千兆级的数据入到进程字典里面。<br>
-&emsp;2.**grpu_leader** 进程所属于的组(group),定义在IO输入输出的(files,使用io:format/1-3输出的地方)。<br>
+&emsp;1.**dictionary** 返回进程中所有的进程字典值<sup>19</sup>。通常使用都安全，因为开发都不会把GB级的数据入到进程字典里面。<br>
+&emsp;2.**group_leader** 进程所属于的组(group),定义在IO输入输出的(files,使用io:format/1-3输出的地方)。<br>
 &emsp;3.**status** 被调度器使用的进程属性值，可能的值如下：<br>
-&emsp;a) **exiting** 进程工作已完成，但是还没有全部被清理掉;<br>
-&emsp;b) **waiting** 进程工作处于receive....end;<br>
-&emsp;c) **running** 自我描述(self-descriptive);<br>
-&emsp;d) **runnable** 进程已准备可以运行，但是还没有被分配，因为另一个进程在正在运行中(running);<br>
-&emsp;e) **garbage_collection**自我描述(self-descriptive);<br>
-&emsp;f) **suspended** 不论它是被BIF挂起，还是socket或port buffer都满负荷时被挂起的。这个进程只能在port有空时才会转为runnable状态。
-
+&emsp;&emsp;a) **exiting** 进程工作已完成，但是还没有全部被清理掉;<br>
+&emsp;&emsp;b) **waiting** 进程工作处于receive....end;<br>
+&emsp;&emsp;c) **running** 自我描述(self-descriptive);<br>
+&emsp;&emsp;d) **runnable** 进程已准备可以运行，但是还没有被分配，因为另一个进程在正在运行中(running);<br>
+&emsp;&emsp;e) **garbage_collection**自我描述(self-descriptive);<br>
+&emsp;&emsp;f) **suspended** 不论它是被BIF挂起，还是socket或port buffer都满负荷时被挂起的。这个进程只能在port有空时才会转为runnable状态。
 </font> <p></p>
 
 **Signals**<br>
@@ -52,7 +51,7 @@ trap_exit has the value true if the process is trapping exits, false otherwise.
 
 <p></p> <font color="green">
 **Signals**<br>
-&emsp;**link** 会显示写指定进程所links的所有其它进程列表，包括ports(sockets,file descriptors)。一般都是可以安全调用的，但在一个监控着成千上万个进程的大监控树进程来说，使用时要非常小心。<br>
+&emsp;**link** 会显示写指定进程所links的所有其它进程列表，包括ports(sockets,file descriptors)。一般都是可以安全调用的，但在一个监控着成千上万个进程的大监控树进程来说，使用时要备加小心。<br>
 &emsp;**monitored-by** 会返回监控本进程的所有进程列表(使用erlang:monitor/2做的监控)。<br>
 &emsp;**monitors** 与monitored_by相反，返回指定进程监控的所有进程列表。<br>
 </font> <p></p>
@@ -71,7 +70,7 @@ as, rather than what it’s running right now.<br>
 &emsp;**current_function** 显示当前运行的函数：返回值为{Mod, Fun, Arity}的元组。<br>
 &emsp;**current_location** 显示当前运行的函数模块位置。返回值为：{Mod, Fun, Arity, [{File, FileName}, {line, Num}]}。<br>
 &emsp;**current_stacktrace** 前缀选项里面一个非常详细选项;显示'current_locations'列表的当前堆栈(stacktrace)。<br>
-*emsp;**initial_call** 显示进程运行spawned时初始化运行的函数：{Mod, Fun, Arity}.这可以用于帮助定位进程初始化时运行的函数，而不是进程当前运行的函数。<br>
+&emsp;**initial_call** 显示进程运行spawned时初始化运行的函数：{Mod, Fun, Arity}.这可以用于帮助定位进程初始化时运行的函数，而不是进程当前运行的函数。<br>
 </font> <p></p>
 
 **Memory Used**<br>
@@ -114,10 +113,9 @@ Fortunately, for all the common ones that are also safe, recon contains the reco
 function to help:<br>
 <p></p> <font color="green">
 **Work**<br>
-&emsp;**reductions** Erlang VM调度器是基于归约(reductions)，可以方便地调度任意单位的工作(基于时间的调度器通常都很难把工作做得跟Erlang一样有效率)。归约越高，进程消耗在CUP和函数调用的工作量越大。<br>
+&emsp;**reductions** Erlang VM调度器是基于归约(reductions)，可以方便地调度任意单位的工作（基于时间的调度器通常都很难把工作做得跟Erlang一样有效率）。归约越高，进程消耗在CUP和函数调用的工作量越大。<br>
 &emsp;幸运的是，这些常用的参数都是可以被安全调用的。你可以使用recon中的recon:info/1来查看：<br>
 </font> <p></p>
-
 -------------------------------------------------------------------<br>
 `1> recon:info("<0.12.0>").` <br>
 `[{meta,[{registered_name,rex},` <br>
@@ -174,7 +172,7 @@ of a node’s processes and find the top N consumers. Using the attributes above
 recon:proc_count(Attribute, N) function, we can get these results:<br>
 <p></p> <font color="green">
 &emsp;后一种形式或能用于获取一些不安全的信息。<br>
-&emsp;有了这些数据，我们就有可能找出调试系统中我们需要的所有信息。接下来的挑战往往是要找出这是得到个进程的数据，还是应该针对全局的某一个进程信息。<br>
+&emsp;有了这些数据，我们就有可能找出调试系统中我们需要的所有信息。接下来的挑战往往是要找出这是得到个进程的数据，还是应该针对全局的某些进程信息。<br>
 &emsp;当发现是内存使用非常高时，比如，你可以列出列出节点所有进程并找出使用内存最高的前N个进程。使用recon:proce_count(Attribute,N)函数，我们就可以得到结果：<br>
 </font> <p></p>
 
@@ -203,7 +201,7 @@ It is important to see this function as a snapshot over a sliding window. A prog
 timeline during sampling might look like this:<br>
 <p></p> <font color="green">
 &emsp;前面提到的所有的选项都可以使用，对于节点中那些出问题的常驻进程，这是一个非常有用的函数。<br>
-&emsp;但如果问题出在那些短暂生存的进程(short-lived)，通常会因为进程存活时间太短而不能被工具侦察到，或我们需要的是一个动态的窗口(比如：进程忙于计算内存或正好在运行代码)。<br>
+&emsp;但如果问题出在那些短暂生存的进程(short-lived)，通常会因为进程存活时间太短而不能被工具侦察到，或我们需要的是一个动态指标的窗口(比如：进程忙于计算内存或正好在运行代码)。<br>
 &emsp;可以在这个动态的窗口中看到到这个函数的快照(snapshot)非常重要。在抽样进程的时间轴(timeline)可能看起来是这样子的：<br>
 </font> <p></p>
 
