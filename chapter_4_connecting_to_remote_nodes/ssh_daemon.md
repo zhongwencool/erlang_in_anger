@@ -2,7 +2,7 @@
 Erlang/OTP comes shipped with an SSH implementation that can both act as a server and a client. Part of it is a demo application providing a remote shell working in Erlang.<br>
 To get this to work, you usually need to have your keys to have access to SSH stuff remotely in place already, but for quick test purposes, you can get things working by doing:<br>
 <p></p> <font color="green">
-&emsp;Erlang/OTP附带了一个SSH实现，它即可以做服务器，也可以做客户端。它的一部分可以看作是提供使用Erlang工作的远程shell演示application。<br>
+&emsp;Erlang/OTP附带了一个SSH实现，它即可以做服务器，也可以做客户端。它的一部分可作为演示application，可以看作是提供一个远程使用Erlang工作的shell。<br>
 &emsp;为了让它工作起来，你通常需要把你的SSH keys在远程服务器上部署好。但为了快速体验到这个功能，你也可以像下面这样子做：
 </font> <p></p>
 
@@ -35,7 +35,7 @@ To connect to the daemon, any SSH client will do:
 And with this you can interact with an Erlang installation without having it installed on the current machine. Just disconnecting from the SSH session (closing the terminal) will be enough to leave. Do not run functions such as q() or init:stop() , which will terminate the remote host. <sup>4</sup><br>
 If you have trouble connecting, you can add the -oLogLevel=DEBUG option to ssh to get debug output.
 <p></p> <font color="green">
-&emsp;这样你就可以不用本地安装Erlang也使用远程的Erlang了。直接断开SSH session(关闭终端)就可以安全离开。但千万不能输出q()或init:stop()之类终结远程shell的命令<sup>4</sup>。<br>
+&emsp;这样你就可以不需要本地安装Erlang，也使用远程的Erlang了。直接断开SSH session(关闭终端)就可以安全离开。但千万不能输出q()或init:stop()之类终结远程shell的命令<sup>4</sup>。<br>
 &emsp;
 如果你连接遇到问题，你可以加一个选项 -oLogLevel=DEBUG 让把debug信息输出。
 </font> <p></p>

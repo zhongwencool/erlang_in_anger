@@ -27,7 +27,7 @@ When that happens, the local shell runs all the line editing and job management 
 To quit the shell, go back in the JCL mode with ˆG. This job management is, as I said, done locally, and it is thus safe to quit with ˆG q:
 <p></p> <font color="green">
 &emsp;当完成了上面操作后，那些你看上去在本地shell完成输入行或作业管理(job management)，实际上是远程节点上完成的。所以远程节点的运行结果也在本地节点上显示。<br>
-&emsp;为了限制shell(远程节点的shell)你可以使用Ctrl+G回来JCL模式，然后输入q退出本地节点(不会影响远程节点)。
+&emsp;为了退出shell(远程节点的shell)你可以使用Ctrl+G回来JCL模式，然后输入q退出本地节点(不会影响远程节点)。
 --------------------------------------------------------------------------------------<br>
 `(server@ferdmbp.local)1>`<br>
 `User switch command`<br>
