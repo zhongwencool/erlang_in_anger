@@ -1,4 +1,5 @@
 # Processes
+#进程占用内存
 There are a lot of different ways in which process memory can grow. Most interesting
 cases will be related to a few common cases: process leaks (as in, you’re leaking processes),
 specific processes leaking their memory, and so on. It’s possible there’s more than one
@@ -25,7 +26,7 @@ This will return a list of processes with neither. For supervisors, just fetchin
 supervisor: count_children(SupervisorPid Or Name) and seeing what looks normal can
 be a good pointer.<br>
 <p></p> <font color="green">
-&emsp;它会返回没有link和monitor的进程列表。对于supervisors来说，只需取得supervisor的子进程的数量(SupervisorPid或Name),查下这个子进程数是不是正常会很有帮助。
+&emsp;它会返回没有link和monitor的进程列表。对于supervisors来说，只需取得supervisor的子进程的数量(SupervisorPid或Name),研究这个子进程数是不是正常将会很有帮助。
 </font> <p></p>
 
 ## Memory Used
@@ -34,7 +35,7 @@ memory attribute. You can look things up either as absolute terms or as a slidin
 <br>&emsp;For memory leaks, unless you’re in a predictable fast increase, absolute values are usually those worth digging into first:<br>
 <p></p> <font color="green">
 &emsp;对于每个进程的的内存模型在章节7.3.2已简明描述过了，但通常来讲，你可以通过查看内存属性得到使用内存最多的那个进程。你可以通过绝对项目(absolute terms)或滑动视窗(sliding window)来查看。
-&emsp;对于内存泄露，首先深挖绝对值(absolute values)对找到问题非常有帮助，除非你处理一个可以预测的快速增长阶段。<br>
+&emsp;对于内存泄露，首先深挖绝对值(absolute values)对找到问题非常有帮助，除非你处理的是可以预测的快速增长阶段。<br>
 </font> <p></p>
 
 -----------------------------------------------------<br>
@@ -54,7 +55,7 @@ memory attribute. You can look things up either as absolute terms or as a slidin
 -----------------------------------------------------<br>
 &emsp;Attributes that may be interesting to check other than memory may be any other fields in Subsection 5.2.1, including **message_queue_len**, but memory will usually encompass all other types.
 <p></p> <font color="green">
-&emsp;内存的其它有意思的属性可以在章节5.2.1看到，比如**message_queue_len**,但内存通常会包涵其它类型。
+&emsp;内存的其它有意思的属性可以在章节5.2.1看到，比如**message_queue_len**,但内存通常会包含其它类型。
 </font> <p></p>
 
 ## Garbage Collections
@@ -67,7 +68,7 @@ setting up Erlang’s system monitor <sup>7</sup> might be the best way to go at
 Erlang’s system monitor will allow you to track information such as long garbage collection periods and large process heaps, among other things. A monitor can temporarily
 be set up as follows:<br>
 <p></p> <font color="green">
-&emsp;一个进程只在一个非常短的时间内使用了大量内存的情况也是非常有可能发生的。对于一个处于大负荷操作的长期运行的节点来说，这种情况通常不会引起问题，但是当内存增长到难以统计时(非常大)，这种突然的行为就有可能是你想要摆脱。<br>
+&emsp;一个进程只在一个非常短的时间内使用了大量内存的情况也是非常有可能发生的。对于一个处于大负荷操作的长期运行的节点来说，这种情况通常不会引起问题，但是当内存增长到难以统计时(非常大)，这种突然的行为就有可能正是你想要摆脱掉的。<br>
 &emsp;在shell里面实时监测所有垃圾回收情况是代价是非常大的。取而代之，设置Erlang系统本身的monitor<sup>7</sup>可能最处理它的最好方式。Erlang系统监控会允许你追踪长周期的垃圾回收和大进程的堆情况，此外，监控可以用以下方式来临时设置：
 </font> <p></p>
 
@@ -105,7 +106,7 @@ may help find out what’s wrong with the application.
 &emsp;第五个命令作用：释放system monitory(退出或杀掉你的进程也可以释放),第六个命令作用：验证下一切工作正常。
 </font> <p></p>
 <p></p> <font color="green">
-&emsp;通过这样监视消息，找到内存增长原因往往是内存泄漏或过度使用，试图在一切变得糟糕之前就找出罪犯。快速地反应并深入到进程当中(可能会使用到recon:info/1)可能会有助于找到application出了出了什么问题。
+&emsp;通过这样监视消息，找到内存增长原因往往是内存泄漏或过度使用，试图在一切变得糟糕之前就找出源头。快速地反应并深入到进程当中(可能会使用到recon:info/1)可能会有助于找到application出了什么问题。
 </font> <p></p>
 
 

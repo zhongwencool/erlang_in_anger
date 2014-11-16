@@ -11,7 +11,7 @@ lot of time, giving long delays between garbage collections.
 <p></p> <font color="green">
 &emsp;在99%的情景下，这个机制都会正常工作。但在下面这些情况下，就变得不一定啦：<br>
 &emsp;1. 对于保证分配和垃圾回收，做的工作太少。<br>
-&emsp;2. 最终生成了一个有各种数据结构的大堆栈，集中他们，然后与大量的refc binaries混合在一起工作。再次用binaries填充满堆(即使只是一个用于映射refc binaries的虚拟堆)，这可能会消耗大量时间，造成垃圾回收被延迟。
+&emsp;2. 最终生成了一个有各种数据结构的大堆栈，并把他们汇聚到一起，然后与大量的refc binaries混合在一起工作。再次用binaries填充满堆(即使只是一个用于映射refc binaries的虚拟堆)，这可能会消耗大量时间，造成垃圾回收被延迟。
 </font> <p></p>
 
 

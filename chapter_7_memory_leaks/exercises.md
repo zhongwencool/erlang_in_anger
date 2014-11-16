@@ -33,7 +33,7 @@ seems to be leaking data from there, or never handling new messages?<br>
 tweak this, or the way you wrote code?<br>
 <p></p> <font color="green">
 [1].你怎么识别由于忘记杀死进程或进程自己使用太多内存而导致的泄露？<br>
-[2].一个进程使用binary 模式打开了150MB的log文件，然后找到一些有用信息，然后把这些信息都存在ETS表中。在你知晓系统存在binary 内存泄露时，你应该怎样去最减小节点上的binary 内存使用。<br>
+[2].一个进程使用binary 模式打开了150MB的log文件，然后找到一些有用信息，然后把这些信息都存在ETS表中。在你知晓系统存在binary 内存泄露时，你应该怎样去最小化节点上的binary 内存使用。<br>
 [3].你怎么发现一个ETS表内存增长过快？<br>
 [4].找到一个节点是否存在内存泄露需要哪几步？你怎么验证是不是由于NIF或dirver引起的内存泄露？<br>
 [5].怎么找出信箱中存在大量消息的进程(可以看下：**message_queue_len**)？<br>

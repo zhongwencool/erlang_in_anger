@@ -30,17 +30,15 @@ which should show what the usage patterns were like under your max memory load.
 <p></p> <font color="green">
 &emsp;调用**recon_alloc:memory/1**来查看内存指标会比**erlang:memory/0**更加灵活。下面给出一些可能有关的参数。<br>
 &emsp;1.调用** recon_alloc:memory(usage)** 。它会返回一个0~1的值，表示Erlang term与Erlang VM从操作系统得到的总内存的百分比。如果这个值接近100%,那么你可能就不会有内存碎片问题，全部的内存都处于使用状态。<br>
-&emsp; 2.使用**recon_alloc:memory(allocated)**查看数据与系统的报告<sup>12</sup>是不是一致，如果真的存在内存碎片或Erlang terms内存泄露,那么这个返回值应该和系统报告的一致。这就可以确定内存是不是有碎片<br>
+&emsp; 2.使用**recon_alloc:memory(allocated)**查看数据与系统的报告<sup>12</sup>是不是一致，如果真的存在内存碎片或Erlang terms内存泄露,那么这个返回值应该和系统报告的一致。这就可以确定内存是不是有碎片。<br>
 </font> <p></p>
 
 <p></p> <font color="green">
-&emsp;调用**recon_alloc:memory(allocated_types)**查看哪一种util分配器(详见章节7.3.2)分配的内存最多。再对比一下调用**erlang:memory()**的结果，看看像不像一个明显的原因。<br>
+&emsp;调用**recon_alloc:memory(allocated_types)**查看util分配器(详见章节7.3.2)分配的内存中最多的那一个。再对比一下调用**erlang:memory()**的结果，看是否有异常。<br>
 &emsp;试试**recon_alloc:fragmentation(current) **。返回的结果会显示节点上不同的分配器(allocators)的各项指标<sup>13</sup>。<br>
 &emsp;如果你看到一些低于正常值的指标，再用**recon_alloc:fragmentation(max)**查看在负载最大时使用的是哪一种模式，比较他们有什么不同。<br>
 &emsp;如果存在很大的差别，你可能就会有某个类型的分配器使用过度造成了内存碎片。
 </font> <p></p>
-
-
 
 [12] You can call **recon_alloc:set_unit(Type)** to set the values reported by recon_alloc in bytes,
 kilobytes, megabytes, or gigabytes<br>

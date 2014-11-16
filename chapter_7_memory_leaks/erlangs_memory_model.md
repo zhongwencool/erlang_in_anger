@@ -1,10 +1,14 @@
 # Erlang's Memory Model
+
+ <font color="red">
+这一节看不懂！！哪位同学可以帮忙翻译一下呀
+</font>
 ## The Global Level
 To understand where memory goes, one must first understand the many allocators being
 used. Erlang’s memory model, for the entire virtual machine, is hierarchical. As shown in
 Figure 7.1, there are two main allocators, and a bunch of sub-allocators (numbered 1-9).
 <p></p> <font color="green">
-&emsp;为了更好地理解内存用到什么地方了，我们必须首先认识一下使用中的多种分配器(allocators)。对于整个虚拟机来说，Erlang内存模型(memory model)是分层的。正如图7.1所示，有两种主要的分配器，一群子分配器(1~9)。
+&emsp;为了更好地理解内存用在什么地方，我们必须首先认识一下使用中的多种分配器(allocators)。对于整个虚拟机来说，Erlang内存模型(memory model)是分层的。正如图7.1所示，有两种主要的分配器，一群子分配器(1~9)。
 </font> <p></p>
 
 ![](http://erlang-in-anger.qiniudn.com/chapter7_1.png)

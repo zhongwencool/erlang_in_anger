@@ -34,8 +34,8 @@ before.
 that might be a good sign you have a problem.
 <br>&emsp;You can further validate the top consumers in total binary memory by using the special **binary_memory** attribute supported in **recon**:<br>
 <p></p> <font color="green">
-&emsp;这样就可以看出有多少每个进程有多少私有的binaries和释放掉了多少。-5580表示有调用函数后此进程少了5580的refc binaries<br>
-&emsp;任何时候都存有大量的refc binaries是正常的，所以并不是上面所有的数据都能说明出问题了。如果你看到调用过这个函数后内存下降得非常厉害。你就可能会有很多懒惰的refc binaries存在。<br>
+&emsp;这样就可以看出有多少每个进程有多少私有的binaries和释放掉了多少。-5580表示调用函数后此进程少了5580的refc binaries<br>
+&emsp;任何时候都存有大量的refc binaries是正常的，所以上面所有的数据并不能说明出了问题。如果你看到调用过这个函数后内存下降得非常厉害。你就可能会有很多懒惰的refc binaries存在。<br>
 &emsp;同理，如果调用后，你还是看到很多进程拥有大量的refc binaries<sup>9</sup>。那么也能说明这里有问题。<br>
 &emsp;接下来，你可以使用**recon**里面的**binary_memory**属性来验证消费者的总binary内存前几名的使用情况。
 </font> <p></p>
