@@ -19,7 +19,7 @@ Using the analysis of a crash dump in Section 6.1:<br>
 [2]. Does it look like repeated errors are the issue? If not, what could it be?<br>
 <p></p> <font color="green">
 使用章节6.1中关于crash dump的分析：<br>
-[1]：那些异常指可以看出问题所在<br>
+[1]：那些异常指标可以看出问题所在<br>
 [2]：这个问题可以重现么? 如果不能，是什么导致它的?<br>
 </font> <p></p>
 

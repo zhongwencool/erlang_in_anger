@@ -5,7 +5,7 @@ can log on it and go inspect it. If you find out many mailboxes are loaded, you 
 to use recon’s **queue_fun.awk** to figure out what function they’re running at the time of
 the crash:<br>
 <p></p> <font color="green">
-&emsp;对于大量累积的信箱，最好的方法就是查看消息数量。如果发现一个信箱特别多的消息，那么就去在crash dump里面调查这个进程，看看他是不是因为没有匹配到一些消息或超负荷了。如果你还有一个类似的在运行状态的节点，你就可以登录上去，检查它。如果你发现很多信箱都超载了。你就可以使用recon’s **queue_fun.awk**来找出它们现在crash时运行了什么函数。
+&emsp;对于大量累积的信箱，最好的方法就是查看消息数量。如果发现一个信箱特别多的消息，那么就去在crash dump里面研究这个进程，看看它是不是因为没有匹配到一些消息或进程超负荷运行。如果你还有一个环境类似但还在在运行着的节点，你就可以登录上去，检查那个进程。如果你发现很多信箱都超载了。你就可以使用recon’s **queue_fun.awk**来找出它们在crash时运行了什么函数。
 </font> <p></p>
 
 -------------------------------------------------------------------<br>

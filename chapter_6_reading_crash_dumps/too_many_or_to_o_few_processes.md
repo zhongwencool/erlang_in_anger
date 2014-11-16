@@ -19,7 +19,7 @@ a slogan like:<br>
 maximal restart frequency within its supervisors, and that prompted the node to shut down. Error logs that led to the cascading failure should be combed over to figure things
 out.
 <p></p> <font color="green">
-&emsp; 在上面这个例子中，问题在于某个(< AppName >)了的application已被supervisors重启的次数达到了规定的最大值，这暗示着节点将会停工。Error日志可以帮你把造成这个连锁错误的问题找出来。
+&emsp; 在上面这个例子中，问题在于某个(< AppName >)了的application已被supervisors重启的次数达到了规定的最大值，这暗示着节点将会停工。Error日志可以协助你把造成此连锁错误的问题找出来。
 </font> <p></p>
 
 [6] See subsection 5.1.3 for details<br>

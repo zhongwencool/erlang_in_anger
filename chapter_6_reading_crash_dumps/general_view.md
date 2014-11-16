@@ -76,14 +76,14 @@ also dozens of processes with hundreds of messages queued up — this can point 
 overload or contention. It’s hard to have general advice for your generic crash dump, but
 there still are a few pointers to help figure things out.<br>
 <p></p> <font color="green">
-&emsp;这些数据并不会把问题原因直接抛给你，但这可以做为一个非常好的线索。比如：上面节点现在内存溢出，有11079Mb/15Gb的被使用了(我知道这个，因为这是我们使用过的最多的内存了!)这可能是以下症状引起的：<br>
+&emsp;这些数据并不会把问题原因直接指明，但这可以做为一个非常好的线索。比如：上面节点现在内存溢出，有11079Mb/15Gb的被使用了(我之所以这样判断，是因为这是我们使用过的最多的内存的一次!)这可能是以下症状引起的：<br>
 &emsp;• 内存碎片;<br>
 &emsp;• C代码或驱动层引起的内存泄露;<br>
 &emsp;• 在生成crash dump<sup>5</sup>前，大量的内存都进入了垃圾回收;<br>
-&emsp;• 更常见的，根据进程的总数和信箱的大小，可以在那里找到任何不寻常的内存。这样就可以解释这个内存暴增的了。<br>
+&emsp;• 更常见的，根据进程的总数和信箱的大小，在那里可以找到任意有异常的内存。可能就是其中的某一个异常造成了内存暴增。<br>
 </font> <p></p>
 <p></p> <font color="green">
-&emsp;在这个特别的dump里面，一个进程的信箱里面有5百万个消息。这就可以看出，可能是所有的消息都不能匹配到代码，或它本身已越负荷运行了。还有很多进程有数以千计的消息在排队。这说明系统超负荷运行或资源竞争冲突了。对于一般的crash dump很能给出一个通用的指导，但还是有一些东西可以帮你找到问题。<br>
+&emsp;在这个特别的dump里面，一个进程的信箱里面有5百万个消息。这就可以看出，可能是所有的消息都不能匹配到代码，或它本身已越负荷运行了。还有很多进程有数以千计的消息在排队。这说明系统超负荷运行或资源竞争冲突了。对于一般的crash dump很难给出一个通用的指导原则，但还是有一些东西可以帮你找到问题。<br>
 </font> <p></p>
 
 [4] https://github.com/ferd/recon/blob/master/script/erl_crashdump_analyzer.sh<br>

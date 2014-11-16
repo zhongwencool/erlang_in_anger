@@ -8,11 +8,11 @@ document.<br>
 &emsp;The crash dump is going to be named **erl_crash.dump** and be located wherever the Erlang process was running by default. This behaviour (and the file name) can be overridden
 by specifying the **ERL_CRASH_DUMP** environment variable <sup>3</sup>.
 <p></p> <font color="green">
-不管Erlang节点什么时间崩溃，都会生成一个crash dump<sup>1</sup>文件。<br>
-&emsp;文件的格式说明大部分都在Erlang的官方文档<sup>2</sup>中，任何想深入了解里面的数据含意的，都可以通过查看这份文档。还有一些特定的数据，除非你理解VM相关的信息，才能看得懂，否则就非常难以理解，但对于这份文档可能太复杂了。
+不管Erlang节点何时崩溃，都会生成一个crash dump<sup>1</sup>文件。<br>
+&emsp;文件的格式大部分都在Erlang的官方文档<sup>2</sup>中有说明，任何想深入了解里面的数据含义的，都可以通过查看这份文档。还有某些特定数据，只有在你理解VM相关机制，才能看得懂，否则就非常难以理解，但这部分内容对于本文档来说可能太复杂了，就不再赘述。
 </font> <p></p>
 <p></p> <font color="green">
-&emsp;那个crash输出文件叫作：**erl_crash.dump**，默认在Erlang进程运行的地方生成。这个默认行为(和文件的名字)都可以通过改变**ERL_CRASH_DUMP**环境变量<sup>2</sup>做到。
+&emsp;那个crash输出文件叫作：**erl_crash.dump**，默认在Erlang进程运行的地方生成。这个默认行为(和文件的名字)都可以通过改变**ERL_CRASH_DUMP**环境变量<sup>2</sup>修改。
 </font> <p></p>
 
 [1] If it isn’t killed by the OS for violating ulimits while dumping or didn’t segfault.<br>
