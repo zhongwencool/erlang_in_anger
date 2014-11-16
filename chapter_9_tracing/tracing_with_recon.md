@@ -9,13 +9,13 @@ production.
 <br>&emsp;A fancier form will be to replace the arity by a function to match on lists of arguments. The function is limited to those usable by match specifications similar to what is available in ETS <sup>10</sup>. Finally, multiple patterns can be put into a list to broaden the matching scope.
 <br>&emsp;It will also be possible to rate limit based on two manners: a static count, or a number of matches per time interval. Rather than going more in details, here’s list of examples and how to trace for them.<br>
 <p></p> <font color="green">
-&emsp;Recon默认会匹配(match)所有进程。这对于大量的debug场景都非常好。大多数情况下，你要处理的有趣部分是特定的trace paterns。Recon支持一些基本的定义它们的方法。<br>
-&emsp;最常用的形式就是 {Mod, Fun, Arity}，Mod就是模块名，Fun就是一个函数名，Arity就是需要trace的函数的参数个数。他们中的任意一个都可以使用通配符(’_’)来替换。Recon禁止匹配形式太过宽泛(比如``
-{’_’ , ’_’ , ’_’}``),因为他们在生产环境下运行非常危险。<br>
+&emsp;Recon默认会匹配(match)所有进程。这对于大量的debug场景都非常好。大多数情况下，你要处理的部分是特定的trace paterns。Recon支持一些基本的定义它们的方法。<br>
+&emsp;最常用的形式就是 {Mod, Fun, Arity}，Mod就是模块名，Fun就是一个函数名，Arity就是需要trace的函数的参数个数。他们中的任意一个都可以使用通配符(’_’)来替换。Recon禁止匹配形式太过宽泛（比如
+{’_’ , ’_’ , ’_’} ）,因为他们在生产环境下运行非常危险。<br>
 </font> <p></p>
 <p></p> <font color="green">
-&emsp;一种更漂亮的形式就是通过一个函数匹配的参数列表来替换arity。函数被用match spcifications限制住，与ETS <sup>10</sup>表的形式类似。最终，可以放入多个模式扩大匹配范围列表。<br>
-&emsp;它还有可能基于两种方法限制速率一个静态统计,或每个时间间隔的匹配数。与其说更多细节，不如给一系统的例子来说明如何trace他们。
+&emsp;一种更漂亮的形式就是通过一个函数匹配的参数列表来替换arity。函数被用match spcifications限制住，与ETS <sup>10</sup>表的match specifications 类似。最终，可以放入多个模式扩大匹配范围列表。<br>
+&emsp;它还有可能基于两种方法限制速率：静态统计（static count） 和每个时间间隔的匹配数（a number of matches per time interval）。与其说更多细节，不如给出一系列的例子来说明如何trace他们。
 </font> <p></p>
 
 -----------------------------------------------------------------<br>
@@ -64,14 +64,14 @@ production.
 </font> <p></p>
 
 <p></p> <font color="green">
-&emsp;接下来说说更多选项可能组合的成的结果：<br>
-&emsp;**{pid, PidSpec}**trace特定的进程。有效的选项是any of all, new, existing, 或一个进程描述符({A,B,C}, "<A.B.C>", 一个代表进程的名字atom , {global, Name},**{via, Registrar, Name}**, 或 a pid)，可以把他们放在一个列表里面同时trace多个。<br>
-&emsp;默认情况下,格式化处理程序将时间戳添加到收到的消息中。如果需要精确的时间戳,可以强制使用时间戳的trace消息选项{timestamp, trace}.<br>
+&emsp;接下来说说更多选项可能组合成的结果：<br>
+&emsp;**{pid, PidSpec}**trace特定的进程。有效的选项是 **all**，** new**， **existing**， 或一个进程描述符（**{A,B,C}**, "< A.B.C >"）, 一个代表进程的名字**atom** , **{global, Name}**,**{via, Registrar, Name}**, 或一个  **pid**)，可以把他们放在一个列表里面同时trace多个。<br>
+&emsp;默认情况下,格式化处理程序将时间戳添加到收到的消息中。如果需要精确的时间戳,可以强制使用时间戳的trace消息选**项{timestamp, trace}**。<br>
 &emsp;**{args, arity | args}**
 <br>&emsp;是否打印函数调用中的参数数量(默认)文字表示。
 <br>&emsp;**{scope, global | local}**
-<br>&emsp;默认情况下,只有‘global'(完全限定的函数调用fully qualified function calls)会被trace,不会调用内部的。如果强制trace本地调用，使用选项{scope, local}，这在你想trace进程中使用** Fun(Args)**调用(不是**Module:Fun(Args)**)的代码变化时非常有用。<br>
-&emsp;有了这些参数，对于特定的函数调用就可以使用多种模式匹配给合使用的方式。很多开发问题或生产过程中的问题都可以更快地被诊断出来。如果以前的想法是“嗯,也许我应该添加更多的日志,看看可能会导致有趣的行为”，但trace通常可以非常快获取您想要的数据而且不需要改动任何代码或改变它的可读性。
+<br>&emsp;默认情况下,只有‘global‘(完全限定的函数调用fully qualified function calls)会被trace,不会调用内部的。如果强制trace本地调用，使用选项{scope, local}，这在你想trace进程中使用** Fun(Args)**调用(不是**Module:Fun(Args)**)的代码变化时非常有用。<br>
+&emsp;有了这些参数，对于特定的函数调用就可以采用多种模式匹配结合使用的方式。很多开发问题或生产过程中的问题都可以更快地被诊断出来。如果以前的想法是”嗯,也许我应该添加更多的日志,看看可能会导致有趣的行为”，那些使用trace通常可以非常快获取您想要的数据而且不需要改动任何代码或改变它的可读性。
 </font> <p></p>
 [10] http://www.erlang.org/doc/man/ets.html#fun2ms-1
 <p></p> <font color="green">
